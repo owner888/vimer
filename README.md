@@ -5,6 +5,7 @@
 4、清除字典配置dict，因为neocomplcache自带了，当然html和smarty要读javascript和css的字典的话还是需要配置的
 au FileType html,htm,smarty setlocal dict+=~/.vim/dict/css.dict
 au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
+5、neocomplcache第一次打开新的文件格式时，会缓存当前格式的一些东西，在用户目录 ~/.neocomplcache 和 ~/.neocon
 
 ========================== 13:09 2014-07-04 杨泽涛 ==============================
 1、zencoding插件更新，并改名为emmet
