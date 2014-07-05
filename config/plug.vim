@@ -7,7 +7,7 @@
 " find dir -name "*.php" -o -name "*.inc" > cscope.files
 " 通过 cscope.files 生成函数列表
 " cscope -Rbq
-" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 跳回
+" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 或者 ctrl+t 跳回
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("cscope")
        set csprg=cscope " /opt/local/bin/cscope
