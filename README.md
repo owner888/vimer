@@ -1,6 +1,10 @@
 ========================== 13:09 2014-07-04 杨泽涛 ==============================
 1、更改为pathogen管理插件模式
 2、增加插件自动更新vundle
+3、neocomplcache 改回老板，不然输入中文都会下拉代码提示，sudo gvim 还一堆报错，烦死人了
+4、清除字典配置dict，因为neocomplcache自带了，当然html和smarty要读javascript和css的字典的话还是需要配置的
+au FileType html,htm,smarty setlocal dict+=~/.vim/dict/css.dict
+au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
 
 ========================== 13:09 2014-07-04 杨泽涛 ==============================
 1、zencoding插件更新，并改名为emmet

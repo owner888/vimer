@@ -76,19 +76,11 @@ let g:snips_author  = "seatle <seatle@foxmail.com>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => autocmd 自动加载
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
-au FileType css setlocal dict+=~/.vim/dict/css.dict
-au FileType java setlocal dict+=~/.vim/dict/java.dict
-au FileType c setlocal dict+=~/.vim/dict/c.dict
-au FileType go setlocal dict+=~/.vim/dict/go.dict
-au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
-au FileType scale setlocal dict+=~/.vim/dict/scale.dict
-au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
-au FileType python setlocal dict+=~/.vim/bundle/Pydiction/complete-dict
+" 让html和smarty模板能调用字典
+au FileType html,htm,smarty setlocal dict+=~/.vim/dict/css.dict
+au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
+au FileType html,htm,smarty let g:javascript_enable_domhtmlcss = 1
 au Filetype java setlocal omnifunc=javacomplete#Complete
-au FileType html,htm,smarty,css setlocal dict+=~/.vim/dict/css.dict
-au FileType html,htm,smarty,javascript let g:javascript_enable_domhtmlcss = 1
-au FileType html,htm,smarty,javascript setlocal dict+=~/.vim/dict/javascript.dict
 " vim无法认出json，遇到json后缀的，告诉一下vim这个是json
 au BufRead,BufNewFile *.json set filetype=json
 

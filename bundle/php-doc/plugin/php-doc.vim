@@ -302,21 +302,21 @@ func! PhpDocFunc()
         if l:paramtype != ""
             let l:paramtype = "" . l:paramtype
         endif
-		exe l:txtBOL . g:pdv_cfg_Comment1."@param" . l:paramtype . "$" . l:paramname . "" . g:pdv_cfg_EOL
+		exe l:txtBOL . g:pdv_cfg_Comment1."@param " . l:paramtype . " $" . l:paramname . "" . g:pdv_cfg_EOL
 	endwhile
 
-	if l:static != ""
-        exe l:txtBOL . g:pdv_cfg_Comment1."@static" . g:pdv_cfg_EOL
-    endif
-	if l:abstract != ""
-        exe l:txtBOL . g:pdv_cfg_Comment1."@abstract" . g:pdv_cfg_EOL
-    endif
-	if l:final != ""
-        exe l:txtBOL . g:pdv_cfg_Comment1."@final" . g:pdv_cfg_EOL
-    endif
-    if l:scope != ""
-    	exe l:txtBOL . g:pdv_cfg_Comment1."@access " . l:scope . g:pdv_cfg_EOL
-    endif
+	"if l:static != ""
+        "exe l:txtBOL . g:pdv_cfg_Comment1."@static" . g:pdv_cfg_EOL
+    "endif
+	"if l:abstract != ""
+        "exe l:txtBOL . g:pdv_cfg_Comment1."@abstract" . g:pdv_cfg_EOL
+    "endif
+	"if l:final != ""
+        "exe l:txtBOL . g:pdv_cfg_Comment1."@final" . g:pdv_cfg_EOL
+    "endif
+    "if l:scope != ""
+        "exe l:txtBOL . g:pdv_cfg_Comment1."@access " . l:scope . g:pdv_cfg_EOL
+    "endif
 	exe l:txtBOL  . g:pdv_cfg_Comment1."@return " . g:pdv_cfg_ReturnVal . g:pdv_cfg_EOL
 
 	"exe l:txtBOL . g:pdv_cfg_Comment1."@copyright " . g:pdv_cfg_Copyright . g:pdv_cfg_EOL

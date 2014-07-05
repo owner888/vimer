@@ -9,7 +9,7 @@ Bundle 'anscoral/nerdtree.vim'
 " 对齐线
 Bundle 'vim-scripts/indentLine.vim'
 " 打开历史目录 => ,,m 
-Bundle 'vim-scripts/mru.vim'
+Bundle 'https://github.com/owner888/vimer/tree/master/bundle/mru.vim'
 " 插件管理器
 Bundle 'gmarik/vundle'
 " 快捷补全
