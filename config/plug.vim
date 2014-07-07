@@ -100,7 +100,7 @@ autocmd BufNewFile *.java 0r ~/.vim/skeletons/java.skel
 " set tags=tags;
 " set autochdir
 
-let Tlist_Ctags_Cmd="ctags"
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 let Tlist_Auto_Highlight_Tag = 1
 let Tlist_Auto_Open = 0
 let Tlist_Auto_Update = 1
@@ -161,3 +161,5 @@ let g:neocomplcache_enable_auto_select = 1 "支持在下拉框自动选择第一
 " let g:neocomplcache_enable_wildcard = 1 " 通配符
 " let g:neocomplcache_enable_caching_message=1 "显示启动进度
 
+" 跳过tpl，html 文件的语法检查，插件syntastic的配置
+let g:syntastic_ignore_files=['.*\.tpl$', '.*\.html$']
