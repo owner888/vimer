@@ -136,6 +136,9 @@ function! s:svnFunctions.Commit(argList)
 	let resultBuffer = s:DoCommand('commit --non-interactive -F "' . a:argList[0] . '"', 'commit', '', {})
 	if resultBuffer == 0
 		echomsg 'No commit needed.'
+  else
+    exec "q"
+    echomsg 'Commit success.'
 	endif
 endfunction
 
@@ -273,7 +276,10 @@ endfunction
 
 " Function: s:svnFunctions.Update(argList) {{{2
 function! s:svnFunctions.Update(argList)
-	return s:DoCommand('update --non-interactive', 'update', '', {})
+  " return s:DoCommand('update --non-interactive', 'update', '', {})
+  let resultBuffer = s:DoCommand('update --non-interactive', 'update', '', {})
+  exec "q"
+  echomsg 'Update success.'
 endfunction
 
 " Annotate setting {{{2

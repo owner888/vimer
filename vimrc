@@ -53,7 +53,7 @@ set autoread                        " 当文件内容被其他编辑器改变时
 "set backspace=indent,eol,start     " 插入模式下允许回格键删除字符, win下有用
 set completeopt=menuone,longest     " 打开文件类型检测, 加了这句才可以用智能补全, 弹出提示框
 set nobackup                        " 禁止生成临时文件
-set noswapfile                      " do not create swap file, 简写 set nowb
+set noswapfile                      " 不要生成swap文件, 简写 set nowb
 "set whichwrap+=<,>,h,l             " 当光标到达行尾或者行首时，继续移动转至下一行或者上一行, win有用
 set wildignore=.svn,.git,*.swp,*.bak,*~,*.o,*.a  " 用于目录插件NERD_tree上，打开目录忽略这些文件
 set tags=tags;                      " 开启tags，方便自动提示,以及搜索,必开 ,因为taglist(左边的函数列表插件)用的到
@@ -70,7 +70,7 @@ setlocal foldlevel=10               " 折叠层级, 最多最外层这贴包含�
 "set ambiwidth=double               " 防止特殊符号无法正常显示, 这个开启之后会影响tab缩进, 并且插件indent中如果对齐符号改成'┆' 也要关闭这个tab建才不会有问题
 set confirm                         " 在处理未保护或只读文件的时候，弹出确认
 set smartcase                       " 如果使用插件搜索补全的时候，有相同的不要覆盖,都搜索出来 
-set scrolloff=3						" 保持光标跟窗口的边距为3，当光标移动到窗口边，就自动弹出3行出来
+" set scrolloff=3						" 保持光标跟窗口的边距为3，当光标移动到窗口边，就自动弹出3行出来
 set history=100                     " 历史记录数, 针对Mru插件显示最近100条打开的文件
 set pumheight=30                    " 智能提示框层的高度
 set cinoptions=:0,l1,g0,t0,(0,(s	" c语言语法的自动缩进
@@ -87,6 +87,10 @@ set showtabline=2					" 显示tab显示框,默认也是开的
 " set guioptions-=T					" 不显示工具条
 " set guioptions+=b					" 显示横向滚动条
 " set guitablabel=%N:\ %f			" tab完全显示路径名
+" set iskeyword+=_,$,@,%,#,-        " 带有如下符号的单词不要被换行分割
+" set cmdheight=2                     " 命令行（在状态行下）的高度，默认为1，这里是2
+" set report=0                        " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+" set shortmess=atI                   " 启动的时候不显示那个援助索马里儿童的提示
 
 
 " 鼠标点哪里，光标到哪里，针对6.3的gvim版本, 新版本不用	
