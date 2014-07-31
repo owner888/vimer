@@ -1,3 +1,9 @@
+snippet var
+	var_dump($${1:variable});${2}	
+snippet echo
+	echo "${1}\n";${2}
+snippet pri
+	echo '<pre>';print_r($${1:variable});echo '</pre>';${2}
 snippet php
 	<?php
 	${1}
@@ -12,10 +18,6 @@ snippet req
 	require '${1:file}';${2}
 snippet req1
 	require_once '${1:file}';${2}
-snippet var
-	var_dump ($${1:variable});${2}
-snippet pri
-	echo '<pre>';print_r($${1:variable});echo '</pre>';${2}
 # $GLOBALS['...']
 snippet globals
 	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}

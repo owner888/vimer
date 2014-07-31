@@ -136,10 +136,12 @@ function! s:svnFunctions.Commit(argList)
 	let resultBuffer = s:DoCommand('commit --non-interactive -F "' . a:argList[0] . '"', 'commit', '', {})
 	if resultBuffer == 0
 		echomsg 'No commit needed.'
-  else
-    exec "q"
-    echomsg 'Commit success.'
-	endif
+    else
+        exec "q"
+        echomsg 'Commit success.'
+        "exec "!clear"
+    endif
+    return resultBuffer
 endfunction
 
 " Function: s:svnFunctions.Delete() {{{2
@@ -276,10 +278,15 @@ endfunction
 
 " Function: s:svnFunctions.Update(argList) {{{2
 function! s:svnFunctions.Update(argList)
-  " return s:DoCommand('update --non-interactive', 'update', '', {})
-  let resultBuffer = s:DoCommand('update --non-interactive', 'update', '', {})
-  exec "q"
-  echomsg 'Update success.'
+    " return s:DoCommand('update --non-interactive', 'update', '', {})
+    let resultBuffer = s:DoCommand('update --non-interactive', 'update', '', {})
+	if resultBuffer == 0
+		echomsg 'No update needed.'
+    else
+        exec "q"
+        echomsg 'Update success.'
+    endif
+    return resultBuffer
 endfunction
 
 " Annotate setting {{{2
