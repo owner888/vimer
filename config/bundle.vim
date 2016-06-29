@@ -23,9 +23,9 @@ Bundle 'vim-scripts/taglist.vim'
 " tree家族出的多行注释
 Bundle 'vimscripts-song/nerdcommenter'
 " c++的补全
-Bundle 'vim-scripts/OmniCppComplete'
+" Bundle 'vim-scripts/OmniCppComplete'
 " 弹框插件
-Bundle 'vim-scripts/neocomplcache'
+" Bundle 'vim-scripts/neocomplcache'
 " gdb vim调试工具, 据大神说很牛逼, 还不会用??????
 Bundle 'badeip/gdb.vim'
 " 文本对齐插件，你可以根据自己的喜欢来设置根据什么对齐比如=号
@@ -39,3 +39,4 @@ Bundle 'mattn/emmet-vim'
 " 保存时语法检查, b不用配置
 Bundle 'scrooloose/syntastic'
 
+Bundle 'Valloric/YouCompleteMe'

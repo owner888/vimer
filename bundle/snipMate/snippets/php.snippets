@@ -3,6 +3,8 @@ snippet var
 snippet echo
 	echo "${1}\n";${2}
 snippet pri
+	print_r($${1:variable});${2}
+snippet prip
 	echo '<pre>';print_r($${1:variable});echo '</pre>';${2}
 snippet php
 	<?php

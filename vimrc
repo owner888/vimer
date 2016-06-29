@@ -44,7 +44,7 @@ set numberwidth=3                   " 行号宽度
 "set showcmd                        " 输入的命令显示出来，看的清楚些 ，win有用 
 set ruler                           " 显示标尺
 "set wildmenu                       " 使回格键（backspace）正常处理indent, eol, start等 win有用
-"set wildmode=list:longest,full     " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）, win下有用
+set wildmode=list:longest,full      " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）, win下有用
 set laststatus=2                    " 启动显示状态行(1),总是显示状态行(2) 
 "set mouse=a                        " 充许使用鼠标, 值对win有用
 "set mousehide						" 隐藏鼠标，当是文本的处于编辑的时候, win有用
@@ -162,7 +162,43 @@ au FileType smarty,html set syntax=html " 语法高亮还是用html自身的高�
 " xmledit
 let xml_use_xhtml = 1
 
+" 当编辑php文件的时候，导入PHP函数列表，按 ctrl+n 自动补全
+"au FileType php call AddPHPFuncList() " 有neocomplacache都不用这些函数了，自带的
+function! AddPHPFuncList()
+  set dict-=~/.vim/php_funclist.txt dict+=~/.vim/php_funclist.txt
+  set complete-=k complete+=k
+endfunction
+
 "引用插件配置
 source ~/.vim/config/plug.vim
 "引用快捷键配置
 source ~/.vim/config/keyboard.vim
+
+"Golang配置
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }

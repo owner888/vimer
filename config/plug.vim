@@ -37,15 +37,6 @@ map <C-\> <plug>NERDCommenterToggle  " 给批量注释设置快捷键
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => markdown配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"autocmd VimEnter * NERDTree "启动Vim时自动打开nerdtree
-let g:NERDTreeWinPos          = "left"
-let g:NERDTreeWinSize         = 30
-let g:NERDTreeShowLineNumbers = 0
-"let g:NERDTreeQuitOnOpen     = 1
-let g:NERDTreeMouseMode       = 1
-let g:NERDChristmasTree       = 1
-"let NERDTreeChDirMode        = 2 "打开书签时，自动将Vim的pwd设为打开的目录，如果你的项目有tags文件，你会发现这个命令很有帮助
-map <C-\> <plug>NERDCommenterToggle  " 给批量注释设置快捷键
 
 "markdown配置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
@@ -76,6 +67,10 @@ let g:snips_author  = "seatle <seatle@foxmail.com>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => autocmd 自动加载
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType php setlocal dict+=~/.vim/swoole_funclist.dict
+au FileType c setlocal dict+=~/.vim/dict/c.dict
+" 太卡了，里面都不知道是什么函数来的
+"au FileType go setlocal dict+=~/.vim/dict/go.dict
 " 让html和smarty模板能调用字典
 au FileType html,htm,smarty setlocal dict+=~/.vim/dict/css.dict
 au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
@@ -163,3 +158,56 @@ let g:neocomplcache_enable_auto_select = 1 "支持在下拉框自动选择第一
 
 " 跳过tpl，html 文件的语法检查，插件syntastic的配置
 let g:syntastic_ignore_files=['.*\.tpl$', '.*\.html$']
+
+"""YouCompleteMe智能补全工具
+""let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+""" 不显示开启vim时检查ycm_extra_conf文件的信息
+""let g:ycm_confirm_extra_conf = 0
+""" 开启基于tag的补全，可以在这之后添加需要的标签路径
+""let g:ycm_collect_identifiers_from_tags_files = 1
+""" 开启语义补全
+""let g:ycm_seed_identifiers_with_syntax = 1
+"""注释和字符串中的文字也会被收入补全
+""let g:ycm_collect_identifiers_from_comments_and_strings = 0
+""" 输入第 2 个字符开始补全
+""let g:ycm_min_num_of_chars_for_completion= 2
+""" 禁止缓存匹配项,每次都重新生成匹配项
+""let g:ycm_cache_omnifunc=0
+"""在注释输入中也能补全
+""let g:ycm_complete_in_comments = 1
+"""在字符串输入中也能补全
+""let g:ycm_complete_in_strings = 1
+"""定义快捷健补全
+""let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+""let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+""" 设置在下面几种格式的文件上屏蔽ycm
+""let g:ycm_filetype_blacklist = {
+""      \ 'tagbar' : 1,
+""      \ 'qf' : 1,
+""      \ 'notes' : 1,
+""      \ 'markdown' : 1,
+""      \ 'unite' : 1,
+""      \ 'text' : 1,
+""      \ 'vimwiki' : 1,
+""      \ 'pandoc' : 1,
+""      \ 'infolog' : 1,
+""      \ 'mail' : 1
+""      \}
+"""设置关健字触发补全
+""let g:ycm_semantic_triggers =  {
+""  \   'c' : ['->', '.', ' ', '(', '[', '&'],
+""  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+""  \             're!\[.*\]\s'],
+""  \   'ocaml' : ['.', '#'],
+""  \   'cpp,objcpp' : ['->', '.', '::'],
+""  \   'perl' : ['->'],
+""  \   'php' : ['->', '::'],
+""  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+""  \   'ruby' : ['.', '::'],
+""  \   'lua' : ['.', ':'],
+""  \   'erlang' : [':'],
+""  \ }
+""let g:ycm_cache_omnifunc = 1
+""let g:ycm_use_ultisnips_completer = 1
+"""定义函数跟踪快捷健
+""nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>

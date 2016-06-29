@@ -1,14 +1,15 @@
 map <F2> :NERDTreeToggle<CR>   " NERDTree目录树开关切换
 map <F3> :TlistToggle<CR>      " taglist标签列表开关切换
-map <F4> t :NERDTreeMirror<CR>gT<C-w>w<ESC>gt<C-w>w    " 新标签打开一个文件，复制目录树
+map <F4> :TagbarToggle<CR>      " taglist标签列表开关切换
+"map <F8> t :NERDTreeMirror<CR>gT<C-w>w<ESC>gt<C-w>w    " 新标签打开一个文件，复制目录树
 "nmap <Leader>f :NERDTreeToggle<CR>
 "nmap <Leader>F :NERDTreeFind<CR>
 "nmap <Leader>s :NERDTreeMirror<CR>
 
 " map php-doc key inoremap:插入模式 nnoremap:命令行模式 vnoremap:视图模式
-inoremap <C-P> <ESC> :call PhpDocSingle()<CR>i
-nnoremap <C-P> :call PhpDocSingle()<CR>
-vnoremap <C-P> :call PhpDocSingle()<CR>
+inoremap <C-D> <ESC> :call PhpDocSingle()<CR>i
+nnoremap <C-D> :call PhpDocSingle()<CR>
+vnoremap <C-D> :call PhpDocSingle()<CR>
 
 " 去掉windows下编辑器产生的 ^M
 noremap  <C-M> :%s/<C-V><cr>//ge<cr>'tzt'm  
@@ -59,3 +60,11 @@ endfunction
 "map <silent> <leader>n :bp<cr>
 "nnoremap <C-TAB> :tabnext<CR>
 
+"control+h进入左边的窗口
+nmap <C-H> <C-W>h 
+"control+j进入下边的窗口
+nmap <C-J> <C-W>j  
+"control+k进入上边的窗口
+nmap <C-K> <C-W>k 
+"control+l进入右边的窗口
+nmap <C-L> <C-W>l  
