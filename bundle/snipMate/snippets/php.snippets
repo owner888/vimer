@@ -1,11 +1,23 @@
 snippet var
 	var_dump($${1:variable});${2}	
+snippet vard
+	echo '<pre>'; var_dump(${1}); echo '</pre>';
+snippet vardd
+	echo '<pre>'; var_dump(${1}); echo '</pre>'; die(${0:});
 snippet echo
 	echo "${1}\n";${2}
 snippet pri
 	print_r($${1:variable});${2}
 snippet prip
 	echo '<pre>';print_r($${1:variable});echo '</pre>';${2}
+snippet http_red
+	header ("HTTP/1.1 301 Moved Permanently");
+	header ("Location: ".URL);
+	exit();
+snippet log "error_log(var_export($var, true));"
+	error_log(var_export(${1}, true));
+snippet t "$retVal = (condition) ? a : b"
+	$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b};
 snippet php
 	<?php
 	${1}
@@ -23,22 +35,31 @@ snippet req1
 # $GLOBALS['...']
 snippet globals
 	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}
-snippet $_ COOKIE['...']
-	$_COOKIE['${1:variable}']${2}
-snippet $_ ENV['...']
-	$_ENV['${1:variable}']${2}
-snippet $_ FILES['...']
-	$_FILES['${1:variable}']${2}
-snippet $_ Get['...']
-	$_GET['${1:variable}']${2}
-snippet $_ POST['...']
-	$_POST['${1:variable}']${2}
-snippet $_ REQUEST['...']
-	$_REQUEST['${1:variable}']${2}
-snippet $_ SERVER['...']
-	$_SERVER['${1:variable}']${2}
-snippet $_ SESSION['...']
-	$_SESSION['${1:variable}']${2}
+# Predefined variables
+snippet C
+	$_COOKIE['${1:variable}']
+snippet S
+	$_SESSION['${1:variable}']
+snippet E
+	$_ENV['${1:variable}']
+snippet F
+	$_FILES['${1:variable}']
+snippet G
+	$_GET['${1:variable}']
+snippet P
+	$_POST['${1:variable}']
+snippet R
+	$_REQUEST['${1:variable}']
+snippet SR
+	$_SERVER['${1:variable}']
+snippet get "get"
+	$_GET['${1:variable}']
+snippet post "post"
+	$_POST['${1:variable}']
+snippet cookie "cookie"
+	$_COOKIE['${1:variable}']
+snippet session "session"
+	$_SESSION['${1:variable}']
 # Start Docblock
 snippet /*
 	/**
@@ -240,3 +261,22 @@ snippet try
 	{
 		$msg = $e->getMessage();
 	}
+# end of phpunit snippets
+snippet te "throw new Exception()"
+	throw new ${1:Exception}("${2:Error Processing Request}");
+snippet fpc "file_put_contents" b
+	file_put_contents(${1:file}, ${2:content}${3:, FILE_APPEND});$0
+snippet sr "str_replace"
+	str_replace(${1:search}, ${2:replace}, ${3:subject})$0
+snippet ia "in_array"
+	in_array(${1:needle}, ${2:haystack})$0
+snippet is "isset"
+	isset(${1:var})$0
+snippet isa "isset array"
+	isset($${1:array}[${2:key}])$0
+snippet in "is_null"
+	is_null($${1:var})$0
+snippet fe "file_exists"
+	file_exists(${1:file})$0
+snippet id "is_dir"
+	is_dir(${1:path})$0
