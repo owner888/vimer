@@ -19,8 +19,10 @@ set cpo&vim
 
 function! SyntaxCheckers_html_jshint_IsAvailable() dict
     call syntastic#log#deprecationWarn('jshint_exec', 'html_jshint_exec')
-    return executable(self.getExec()) &&
-        \ syntastic#util#versionIsAtLeast(syntastic#util#getVersion(self.getExecEscaped() . ' --version'), [2,4])
+    if !executable(self.getExec())
+        return 0
+    endif
+    return syntastic#util#versionIsAtLeast(self.getVersion(), [2, 4])
 endfunction
 
 function! SyntaxCheckers_html_jshint_GetLocList() dict
@@ -45,4 +47,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:
