@@ -1,6 +1,6 @@
 "============================================================================
 "File:        recess.vim
-"Description: Syntax checking plugin for syntastic.vim using `recess`
+"Description: Syntax checking plugin for syntastic using `recess`
 "             (http://twitter.github.io/recess/).
 "Maintainer:  Tim Carry <tim at pixelastic dot com>
 "License:     This program is free software. It comes without any warranty,
@@ -11,16 +11,14 @@
 "
 "============================================================================
 
-if exists("g:loaded_syntastic_css_recess_checker")
+if exists('g:loaded_syntastic_css_recess_checker')
     finish
 endif
 let g:loaded_syntastic_css_recess_checker = 1
-
-runtime! syntax_checkers/less/*.vim
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'css',
     \ 'name': 'recess',
     \ 'redirect': 'less/recess'})
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:
