@@ -1,5 +1,5 @@
 "============================================================================
-"File:        plutil.vim
+"File:        shfmt.vim
 "Description: Syntax checking plugin for syntastic
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
@@ -10,21 +10,19 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_xml_plutil_checker')
+if exists('g:loaded_syntastic_sh_shfmt_checker')
     finish
 endif
-let g:loaded_syntastic_xml_plutil_checker = 1
+let g:loaded_syntastic_sh_shfmt_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_xml_plutil_GetLocList() dict
-    let makeprg = self.makeprgBuild({
-        \ 'args_before': '-lint -s',
-        \ 'fname_before': '--' })
+function! SyntaxCheckers_sh_shfmt_GetLocList() dict
+    let makeprg = self.makeprgBuild({})
 
     let errorformat =
-        \ '%E%f: %m at line %l'
+        \ '%f:%l:%c: %m'
 
     return SyntasticMake({
         \ 'makeprg': makeprg,
@@ -33,8 +31,8 @@ function! SyntaxCheckers_xml_plutil_GetLocList() dict
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
-    \ 'filetype': 'xml',
-    \ 'name': 'plutil'})
+    \ 'filetype': 'sh',
+    \ 'name': 'shfmt'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
