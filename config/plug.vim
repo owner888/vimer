@@ -1,5 +1,26 @@
 " 在使用bundle安装插件之前，需要先安装vundle插件
-"
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+" 生成文件列表 cscope.files
+" find dir -name "*.php" -o -name "*.inc" > cscope.files
+" 通过 cscope.files 生成函数列表
+" cscope -Rbq
+" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 或者 ctrl+t 跳回
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("cscope")
+       set csprg=cscope " /opt/local/bin/cscope
+       set csto=1
+       set cst
+       set nocsverb
+       " add any database in current directory
+       if filereadable("cscope.out")
+           cs add cscope.out
+       endif
+       set csverb
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nerdtree 左侧目录树
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

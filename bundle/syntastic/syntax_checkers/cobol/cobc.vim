@@ -1,6 +1,6 @@
 "============================================================================
 "File:        cobc.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -27,13 +27,12 @@ function! SyntaxCheckers_cobol_cobc_IsAvailable() dict
     if !exists('g:syntastic_cobol_compiler')
         let g:syntastic_cobol_compiler = self.getExec()
     endif
-    call self.log('g:syntastic_cobol_compiler =', g:syntastic_cobol_compiler)
-    return executable(expand(g:syntastic_cobol_compiler, 1))
+    return executable(expand(g:syntastic_cobol_compiler))
 endfunction
 
 function! SyntaxCheckers_cobol_cobc_GetLocList() dict
     return syntastic#c#GetLocList('cobol', 'cobc', {
-        \ 'errorformat': '%f:%\s%#%l: %trror: %m',
+        \ 'errorformat': '%f:%l: %trror: %m',
         \ 'main_flags': '-fsyntax-only' })
 endfunction
 
@@ -44,4 +43,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

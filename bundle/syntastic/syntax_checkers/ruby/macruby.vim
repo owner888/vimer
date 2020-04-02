@@ -1,6 +1,6 @@
 "============================================================================
 "File:        macruby.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
 "             it and/or modify it under the terms of the Do What The Fuck You
@@ -9,7 +9,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_ruby_macruby_checker')
+if exists("g:loaded_syntastic_ruby_macruby_checker")
     finish
 endif
 let g:loaded_syntastic_ruby_macruby_checker = 1
@@ -19,8 +19,8 @@ set cpo&vim
 
 function! SyntaxCheckers_ruby_macruby_GetLocList() dict
     let makeprg = self.makeprgBuild({
-        \ 'args': '-W1',
-        \ 'args_after': '-c' })
+        \ 'exe_before': 'RUBYOPT=',
+        \ 'args_after': '-W1 -c' })
 
     let errorformat =
         \ '%-GSyntax OK,'.
@@ -31,12 +31,9 @@ function! SyntaxCheckers_ruby_macruby_GetLocList() dict
         \ '%W%f:%l: %m,'.
         \ '%-C%.%#'
 
-    let env = { 'RUBYOPT': '' }
-
     return SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'env': env })
+        \ 'errorformat': errorformat })
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
@@ -46,4 +43,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

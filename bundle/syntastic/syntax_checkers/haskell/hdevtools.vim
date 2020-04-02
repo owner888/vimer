@@ -1,6 +1,6 @@
 "============================================================================
 "File:        hdevtools.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Anthony Carapetis <anthony.carapetis at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_haskell_hdevtools_checker')
+if exists("g:loaded_syntastic_haskell_hdevtools_checker")
     finish
 endif
 let g:loaded_syntastic_haskell_hdevtools_checker = 1
@@ -25,19 +25,18 @@ function! SyntaxCheckers_haskell_hdevtools_GetLocList() dict
         let g:syntastic_haskell_hdevtools_args = g:hdevtools_options
     endif
 
-    let buf = bufnr('')
     let makeprg = self.makeprgBuild({
         \ 'exe_after': 'check',
-        \ 'fname': syntastic#util#shescape(fnamemodify(bufname(buf), ':p')) })
+        \ 'fname': syntastic#util#shexpand('%:p') })
 
     let errorformat =
         \ '%-Z %#,'.
-        \ '%W%\m%f:%l:%v%\%%(-%\d%\+%\)%\=: Warning: %m,'.
-        \ '%W%\m%f:%l:%v%\%%(-%\d%\+%\)%\=: Warning:,'.
-        \ '%E%\m%f:%l:%v%\%%(-%\d%\+%\)%\=: %m,'.
-        \ '%E%>%\m%f:%l:%v%\%%(-%\d%\+%\)%\=:,'.
+        \ '%W%f:%l:%v: Warning: %m,'.
+        \ '%W%f:%l:%v: Warning:,'.
+        \ '%E%f:%l:%v: %m,'.
+        \ '%E%>%f:%l:%v:,'.
         \ '%+C  %#%m,'.
-        \ '%W%>%\m%f:%l:%v%\%%(-%\d%\+%\)%\=:,'.
+        \ '%W%>%f:%l:%v:,'.
         \ '%+C  %#%tarning: %m,'
 
     return SyntasticMake({
@@ -54,4 +53,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

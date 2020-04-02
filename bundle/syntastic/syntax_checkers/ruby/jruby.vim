@@ -1,6 +1,6 @@
 "============================================================================
 "File:        jruby.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Leonid Shevtsov <leonid at shevtsov dot me>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_ruby_jruby_checker')
+if exists("g:loaded_syntastic_ruby_jruby_checker")
     finish
 endif
 let g:loaded_syntastic_ruby_jruby_checker = 1
@@ -20,8 +20,9 @@ set cpo&vim
 
 function! SyntaxCheckers_ruby_jruby_GetLocList() dict
     let makeprg = self.makeprgBuild({
-        \ 'args': (syntastic#util#isRunningWindows() ? '-T1 -W1' : '-W1'),
-        \ 'args_after': '-c' })
+        \ 'exe_before': (syntastic#util#isRunningWindows() ? '' : 'RUBYOPT='),
+        \ 'args': (syntastic#util#isRunningWindows() ? '-T1' : ''),
+        \ 'args_after': '-W1 -c' })
 
     let errorformat =
         \ '%-GSyntax OK for %f,'.
@@ -32,12 +33,9 @@ function! SyntaxCheckers_ruby_jruby_GetLocList() dict
         \ '%W%f:%l: %m,'.
         \ '%-C%.%#'
 
-    let env = syntastic#util#isRunningWindows() ? {} : { 'RUBYOPT': '' }
-
     return SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'env': env })
+        \ 'errorformat': errorformat })
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
@@ -47,4 +45,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

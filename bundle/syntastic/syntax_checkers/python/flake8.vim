@@ -1,12 +1,12 @@
 "============================================================================
 "File:        flake8.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Authors:     Sylvain Soliman <Sylvain dot Soliman+git at gmail dot com>
 "             kstep <me@kstep.me>
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_python_flake8_checker')
+if exists("g:loaded_syntastic_python_flake8_checker")
     finish
 endif
 let g:loaded_syntastic_python_flake8_checker = 1
@@ -19,41 +19,40 @@ function! SyntaxCheckers_python_flake8_GetHighlightRegex(item)
 endfunction
 
 function! SyntaxCheckers_python_flake8_GetLocList() dict
-    let makeprg = self.makeprgBuild({})
+    let makeprg = self.makeprgBuild({
+        \ 'exe_before': (syntastic#util#isRunningWindows() ? '' : 'TERM=dumb') })
 
     let errorformat =
         \ '%E%f:%l: could not compile,%-Z%p^,' .
-        \ '%A%f:%l:%c: %m,' .
-        \ '%A%f:%l: %m,' .
+        \ '%A%f:%l:%c: %t%n %m,' .
+        \ '%A%f:%l: %t%n %m,' .
         \ '%-G%.%#'
-
-    let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
 
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
-        \ 'env': env })
+        \ 'errorformat': errorformat })
 
     for e in loclist
-        " flake8 codes: https://gitlab.com/pycqa/flake8/issues/339
+        " E*** and W*** are pep8 errors
+        " F*** are PyFlakes codes
+        " C*** are McCabe complexity messages
+        " N*** are naming conventions from pep8-naming
 
-        let parts = matchlist(e['text'], '\v\C^([A-Z]+)(\d+):?\s+(.*)')
-        if len(parts) >= 4
-            let e['type'] = parts[1][0]
-            let e['text'] = printf('%s [%s%s]', parts[3], parts[1], parts[2])
-
-            if e['type'] ==? 'E' && parts[2] !~# '\m^9'
+        if has_key(e, 'nr')
+            let e['text'] .= printf(' [%s%03d]', e['type'], e['nr'])
+            " E901 are syntax errors
+            " E902 are I/O errors
+            if e['type'] ==? 'E' && e['nr'] !~ '\m^9'
                 let e['subtype'] = 'Style'
             endif
-        else
-            let e['type'] = 'E'
+            call remove(e, 'nr')
         endif
 
-        if e['type'] =~? '\m^[CHIMNRTW]'
+        if e['type'] =~? '\m^[CNW]'
             let e['subtype'] = 'Style'
         endif
 
-        let e['type'] = e['type'] =~? '\m^[EFHC]' ? 'E' : 'W'
+        let e['type'] = e['type'] =~? '\m^[EFC]' ? 'E' : 'W'
     endfor
 
     return loclist
@@ -68,4 +67,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

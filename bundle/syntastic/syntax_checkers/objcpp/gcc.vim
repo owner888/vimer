@@ -1,6 +1,6 @@
 "============================================================================
 "File:        objcpp.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Gregor Uhlenheuer <kongo2002 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -26,8 +26,7 @@ function! SyntaxCheckers_objcpp_gcc_IsAvailable() dict
     if !exists('g:syntastic_c_compiler')
         let g:syntastic_objcpp_compiler = executable(self.getExec()) ? self.getExec() : 'clang'
     endif
-    call self.log('g:syntastic_objcpp_compiler =', g:syntastic_objcpp_compiler)
-    return executable(expand(g:syntastic_objcpp_compiler, 1))
+    return executable(expand(g:syntastic_objcpp_compiler))
 endfunction
 
 function! SyntaxCheckers_objcpp_gcc_GetLocList() dict
@@ -56,4 +55,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

@@ -1,6 +1,6 @@
 "============================================================================
 "File:        scan.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -15,10 +15,6 @@ if exists('g:loaded_syntastic_haskell_scan_checker')
 endif
 let g:loaded_syntastic_haskell_scan_checker = 1
 
-if !exists('g:syntastic_haskell_scan_sort')
-    let g:syntastic_haskell_scan_sort = 1
-endif
-
 let s:save_cpo = &cpo
 set cpo&vim
 
@@ -27,10 +23,14 @@ function! SyntaxCheckers_haskell_scan_GetLocList() dict
 
     let errorformat = '%f:%l:%v: %m'
 
-    return SyntasticMake({
+    let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
         \ 'subtype': 'Style' })
+
+    call self.setWantSort(1)
+
+    return loclist
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
@@ -40,4 +40,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

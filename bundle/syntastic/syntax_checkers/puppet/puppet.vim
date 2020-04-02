@@ -1,6 +1,6 @@
 "============================================================================
 "File:        puppet.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Eivind Uggedal <eivind at uggedal dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_puppet_puppet_checker')
+if exists("g:loaded_syntastic_puppet_puppet_checker")
     finish
 endif
 let g:loaded_syntastic_puppet_puppet_checker = 1
@@ -19,19 +19,21 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_puppet_puppet_GetLocList() dict
-    if !exists('s:puppet_new')
-        let s:puppet_new = syntastic#util#versionIsAtLeast(self.getVersion(), [2, 7, 0])
+    let ver = syntastic#util#getVersion(self.getExecEscaped() . ' --version 2>' . syntastic#util#DevNull())
+
+    if syntastic#util#versionIsAtLeast(ver, [2,7,0])
+        let args = 'parser validate --color=false'
+    else
+        let args = '--color=false --parseonly'
     endif
 
-    let makeprg = self.makeprgBuild({
-        \ 'args_before': (s:puppet_new ? 'parser validate --color=false' : '--color=false --parseonly') })
+    let makeprg = self.makeprgBuild({ 'args_before': args })
 
     let errorformat =
         \ '%-Gerr: Try ''puppet help parser validate'' for usage,' .
         \ '%-GError: Try ''puppet help parser validate'' for usage,' .
-        \ '%A%t%*[a-zA-Z]: %m at %f:%l:%c,' .
-        \ '%A%t%*[a-zA-Z]: %m at %f:%l,'.
-        \ '%A%t%*[a-zA-Z]: Could not parse for environment production: %m (file: %f\, line: %l\, column: %c)'
+        \ '%Eerr: Could not parse for environment %*[a-z]: %m at %f:%l,' .
+        \ '%EError: Could not parse for environment %*[a-z]: %m at %f:%l'
 
     return SyntasticMake({
         \ 'makeprg': makeprg,
@@ -45,4 +47,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

@@ -1,4 +1,4 @@
-if exists('g:loaded_syntastic_notifier_highlighting') || !exists('g:loaded_syntastic_plugin')
+if exists("g:loaded_syntastic_notifier_highlighting") || !exists("g:loaded_syntastic_plugin")
     finish
 endif
 let g:loaded_syntastic_notifier_highlighting = 1
@@ -13,7 +13,7 @@ let s:setup_done = 0
 
 " Public methods {{{1
 
-function! g:SyntasticHighlightingNotifier.New() abort " {{{2
+function! g:SyntasticHighlightingNotifier.New() " {{{2
     let newObj = copy(self)
 
     if !s:setup_done
@@ -25,15 +25,15 @@ function! g:SyntasticHighlightingNotifier.New() abort " {{{2
     return newObj
 endfunction " }}}2
 
-function! g:SyntasticHighlightingNotifier.enabled() abort " {{{2
+function! g:SyntasticHighlightingNotifier.enabled() " {{{2
     return s:has_highlighting && syntastic#util#var('enable_highlighting')
 endfunction " }}}2
 
-" Sets error highlights in the current window
-function! g:SyntasticHighlightingNotifier.refresh(loclist) abort " {{{2
+" Sets error highlights in the cuirrent window
+function! g:SyntasticHighlightingNotifier.refresh(loclist) " {{{2
     if self.enabled()
-        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_NOTIFICATIONS, 'highlighting: refresh')
-        call self._reset()
+        call self.reset(a:loclist)
+        call syntastic#log#debug(g:SyntasticDebugNotifications, 'highlighting: refresh')
         let buf = bufnr('')
         let issues = filter(a:loclist.copyRaw(), 'v:val["bufnr"] == buf')
         for item in issues
@@ -61,10 +61,14 @@ endfunction " }}}2
 
 " Remove all error highlights from the window
 " @vimlint(EVL103, 1, a:loclist)
-function! g:SyntasticHighlightingNotifier.reset(loclist) abort " {{{2
+function! g:SyntasticHighlightingNotifier.reset(loclist) " {{{2
     if s:has_highlighting
-        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_NOTIFICATIONS, 'highlighting: reset')
-        call self._reset()
+        call syntastic#log#debug(g:SyntasticDebugNotifications, 'highlighting: reset')
+        for match in getmatches()
+            if stridx(match['group'], 'Syntastic') == 0
+                call matchdelete(match['id'])
+            endif
+        endfor
     endif
 endfunction " }}}2
 " @vimlint(EVL103, 0, a:loclist)
@@ -74,7 +78,7 @@ endfunction " }}}2
 " Private methods {{{1
 
 " One time setup: define our own highlighting
-function! g:SyntasticHighlightingNotifier._setup() abort " {{{2
+function! g:SyntasticHighlightingNotifier._setup() " {{{2
     if s:has_highlighting
         if !hlexists('SyntasticError')
             highlight link SyntasticError SpellBad
@@ -89,14 +93,6 @@ function! g:SyntasticHighlightingNotifier._setup() abort " {{{2
             highlight link SyntasticStyleWarning SyntasticWarning
         endif
     endif
-endfunction " }}}2
-
-function! g:SyntasticHighlightingNotifier._reset() abort " {{{2
-    for match in getmatches()
-        if stridx(match['group'], 'Syntastic') == 0
-            call matchdelete(match['id'])
-        endif
-    endfor
 endfunction " }}}2
 
 " }}}1
