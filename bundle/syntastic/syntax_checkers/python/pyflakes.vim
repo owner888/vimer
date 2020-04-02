@@ -1,13 +1,13 @@
 "============================================================================
 "File:        pyflakes.vim
-"Description: Syntax checking plugin for syntastic.vim
+"Description: Syntax checking plugin for syntastic
 "Authors:     Martin Grenfell <martin.grenfell@gmail.com>
 "             kstep <me@kstep.me>
 "             Parantapa Bhattacharya <parantapa@gmail.com>
 "
 "============================================================================
 
-if exists("g:loaded_syntastic_python_pyflakes_checker")
+if exists('g:loaded_syntastic_python_pyflakes_checker')
     finish
 endif
 let g:loaded_syntastic_python_pyflakes_checker = 1
@@ -27,12 +27,12 @@ function! SyntaxCheckers_python_pyflakes_GetHighlightRegex(i)
 
         " fun with Python's %r: try "..." first, then '...'
         let term = matchstr(a:i['text'], '\m^.\{-}"\zs.\{-1,}\ze"')
-        if term != ''
+        if term !=# ''
             return '\V\<' . escape(term, '\') . '\>'
         endif
 
         let term = matchstr(a:i['text'], '\m^.\{-}''\zs.\{-1,}\ze''')
-        if term != ''
+        if term !=# ''
             return '\V\<' . escape(term, '\') . '\>'
         endif
     endif
@@ -40,8 +40,7 @@ function! SyntaxCheckers_python_pyflakes_GetHighlightRegex(i)
 endfunction
 
 function! SyntaxCheckers_python_pyflakes_GetLocList() dict
-    let makeprg = self.makeprgBuild({
-        \ 'exe_before': (syntastic#util#isRunningWindows() ? '' : 'TERM=dumb') })
+    let makeprg = self.makeprgBuild({})
 
     let errorformat =
         \ '%E%f:%l: could not compile,'.
@@ -50,10 +49,13 @@ function! SyntaxCheckers_python_pyflakes_GetLocList() dict
         \ '%E%f:%l: %m,'.
         \ '%-G%.%#'
 
+    let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
+
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'defaults': {'text': "Syntax error"} })
+        \ 'env': env,
+        \ 'defaults': {'text': 'Syntax error'} })
 
     for e in loclist
         let e['vcol'] = 0
@@ -69,4 +71,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:

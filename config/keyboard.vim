@@ -3,7 +3,7 @@ map <F3> :TlistToggle<CR>      " taglist标签列表开关切换
 map <F4> :TagbarToggle<CR>      " taglist标签列表开关切换
 "map <F8> t :NERDTreeMirror<CR>gT<C-w>w<ESC>gt<C-w>w    " 新标签打开一个文件，复制目录树
 "nmap <Leader>f :NERDTreeToggle<CR>
-"nmap <Leader>F :NERDTreeFind<CR>
+nmap <Leader>F :NERDTreeFind<CR>
 "nmap <Leader>s :NERDTreeMirror<CR>
 
 " map php-doc key inoremap:插入模式 nnoremap:命令行模式 vnoremap:视图模式
@@ -32,24 +32,24 @@ map <silent> ,sn :VCSAnnotate<CR>
 
 " 2.qq、百度、搜狗输入法是用单引号分开词的，下面这个会导致后面多出很多单引号
 " inoremap ' ''<ESC>i
-inoremap ` ``<ESC>i
-inoremap " ""<ESC>i
-inoremap < <><ESC>i
-inoremap > <c-r>=ClosePair('>')<CR>
-inoremap { {}<ESC>i
-inoremap } <c-r>=ClosePair('}')<CR>
-inoremap ( ()<ESC>i
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap [ []<ESC>i
-inoremap ] <c-r>=ClosePair(']')<CR>
+"inoremap ` ``<ESC>i
+"inoremap " ""<ESC>i
+"inoremap < <><ESC>i
+"inoremap > <c-r>=ClosePair('>')<CR>
+"inoremap { {}<ESC>i
+"inoremap } <c-r>=ClosePair('}')<CR>
+"inoremap ( ()<ESC>i
+"inoremap ) <c-r>=ClosePair(')')<CR>
+"inoremap [ []<ESC>i
+"inoremap ] <c-r>=ClosePair(']')<CR>
 
-function! ClosePair(char)
-  if getline('.')[col('.')-1] == a:char
-    return "\<Right>"
-  else
-    return a:char
-  endif
-endfunction
+"function! ClosePair(char)
+  "if getline('.')[col('.')-1] == a:char
+    "return "\<Right>"
+  "else
+    "return a:char
+  "endif
+"endfunction
 
 
 " 3.Ctrl+S实现保存，如果未命名文件名会提示你选择保存路径和文件名，gui（gvim 命令）下有效, 且win才有效
@@ -68,3 +68,9 @@ nmap <C-J> <C-W>j
 nmap <C-K> <C-W>k 
 "control+l进入右边的窗口
 nmap <C-L> <C-W>l  
+
+nnoremap <leader>fa :FlutterRun<cr>
+nnoremap <leader>fq :FlutterQuit<cr>
+nnoremap <leader>fr :FlutterHotReload<cr>
+nnoremap <leader>fR :FlutterHotRestart<cr>
+nnoremap <leader>fD :FlutterVisualDebug<cr>

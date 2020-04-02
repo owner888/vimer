@@ -1,6 +1,6 @@
 "============================================================================
 "File:        recess.vim
-"Description: Syntax checking plugin for syntastic.vim using `recess`
+"Description: Syntax checking plugin for syntastic using `recess`
 "             (http://twitter.github.io/recess/).
 "Maintainer:  Tim Carry <tim at pixelastic dot com>
 "License:     This program is free software. It comes without any warranty,
@@ -41,4 +41,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:

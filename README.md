@@ -1,3 +1,21 @@
+========================== 09:20 2019-11-13 杨泽涛 ==============================
+1、更新扩展网址
+https://vimawesome.com/
+========================== 14:42 2019-06-05 杨泽涛 ==============================
+1、NDRE_tree插件更新，采用GitHub
+https://github.com/scrooloose/nerdtree
+git clone https://github.com/scrooloose/nerdtree ~/.vim/bundle/nerdtree
+
+2、增加surround插件
+https://github.com/tpope/vim-surround
+git clone https://github.com/tpope/vim-surround ~/.vim/bundle/surround
+
+3、增加gutentags插件
+git clone https://github.com/ludovicchabant/vim-gutentags gutentags
+gutentags通过'.root', '.svn', '.git', '.project'来查找根目录，所以如果不是用git或者svn开发的话，一定要在工程目录新建一个.root或者.project文件
+通过按键 Ctrl + ] 就可以跳转到对应的定义位置，命令 Ctrl + o 可以回退到原来的位置，可能需要按两次
+如果当前光标下是个局部变量，在Vim命令模式下执行命令 gd 就可以跳转到这个局部变量的定义处
+
 ========================== 13:09 2014-07-04 杨泽涛 ==============================
 1、更改为pathogen管理插件模式
 2、增加插件自动更新vundle

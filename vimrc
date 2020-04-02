@@ -1,4 +1,4 @@
-" vim 配置文件 --- yelei 
+" vim 配置文件 
 
 " 加载插件管理器插件 pathogen.vim 
 call pathogen#infect()	
@@ -164,41 +164,12 @@ let xml_use_xhtml = 1
 
 " 当编辑php文件的时候，导入PHP函数列表，按 ctrl+n 自动补全
 "au FileType php call AddPHPFuncList() " 有neocomplacache都不用这些函数了，自带的
-function! AddPHPFuncList()
-  set dict-=~/.vim/php_funclist.txt dict+=~/.vim/php_funclist.txt
-  set complete-=k complete+=k
-endfunction
+"function! AddPHPFuncList()
+  "set dict-=~/.vim/funclist/php.dict dict+=~/.vim/funclist/php.dict
+  "set complete-=k complete+=k
+"endfunction
 
 "引用插件配置
 source ~/.vim/config/plug.vim
 "引用快捷键配置
 source ~/.vim/config/keyboard.vim
-
-"Golang配置
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
