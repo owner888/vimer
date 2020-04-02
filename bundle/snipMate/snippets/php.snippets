@@ -167,7 +167,7 @@ snippet class
 	class ${2:ClassName}
 	{
 		${3}
-		function ${4:__construct}(${5:argument})
+		function ${4:__construct}(${5:$argument})
 		{
 			${6:// code...}
 		}
@@ -250,7 +250,7 @@ snippet fun
 	}
 # $... = array (...)
 snippet array
-	$${1:arrayName} = array('${2}' => ${3});${4}
+	$${1:arrayName} = ['${2}' => ${3}];${4}
 snippet try
 	try
 	{

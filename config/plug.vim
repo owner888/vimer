@@ -1,26 +1,5 @@
 " 在使用bundle安装插件之前，需要先安装vundle插件
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" cscope setting
-" 生成文件列表 cscope.files
-" find dir -name "*.php" -o -name "*.inc" > cscope.files
-" 通过 cscope.files 生成函数列表
-" cscope -Rbq
-" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 或者 ctrl+t 跳回
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("cscope")
-       set csprg=cscope " /opt/local/bin/cscope
-       set csto=1
-       set cst
-       set nocsverb
-       " add any database in current directory
-       if filereadable("cscope.out")
-           cs add cscope.out
-       endif
-       set csverb
-endif
-
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nerdtree 左侧目录树
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,7 +46,7 @@ let g:snips_author  = "seatle <seatle@foxmail.com>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => autocmd 自动加载
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType php setlocal dict+=~/.vim/swoole_funclist.dict
+au FileType php setlocal dict+=~/.vim/funclist/swoole.dict
 au FileType c setlocal dict+=~/.vim/dict/c.dict
 " 太卡了，里面都不知道是什么函数来的
 "au FileType go setlocal dict+=~/.vim/dict/go.dict
@@ -211,3 +190,56 @@ let g:syntastic_ignore_files=['.*\.tpl$', '.*\.html$']
 ""let g:ycm_use_ultisnips_completer = 1
 """定义函数跟踪快捷健
 ""nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"Golang配置
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+" 所生成的数据文件的名称 "
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+" 检测 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" 配置 ctags 的参数 "
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+"let g:flutter_command = ''
+let g:flutter_hot_reload_on_save = 1
+
+let delimitMate_expand_cr = 1
