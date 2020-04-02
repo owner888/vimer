@@ -1,6 +1,6 @@
 "============================================================================
 "File:        racket.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Author:      Steve Bragg <steve at empresseffects dot com>
 "
 "License:     This program is free software. It comes without any warranty,
@@ -11,7 +11,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_racket_racket_checker')
+if exists("g:loaded_syntastic_racket_racket_checker")
     finish
 endif
 let g:loaded_syntastic_racket_racket_checker=1
@@ -42,10 +42,9 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'racket',
-    \ 'name': 'racket',
-    \ 'enable': 'enable_racket_racket_checker' })
+    \ 'name': 'racket'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

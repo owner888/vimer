@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_go_govet_checker')
+if exists("g:loaded_syntastic_go_govet_checker")
     finish
 endif
 let g:loaded_syntastic_go_govet_checker = 1
@@ -18,33 +18,32 @@ let g:loaded_syntastic_go_govet_checker = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_go_govet_GetLocList() dict
-    let buf = bufnr('')
-    let makeprg = self.getExecEscaped() . ' vet'
+function! SyntaxCheckers_go_govet_IsAvailable() dict
+    return executable('go')
+endfunction
 
-    let errorformat =
-        \ '%Evet: %.%\+: %f:%l:%c: %m,' .
-        \ '%f:%l:%c: %m,' .
-        \ '%W%f:%l: %m,' .
-        \ '%-G%.%#'
+function! SyntaxCheckers_go_govet_GetLocList() dict
+    let makeprg = 'go vet'
+    let errorformat = '%Evet: %.%\+: %f:%l:%c: %m,%W%f:%l: %m,%-G%.%#'
 
     " The go compiler needs to either be run with an import path as an
     " argument or directly from the package directory. Since figuring out
     " the proper import path is fickle, just cwd to the package.
 
-    return SyntasticMake({
+    let errors = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'cwd': fnamemodify(bufname(buf), ':p:h'),
+        \ 'cwd': expand('%:p:h'),
         \ 'defaults': {'type': 'w'} })
+
+    return errors
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'go',
-    \ 'name': 'govet',
-    \ 'exec': 'go' })
+    \ 'name': 'govet'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

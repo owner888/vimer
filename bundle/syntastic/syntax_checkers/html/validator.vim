@@ -1,6 +1,6 @@
 "============================================================================
 "File:        validator.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -9,54 +9,51 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "
 "============================================================================
+"
+" For detail;s about validator see: http://about.validator.nu/
+"
+" Checker options:
+"
+" - g:syntastic_html_validator_api (string; default: 'http://validator.nu/')
+"   URL of the service to use for checking; leave it to the default to run the
+"   checks against http://validator.nu/, or set it to 'http://localhost:8888/'
+"   if you're running a local service as per http://about.validator.nu/#src
+"
+" - g:syntastic_html_validator_parser (string; default: empty)
+"   parser to use; legal values are: xml, xmldtd, html, html5, html4, html4tr;
+"   set it to 'html5' to check HTML5 files;  see the wiki for reference:
+"   http://wiki.whatwg.org/wiki/Validator.nu_Common_Input_Parameters#parser
+"
+" - g:syntastic_html_validator_nsfilter (string; default: empty)
+"   sets the nsfilter for the parser; see the wiki for details:
+"   http://wiki.whatwg.org/wiki/Validator.nu_Common_Input_Parameters#nsfilter
 
-if exists('g:loaded_syntastic_html_validator_checker')
+if exists("g:loaded_syntastic_html_validator_checker")
     finish
 endif
 let g:loaded_syntastic_html_validator_checker=1
 
+if !exists('g:syntastic_html_validator_api')
+    let g:syntastic_html_validator_api = 'http://validator.nu/'
+endif
+
+if !exists('g:syntastic_html_validator_parser')
+    let g:syntastic_html_validator_parser = ''
+endif
+
+if !exists('g:syntastic_html_validator_nsfilter')
+    let g:syntastic_html_validator_nsfilter = ''
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Constants {{{1
-
-let s:DEFAULTS = {
-    \ 'api':      'https://validator.nu/',
-    \ 'nsfilter': '',
-    \ 'parser':   '',
-    \ 'schema':   '' }
-
-let s:CONTENT_TYPE = {
-    \ 'html': 'text/html',
-    \ 'svg':  'image/svg+xml',
-    \ 'xhtm': 'application/xhtml+xml' }
-
-" }}}1
-
-" @vimlint(EVL101, 1, l:api)
-" @vimlint(EVL101, 1, l:nsfilter)
-" @vimlint(EVL101, 1, l:parser)
-" @vimlint(EVL101, 1, l:schema)
-function! SyntaxCheckers_html_validator_GetLocList() dict " {{{1
-    let buf = bufnr('')
-    let type = self.getFiletype()
-    let fname = syntastic#util#shescape(fnamemodify(bufname(buf), ':p'))
-
-    for key in keys(s:DEFAULTS)
-        let l:{key} = syntastic#util#var(type . '_validator_' . key, get(s:DEFAULTS, key))
-    endfor
-    let ctype = get(s:CONTENT_TYPE, type, '')
-
-    " vint: -ProhibitUsingUndeclaredVariable
-    let makeprg = self.getExecEscaped() . ' -q -L -s --compressed -F out=gnu -F asciiquotes=yes' .
-        \ (nsfilter !=# '' ? ' -F nsfilter=' . syntastic#util#shescape(nsfilter) : '') .
-        \ (parser !=# '' ? ' -F parser=' . parser : '') .
-        \ (schema !=# '' ? ' -F schema=' . syntastic#util#shescape(schema) : '') .
-        \ ' -F doc=@' . fname .
-            \ (ctype !=# '' ? '\;type=' . ctype : '') .
-            \ '\;filename=' . fname .
-        \ ' ' . api
-    " vint: ProhibitUsingUndeclaredVariable
+function! SyntaxCheckers_html_validator_GetLocList() dict
+    let fname = syntastic#util#shexpand('%')
+    let makeprg = self.getExecEscaped() . ' -s --compressed -F out=gnu -F asciiquotes=yes' .
+        \ (g:syntastic_html_validator_parser != '' ? ' -F parser=' . g:syntastic_html_validator_parser : '') .
+        \ (g:syntastic_html_validator_nsfilter != '' ? ' -F nsfilter=' . g:syntastic_html_validator_nsfilter : '') .
+        \ ' -F doc=@' . fname . '\;type=text/html\;filename=' . fname . ' ' . g:syntastic_html_validator_api
 
     let errorformat =
         \ '%E"%f":%l: %trror: %m,' .
@@ -77,11 +74,7 @@ function! SyntaxCheckers_html_validator_GetLocList() dict " {{{1
         \ 'errorformat': errorformat,
         \ 'preprocess': 'validator',
         \ 'returns': [0] })
-endfunction " }}}1
-" @vimlint(EVL101, 0, l:schema)
-" @vimlint(EVL101, 0, l:parser)
-" @vimlint(EVL101, 0, l:nsfilter)
-" @vimlint(EVL101, 0, l:api)
+endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'html',
@@ -91,4 +84,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

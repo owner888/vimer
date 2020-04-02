@@ -1,6 +1,6 @@
 "============================================================================
 "File:        svtools.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -20,7 +20,7 @@
 "
 "   let g:syntastic_enable_r_svtools_checker = 1
 
-if exists('g:loaded_syntastic_r_svtools_checker')
+if exists("g:loaded_syntastic_r_svtools_checker")
     finish
 endif
 let g:loaded_syntastic_r_svtools_checker = 1
@@ -34,25 +34,28 @@ set cpo&vim
 
 function! SyntaxCheckers_r_svtools_GetHighlightRegex(item)
     let term = matchstr(a:item['text'], "\\m'\\zs[^']\\+\\ze'")
-    return term !=# '' ? '\V' . escape(term, '\') : ''
+    return term != '' ? '\V' . escape(term, '\') : ''
 endfunction
 
 function! SyntaxCheckers_r_svtools_IsAvailable() dict
     if !executable(self.getExec())
         return 0
     endif
-    call syntastic#util#system(self.getExecEscaped() . ' --slave --restore --no-save -e ' . syntastic#util#shescape('library(svTools)'))
+    call system(self.getExecEscaped() . ' --slave --restore --no-save -e ' . syntastic#util#shescape('library(svTools)'))
     return v:shell_error == 0
 endfunction
 
 function! SyntaxCheckers_r_svtools_GetLocList() dict
-    let buf = bufnr('')
+    if !exists('g:syntastic_enable_r_svtools_checker') || !g:syntastic_enable_r_svtools_checker
+        call syntastic#log#error('checker r/svtools: checks disabled for security reasons; set g:syntastic_enable_r_svtools_checker to 1 to override')
+        return []
+    endif
 
     let setwd = syntastic#util#isRunningWindows() ? 'setwd("' . escape(getcwd(), '"\') . '"); ' : ''
     let makeprg = self.getExecEscaped() . ' --slave --restore --no-save' .
         \ ' -e ' . syntastic#util#shescape(setwd . 'library(svTools); ' .
         \       'try(lint(commandArgs(TRUE), filename = commandArgs(TRUE), type = "flat", sep = ":"))') .
-        \ ' --args ' . syntastic#util#shescape(bufname(buf))
+        \ ' --args ' . syntastic#util#shexpand('%')
 
     let errorformat =
         \ '%trror:%f:%\s%#%l:%\s%#%v:%m,' .
@@ -67,10 +70,9 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'r',
     \ 'name': 'svtools',
-    \ 'exec': 'R',
-    \ 'enable': 'enable_r_svtools_checker'})
+    \ 'exec': 'R' })
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

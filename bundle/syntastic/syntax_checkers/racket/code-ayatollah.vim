@@ -1,6 +1,6 @@
 "============================================================================
 "File:        code-ayatollah.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  LCD 47 <lcd047 at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_racket_code_ayatollah_checker')
+if exists("g:loaded_syntastic_racket_code_ayatollah_checker")
     finish
 endif
 let g:loaded_syntastic_racket_code_ayatollah_checker = 1
@@ -19,15 +19,11 @@ if !exists('g:syntastic_racket_code_ayatollah_script')
     let g:syntastic_racket_code_ayatollah_script = 'code-ayatollah.rkt'
 endif
 
-if !exists('g:syntastic_racket_code_ayatollah_sort')
-    let g:syntastic_racket_code_ayatollah_sort = 1
-endif
-
 let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_racket_code_ayatollah_IsAvailable() dict
-    let s:script = expand(g:syntastic_racket_code_ayatollah_script, 1)
+    let s:script = expand(g:syntastic_racket_code_ayatollah_script)
     return executable(self.getExec()) && filereadable(s:script)
 endfunction
 
@@ -48,6 +44,8 @@ function! SyntaxCheckers_racket_code_ayatollah_GetLocList() dict
         let e['col'] += 1
     endfor
 
+    call self.setWantSort(1)
+
     return loclist
 endfunction
 
@@ -59,4 +57,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

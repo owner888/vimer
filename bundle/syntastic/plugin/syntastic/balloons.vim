@@ -1,4 +1,4 @@
-if exists('g:loaded_syntastic_notifier_balloons') || !exists('g:loaded_syntastic_plugin')
+if exists("g:loaded_syntastic_notifier_balloons") || !exists("g:loaded_syntastic_plugin")
     finish
 endif
 let g:loaded_syntastic_notifier_balloons = 1
@@ -11,34 +11,42 @@ let g:SyntasticBalloonsNotifier = {}
 
 " Public methods {{{1
 
-function! g:SyntasticBalloonsNotifier.New() abort " {{{2
+function! g:SyntasticBalloonsNotifier.New() " {{{2
     let newObj = copy(self)
     return newObj
 endfunction " }}}2
 
-function! g:SyntasticBalloonsNotifier.enabled() abort " {{{2
+function! g:SyntasticBalloonsNotifier.enabled() " {{{2
     return has('balloon_eval') && syntastic#util#var('enable_balloons')
 endfunction " }}}2
 
 " Update the error balloons
-function! g:SyntasticBalloonsNotifier.refresh(loclist) abort " {{{2
-    unlet! b:syntastic_private_balloons
+function! g:SyntasticBalloonsNotifier.refresh(loclist) " {{{2
+    let b:syntastic_balloons = {}
     if self.enabled() && !a:loclist.isEmpty()
-        let b:syntastic_private_balloons = a:loclist.balloons()
-        if !empty(b:syntastic_private_balloons)
-            set ballooneval balloonexpr=SyntasticBalloonsExprNotifier()
+        call syntastic#log#debug(g:SyntasticDebugNotifications, 'balloons: refresh')
+        let buf = bufnr('')
+        let issues = filter(a:loclist.copyRaw(), 'v:val["bufnr"] == buf')
+        if !empty(issues)
+            for i in issues
+                if has_key(b:syntastic_balloons, i['lnum'])
+                    let b:syntastic_balloons[i['lnum']] .= "\n" . i['text']
+                else
+                    let b:syntastic_balloons[i['lnum']] = i['text']
+                endif
+            endfor
+            set beval bexpr=SyntasticBalloonsExprNotifier()
         endif
     endif
 endfunction " }}}2
 
 " Reset the error balloons
 " @vimlint(EVL103, 1, a:loclist)
-function! g:SyntasticBalloonsNotifier.reset(loclist) abort " {{{2
-    if has('balloon_eval') && !empty(get(b:, 'syntastic_private_balloons', {}))
-        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_NOTIFICATIONS, 'balloons: reset')
-        set noballooneval
+function! g:SyntasticBalloonsNotifier.reset(loclist) " {{{2
+    if has('balloon_eval')
+        call syntastic#log#debug(g:SyntasticDebugNotifications, 'balloons: reset')
+        set nobeval
     endif
-    unlet! b:syntastic_private_balloons
 endfunction " }}}2
 " @vimlint(EVL103, 0, a:loclist)
 
@@ -46,11 +54,11 @@ endfunction " }}}2
 
 " Private functions {{{1
 
-function! SyntasticBalloonsExprNotifier() abort " {{{2
-    if !exists('b:syntastic_private_balloons')
+function! SyntasticBalloonsExprNotifier() " {{{2
+    if !exists('b:syntastic_balloons')
         return ''
     endif
-    return get(b:syntastic_private_balloons, v:beval_lnum, '')
+    return get(b:syntastic_balloons, v:beval_lnum, '')
 endfunction " }}}2
 
 " }}}1

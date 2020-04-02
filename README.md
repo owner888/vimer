@@ -1,3 +1,6 @@
+========================== 09:20 2020-04-02 杨泽涛 ==============================
+1、解决ctags不支持golang
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ========================== 09:20 2019-11-13 杨泽涛 ==============================
 1、更新扩展网址
 https://vimawesome.com/

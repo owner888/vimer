@@ -1,6 +1,6 @@
 "============================================================================
 "File:        lisp.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Karl Yngve Lervåg <karl.yngve@lervag.net>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -10,7 +10,7 @@
 "
 "============================================================================
 
-if exists('g:loaded_syntastic_lisp_clisp_checker')
+if exists("g:loaded_syntastic_lisp_clisp_checker")
     finish
 endif
 let g:loaded_syntastic_lisp_clisp_checker = 1
@@ -19,13 +19,9 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_lisp_clisp_GetLocList() dict
-    let buf = bufnr('')
-    let tmpdir = syntastic#util#tmpdir()
-
     let makeprg = self.makeprgBuild({
         \ 'args_after': '-q',
-        \ 'fname_before': '-c',
-        \ 'post_args_after': ['-o', tmpdir] })
+        \ 'fname_before': '-c' })
 
     let errorformat  =
         \ '%-G;%.%#,' .
@@ -37,14 +33,10 @@ function! SyntaxCheckers_lisp_clisp_GetLocList() dict
         \ '%Z %m,' .
         \ '%-G%.%#'
 
-    let loclist = SyntasticMake({
+    return SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'defaults': {'bufnr': buf} })
-
-    call syntastic#util#rmrf(tmpdir)
-
-    return loclist
+        \ 'defaults': {'bufnr': bufnr('')} })
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
@@ -54,4 +46,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:

@@ -1,6 +1,6 @@
 "============================================================================
 "File:        w3.vim
-"Description: Syntax checking plugin for syntastic
+"Description: Syntax checking plugin for syntastic.vim
 "Maintainer:  Martin Grenfell <martin.grenfell at gmail dot com>
 "License:     This program is free software. It comes without any warranty,
 "             to the extent permitted by applicable law. You can redistribute
@@ -9,50 +9,30 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "
 "============================================================================
+"
+" Checker option:
+"
+" - g:syntastic_html_w3_api (string; default: 'http://validator.w3.org/check')
+"   URL of the service to use for checking; leave it to the default to run the
+"   checks against http://validator.w3.org/, or set it to
+"   'http://localhost/w3c-validator/check' if you're running a local service
 
-if exists('g:loaded_syntastic_html_w3_checker')
+if exists("g:loaded_syntastic_html_w3_checker")
     finish
 endif
 let g:loaded_syntastic_html_w3_checker = 1
 
+if !exists('g:syntastic_html_w3_api')
+    let g:syntastic_html_w3_api = 'http://validator.w3.org/check'
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Constants {{{1
-
-let s:DEFAULTS = {
-    \ 'html': {
-        \ 'ctype':   'text/html',
-        \ 'doctype': 'HTML5' },
-    \ 'svg': {
-        \ 'ctype':   'image/svg+xml',
-        \ 'doctype': 'SVG 1.1' },
-    \ 'xhtml': {
-        \ 'ctype':   'application/xhtml+xml',
-        \ 'doctype': 'XHTML 1.1' } }
-
-" }}}1
-
-" @vimlint(EVL101, 1, l:ctype)
-" @vimlint(EVL101, 1, l:doctype)
-function! SyntaxCheckers_html_w3_GetLocList() dict " {{{1
-    let buf = bufnr('')
-    let type = self.getFiletype()
-    let fname = syntastic#util#shescape(fnamemodify(bufname(buf), ':p'))
-    let api = syntastic#util#var(type . '_w3_api', 'https://validator.w3.org/check')
-
-    for key in keys(s:DEFAULTS[type])
-        let l:{key} = syntastic#util#var(type . '_w3_' . key, get(s:DEFAULTS[type], key))
-    endfor
-
-    " vint: -ProhibitUsingUndeclaredVariable
-    let makeprg = self.getExecEscaped() . ' -q -L -s --compressed -F output=json' .
-        \ (doctype !=# '' ? ' -F doctype=' . syntastic#util#shescape(doctype) : '') .
-        \ ' -F uploaded_file=@' . fname .
-            \ '\;type=' . ctype .
-            \ '\;filename=' . fname .
-        \ ' ' . api
-    " vint: ProhibitUsingUndeclaredVariable
+function! SyntaxCheckers_html_w3_GetLocList() dict
+    let makeprg = self.getExecEscaped() . ' -s -F output=json ' .
+        \ '-F uploaded_file=@' . syntastic#util#shexpand('%:p') . '\;type=text/html ' .
+        \ g:syntastic_html_w3_api
 
     let errorformat =
         \ '%A %\+{,' .
@@ -68,7 +48,7 @@ function! SyntaxCheckers_html_w3_GetLocList() dict " {{{1
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'defaults': {'bufnr': bufnr('')},
+        \ 'defaults': {'bufnr': bufnr("")},
         \ 'returns': [0] })
 
     for e in loclist
@@ -76,9 +56,7 @@ function! SyntaxCheckers_html_w3_GetLocList() dict " {{{1
     endfor
 
     return loclist
-endfunction " }}}1
-" @vimlint(EVL104, 0, l:doctype)
-" @vimlint(EVL101, 0, l:ctype)
+endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'html',
@@ -88,4 +66,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set sw=4 sts=4 et fdm=marker:
+" vim: set et sts=4 sw=4:
