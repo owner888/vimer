@@ -1,9 +1,11 @@
 ========================== 09:20 2020-04-02 杨泽涛 ==============================
-1、解决ctags不支持golang
+1、解决 macOS 上 ctags 不支持 golang
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+
 ========================== 09:20 2019-11-13 杨泽涛 ==============================
 1、更新扩展网址
 https://vimawesome.com/
+
 ========================== 14:42 2019-06-05 杨泽涛 ==============================
 1、NDRE_tree插件更新，采用GitHub
 https://github.com/scrooloose/nerdtree
@@ -135,5 +137,3 @@ taglist插件需要依赖ctags程序才能工作，目前常用的ctags版本是
 下载地址：http://www.vim.org/scripts/script.php?script_id=1879
 
 9、增加样式vimfiles/colors/molokai.vim
-
-
