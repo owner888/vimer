@@ -1,5 +1,0 @@
-swoole_server
-swoole_server_set
-swoole_server_addlisten
-swoole_server_handler
-swoole_server_addtimer
