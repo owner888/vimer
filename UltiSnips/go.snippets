@@ -1,0 +1,116 @@
+snippet var
+var ${1:variable} ${2:type}	
+endsnippet
+snippet pri
+fmt.Println(${1:variable})${2}
+endsnippet
+snippet spri
+fmt.Sprintf("value is %s", ${1:variable})${2}
+endsnippet
+snippet log
+log.Printf(${1:variable}, err)${2}
+endsnippet
+snippet import
+import (
+	"${1:file}";${2}
+)
+endsnippet
+# class ...
+snippet class
+type ${1:className} struct {
+	${2:variable} ${3:string}
+}
+func (${4:self} *$1) ${5:method}(${6:variable} ${7:string}) ${8:string} {
+	${9:// code...}
+	return $4.$2
+}
+endsnippet
+snippet func
+func ${1:FunctionName}(${2:variable} ${3:string}) ${4:bool}{
+	${5:// code...}
+	return true
+}
+endsnippet
+# make
+snippet make
+make(${1:[]string}, ${2:0})${0}
+endsnippet
+snippet fors "for select"
+for {
+	select {
+		case ${2:${1:result} := }<- ${3:channel}:
+			${0}
+	}
+}
+endsnippet
+snippet if
+if ${1:/* condition */} {
+	${2:// code...}
+}
+endsnippet
+snippet ife
+if ${1:/* condition */} {
+	${2:// code...}
+} else {
+	${3:// code...}
+}
+${4}
+endsnippet
+snippet else
+else {
+	${1:// code...}
+}
+endsnippet
+snippet elseif
+elseif ${1:/* condition */} {
+	${2:// code...}
+}
+endsnippet
+snippet switch
+switch ${1:variable} {
+case ${2:value}:
+    ${3:// code...}
+default:
+    ${4:// code...}
+}${5}
+endsnippet
+snippet case
+case ${1:value}:
+${2:// code...}
+endsnippet
+snippet for
+for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+	${4: // code...}
+}
+endsnippet
+snippet foreach
+for ${1:key}, ${2:value} := range ${3:args} {
+	${4:// code...}
+}
+endsnippet
+snippet go
+go func() {
+	${1:// code...}
+} ()
+endsnippet
+# ... = map[...]... {...}
+snippet array
+v := [${1:2}]string{"${2:str1}", "${3:str1}"}
+endsnippet
+snippet slice
+v := []string{}
+v = append(v, "${1:string}")
+endsnippet
+snippet map
+${1:mapName} := map[${2:string}]${3:string} {
+	"${4:key}": "${5:value}"
+}
+$1["$4"] = "$5"
+endsnippet
+snippet try
+defer func() {
+	if err := recover(); err != nil {
+		log.Printf("Runtime error caught: %v", err)
+	}
+}()
+endsnippet
