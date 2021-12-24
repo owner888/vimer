@@ -1,0 +1,9 @@
+snippet log
+	const-string v0, "${1:tag}"
+
+	invoke-static {v0, ${2:p0}}, Lcom/agc/Log;->w(Ljava/lang/Object;${3:F|I|Z})I${4}
+snippet var
+	var_dump($${1:variable});${2}	
+snippet vard
+	echo '<pre>'; var_dump(${1}); echo '</pre>';
+

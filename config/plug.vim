@@ -1,23 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" cscope setting
-" 生成文件列表 cscope.files
-" find dir -name "*.php" -o -name "*.inc" > cscope.files
-" 通过 cscope.files 生成函数列表
-" cscope -Rbq
-" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 或者 ctrl+t 跳回
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"if has("cscope")
-   "set csprg=cscope " /opt/local/bin/cscope
-   "set csto=1
-   "set cst
-   "set nocsverb
-   "" add any database in current directory
-   "if filereadable("cscope.out")
-       "cs add cscope.out
-   "endif
-   "set csverb
-"endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => mru 打开最近编辑过的文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -116,6 +96,26 @@ let g:NERDTreeMouseMode       = 1
 let g:NERDChristmasTree       = 1
 "let NERDTreeChDirMode        = 2            " 打开书签时，自动将Vim的pwd设为打开的目录，如果你的项目有tags文件，你会发现这个命令很有帮助
 "let g:NERDTreeIgnore = ['\~$', '\.pyc$', '\.class$']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NERD Commenter 代码注释
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 默认情况下，在注释分隔符后添加空格
+let g:NERDSpaceDelims = 1
+" 对美化的多行注释使用压缩语法(貌似这个没什么卵用)
+let g:NERDCompactSexyComs = 1
+" 按行对齐注释分隔符左对齐，而不是按代码缩进
+let g:NERDDefaultAlign = 'left'
+" 默认情况下，将语言设置为使用其备用分隔符（不是很明白所以忽略）
+let g:NERDAltDelims_java = 1
+" 添加您自己的自定义格式或覆盖默认格式（你懂的）
+let g:NERDCustomDelimiters = { 'smali': { 'left': '#' } }
+" 允许注释和反转空行（在注释区域时很有用） （没亲测）
+let g:NERDCommentEmptyLines = 1
+" 取消注释时启用尾随空白的修剪
+let g:NERDTrimTrailingWhitespace = 1
+" 启用nerdcommenttoggle检查是否对所有选定行进行了注释
+let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar 右侧的函数列表树
@@ -301,32 +301,6 @@ let g:ale_lint_on_enter = 0
 " 解决java乱码问题
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" => gutentags 自动生成tags
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:gutentags_trace = 1
-
-"" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-"let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-
-"" 所生成的数据文件的名称 "
-"let g:gutentags_ctags_tagfile = '.tags'
-
-"" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-"let s:vim_tags = expand('~/.cache/tags')
-"let g:gutentags_cache_dir = s:vim_tags
-
-"" 检测 ~/.cache/tags 不存在就新建 "
-"if !isdirectory(s:vim_tags)
-   "silent! call mkdir(s:vim_tags, 'p')
-"endif
-
-"" 配置 ctags 的参数 "
-"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
-"let g:gutentags_ctags_extra_args += ['--php-kinds=+ctif']
-"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
-"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => flutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -430,7 +404,7 @@ au FileType smarty,html,htm let g:javascript_enable_domhtmlcss = 1
 "au Filetype python setlocal omnifunc=python3complete#Complete
 " 奇怪的是 java 和 golang 认不出来，会导致gocode没法用
 au Filetype java setlocal omnifunc=javacomplete#Complete
-au FileType java setlocal completefunc=javacomplete#CompleteParamsInfo
+" au FileType java setlocal completefunc=javacomplete#CompleteParamsInfo
 " 上面为了=号格式化不出问题，把html的文件类型设置为xml了，这里需要加这个HTML标签才可以职能补齐
 au FileType smarty,html,htm,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -439,4 +413,50 @@ au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 au FileType go nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
 au FileType vim nnoremap <buffer> <C-]> :call vim#Jump()<CR>
 
-autocmd FileType smali setlocal cindent
+au FileType smali setlocal cindent
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cscope setting
+" 生成文件列表 cscope.files
+" find dir -name "*.php" -o -name "*.inc" > cscope.files
+" 通过 cscope.files 生成函数列表
+" cscope -Rbq
+" 通过 ctrl+] 跳转到目标函数，通过 ctrl+o 或者 ctrl+t 跳回
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"if has("cscope")
+   "set csprg=cscope " /opt/local/bin/cscope
+   "set csto=1
+   "set cst
+   "set nocsverb
+   "" add any database in current directory
+   "if filereadable("cscope.out")
+       "cs add cscope.out
+   "endif
+   "set csverb
+"endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" => gutentags 自动生成tags
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:gutentags_trace = 1
+
+"" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+"let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+"" 所生成的数据文件的名称 "
+"let g:gutentags_ctags_tagfile = '.tags'
+
+"" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+"let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_cache_dir = s:vim_tags
+
+"" 检测 ~/.cache/tags 不存在就新建 "
+"if !isdirectory(s:vim_tags)
+   "silent! call mkdir(s:vim_tags, 'p')
+"endif
+
+"" 配置 ctags 的参数 "
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+"let g:gutentags_ctags_extra_args += ['--php-kinds=+ctif']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
