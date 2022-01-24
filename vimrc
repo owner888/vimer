@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双引号/反引号)
     "Plug 'jiangmiao/auto-pairs'
 
-    "Plug 'junegunn/vim-easy-align'             " 快速进行对齐/格式化，同类型产品：tabular
+    Plug 'junegunn/vim-easy-align'              " 快速进行对齐/格式化，同类型产品：tabular
     Plug 'Shougo/neocomplcache.vim'             " 代码补全，不依赖lua、python、nodejs
     Plug 'owner888/snipMate'                    " 10年前的代码块引擎
     "Plug 'SirVer/ultisnips'                    " 代码块引擎，需要python支持
@@ -64,6 +64,7 @@ call plug#begin('~/.vim/plugged')
 
     " Java
     Plug 'vim-scripts/javacomplete'
+    " Plug 'artur-shaik/vim-javacomplete2'
 
     " Colorscheme
     Plug 'tomasr/molokai'

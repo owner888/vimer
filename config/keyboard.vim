@@ -25,6 +25,7 @@ map <C-\> <plug>NERDCommenterToggle
 imap <C-D> <ESC> :call PhpDocSingle()<CR>i
 nmap <C-D> :call PhpDocSingle()<CR>
 vmap <C-D> :call PhpDocSingle()<CR>
+vmap <C-Z> zf<CR>
 
 "execute current line
 nmap <leader>te :.w !bash<CR>
