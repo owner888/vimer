@@ -16,15 +16,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'itchyny/lightline.vim'                " 状态栏美化
     Plug 'mengelbrecht/lightline-bufferline'    " 美化Tabs line
     "Plug 'Yggdroot/indentLine'
-    Plug 'wakatime/vim-wakatime'                " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
+    " Plug 'wakatime/vim-wakatime'                " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
 
     " file explorer
-    Plug 'scrooloose/nerdtree'                  " 显示目录树，按F2展开关闭
+    " Plug 'scrooloose/nerdtree'                  " 显示目录树，按F2展开关闭
     Plug 'preservim/nerdcommenter'              " 快速注释/解开注释，按 ctrl + \
     "Plug 'Xuyuanp/nerdtree-git-plugin'         " git status 效果                                                                                                                         
     "Plug 'airblade/vim-gitgutter'              " git diff，显示哪一行修改、增加
 
-    Plug 'majutsushi/tagbar'                    " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
+    " Plug 'majutsushi/tagbar'                    " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
     "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
     "Plug 'owner888/taglist.vim'                " 函数变量列表，依赖ctags，不支持golang
 
@@ -63,7 +63,7 @@ call plug#begin('~/.vim/plugged')
     "Plug 'mbbill/code_complete'
 
     " Java
-    Plug 'vim-scripts/javacomplete'
+    " Plug 'vim-scripts/javacomplete'
     " Plug 'artur-shaik/vim-javacomplete2'
 
     " Colorscheme
