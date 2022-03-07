@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'itchyny/lightline.vim'                " 状态栏美化
     Plug 'mengelbrecht/lightline-bufferline'    " 美化Tabs line
     "Plug 'Yggdroot/indentLine'
-    " Plug 'wakatime/vim-wakatime'                " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
+    Plug 'wakatime/vim-wakatime'                " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
 
     " file explorer
     " Plug 'scrooloose/nerdtree'                  " 显示目录树，按F2展开关闭
