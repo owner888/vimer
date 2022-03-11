@@ -248,6 +248,7 @@ let g:tlist_smali_settings = "smali;f:field;m:method"
 " => vim-go google出的golang官方插件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 用gopls来代替gocode，gocode作者不维护了
+" let g:go_gopls_enabled = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_template_autocreate = 0
@@ -258,6 +259,7 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_gopls_options = ['-remote=auto']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tabular 文本对齐
@@ -300,6 +302,9 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 " 解决java乱码问题
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+let g:ale_linters = {
+  \ 'go': ['gopls'],
+  \}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => flutter
@@ -330,6 +335,13 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => neocomplacache 代码补全
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable lsp for go by using gopls
+let g:completor_filetype_map = {}
+let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => neocomplacache 代码补全
@@ -403,7 +415,7 @@ au FileType smarty,html,htm let g:javascript_enable_domhtmlcss = 1
 "au Filetype php setlocal omnifunc=phpcomplete#Complete
 "au Filetype python setlocal omnifunc=python3complete#Complete
 " 奇怪的是 java 和 golang 认不出来，会导致gocode没法用
-au Filetype java setlocal omnifunc=javacomplete#Complete
+" au Filetype java setlocal omnifunc=javacomplete#Complete
 " au FileType java setlocal completefunc=javacomplete#CompleteParamsInfo
 " 上面为了=号格式化不出问题，把html的文件类型设置为xml了，这里需要加这个HTML标签才可以职能补齐
 au FileType smarty,html,htm,markdown setlocal omnifunc=htmlcomplete#CompleteTags
