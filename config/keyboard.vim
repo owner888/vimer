@@ -41,11 +41,11 @@ nmap <Leader><Leader>d :call DebugContacts()<CR>
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 " 去掉windows下编辑器产生的 ^M
-"vmap ++ :%s/<C-V><cr>//ge<cr>'tzt'm
-"nmap ++ :%s/<C-V><cr>//ge<cr>'tzt'm
+vmap ++ :%s/<C-V><cr>//ge<cr>'tzt'm
+nmap ++ :%s/<C-V><cr>//ge<cr>'tzt'm
 " 删除所有行未尾空格
-"nmap -- :%s,/s/+$,,g
-"nmap -- :%s,/s/+$,,g
+vmap -- :%s,/s/+$,,g
+nmap -- :%s,/s/+$,,g
 
 " Ctrl+S实现保存，如果未命名文件名会提示你选择保存路径和文件名，gui（gvim 命令）下有效, 且win才有效
 "map <silent> <C-S> :if expand("%") == ""<CR>:browse confirm w<CR>:else<CR>:confirm w<CR>:endif<CR>
