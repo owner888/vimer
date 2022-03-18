@@ -1,3 +1,4 @@
+" echo 'source ~/.vim/vimrc' > ~/.vimrc
 " vim 配置文件 
 let s:darwin = has('mac')
 let s:windows = has('win32') || has('win64')
