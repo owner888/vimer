@@ -20,10 +20,10 @@ let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 let g:lightline#bufferline#composed_number_map = {
-\ 1:  '⑴ ', 2:  '⑵ ', 3:  '⑶ ', 4:  '⑷ ', 5:  '⑸ ',
-\ 6:  '⑹ ', 7:  '⑺ ', 8:  '⑻ ', 9:  '⑼ ', 10: '⑽ ',
-\ 11: '⑾ ', 12: '⑿ ', 13: '⒀ ', 14: '⒁ ', 15: '⒂ ',
-\ 16: '⒃ ', 17: '⒄ ', 18: '⒅ ', 19: '⒆ ', 20: '⒇ '}
+\ 1:  '1', 2:  '2', 3:  '3', 4:  '4', 5:  '5',
+\ 6:  '6', 7:  '7', 8:  '8', 9:  '9', 10: '10',
+\ 11: '11', 12: '12', 13: '13', 14: '14', 15: '15',
+\ 16: '16', 17: '17', 18: '18', 19: '19', 20: '20'}
 
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
