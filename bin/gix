@@ -1,0 +1,82 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# A command line tool to wrap git command to enforce a custom git commit message
+# convention based on "AngularJS Git Commit Message Conventions" described at 
+#
+#    https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y
+# 
+# author: Emac Shen
+# version: 0.1.0-20200419
+# ----------------------------------------------------------------------------
+
+# check whether `git` executable exists
+GITX_VERSION=`git version | awk '{print $3}'`
+if [[ -z "$GITX_VERSION" ]] ; then
+  echo "Error: cannot find git executable"
+  exit 1
+fi
+
+# skip if it's not a `git ci` command
+if [[ "$1" != "ci" ]] ; then
+  exec git "$@"
+fi
+
+# skip if it contains any of the following options:
+# -m/--message, -c/--reuse-message, -C/--reedit-message, -F/--file, -t/--template
+if [[ ( "$*" =~ "-m" ) || ( "$*" =~ "--message" ) || ( "$*" =~ "-c" ) || ( "$*" =~ "--reuse-message" ) || ( "$*" =~ "-C" ) || ( "$*" =~ "--reedit-message" ) || ( "$*" =~ "-F" ) || ( "$*" =~ "--file" ) || ( "$*" =~ "-t" ) || ( "$*" =~ "--template" ) ]] ; then
+  exec git "$@"
+fi
+
+# loop until a non-empty value is read
+loop_read() {
+  local _result=$1
+  local _prompt=$2
+  read -p "$_prompt" $_result
+  if [[ -z "${!_result}" ]] ; then
+    loop_read "$@"
+  fi
+}
+
+# prompt for type...
+loop_read GITX_TYPE_IDX "type (0:feat, 1:fix, 2:style, 3:refactor, 4:perf, 5: test, 6:revert, 7:docs, 8:build, 9:ci, 10:chore): "
+case "$GITX_TYPE_IDX" in 
+  0) GITX_TYPE="feat" ;;
+  1) GITX_TYPE="fix" ;;
+  2) GITX_TYPE="style" ;;
+  3) GITX_TYPE="refactor" ;;
+  4) GITX_TYPE="perf" ;;
+  5) GITX_TYPE="test" ;;
+  6) GITX_TYPE="revert" ;;
+  7) GITX_TYPE="docs" ;;
+  8) GITX_TYPE="build" ;;
+  9) GITX_TYPE="ci" ;;
+  10) GITX_TYPE="chore" ;;
+  *) echo "Error: invalid type"
+     exit 1
+     ;;
+esac
+
+# prompt for scope(skipable)...
+read -p "scope (press ENTER to skip): " GITX_SCOPE
+if [[ -n "$GITX_SCOPE" ]] ; then
+  GITX_SCOPE="($GITX_SCOPE)"
+fi
+
+# prompt for short description...
+loop_read GITX_SHORT_DESCRIPTION "short description: "
+
+# prompt for long description(skipable)...
+#read -p "long description (press ENTER to skip): " GITX_LONG_DESCRIPTION
+
+# compose full commit message ($GITX_MESSAGE) in the following format:
+# <type>(<scope>): <short description>
+# <BLANK LINE>
+# <long descrption>
+GITX_MESSAGE="${GITX_TYPE}${GITX_SCOPE}: $GITX_SHORT_DESCRIPTION"
+if [[ -n "$GITX_LONG_DESCRIPTION" ]] ; then
+  GITX_MESSAGE="$GITX_MESSAGE
+$GITX_LONG_DESCRIPTION"
+fi
+
+# append the full commit message (-m $GITX_MESSAGE) to the original command
+git "$@" -m "$GITX_MESSAGE"
