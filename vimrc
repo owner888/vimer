@@ -190,26 +190,24 @@ if has("gui_running")
     let ayucolor="light"    " for light version of theme
     let ayucolor="mirage"   " for mirage version of theme
     let ayucolor="dark"     " for dark version of theme
-	colorscheme molokai	    " 设置颜色方案：molokai、ayu、gruvbox、solarized8
-	set linespace=3     	" 行间距
-	set columns=220    		" 初始窗口的宽度
-	set lines=50       		" 初始窗口的高度
+    colorscheme molokai	    " 设置颜色方案：molokai、ayu、gruvbox、solarized8
+    set linespace=3     	" 行间距
+    set columns=220    		" 初始窗口的宽度
+    set lines=50       		" 初始窗口的高度
     au FileType php,python,c,java,javascript,html,htm,smarty,json setl cursorline   " 高亮当前行
     au FileType php,python,c,java,javascript,html,htm,smarty,json setl cursorcolumn " 高亮当前列
 else
-	set t_Co=256       		" 让终端支持256色，否则很多配色不会正常显示，molokai就是其中之一
-    if !has('nvim')
+    set mouse=a
+    set t_Co=256       		" 让终端支持256色，否则很多配色不会正常显示，molokai就是其中之一
+    colorscheme gruvbox 	" 设置颜色方案：molokai、gruvbox、solarized8
+    hi Pmenu ctermbg=black  " 终端时的背景颜色
+    hi PmenuSel ctermfg=0 ctermbg=lightblue " 当在终端使用时，弹出提示框内的文本的高亮的颜色
+
+    if !has('nvim') && has('mac') " 非macOS说明是在Linux命令行模式下，不能去设置初始窗口的宽度和高度，否则样式会乱了
         set linespace=3
         set columns=230
         set lines=55
     endif
-
-	colorscheme gruvbox 	" 设置颜色方案：molokai、gruvbox、solarized8
-    set mouse=a
-	" 终端时的背景颜色
-	hi Pmenu ctermbg=black   
-    " 当在终端使用时，弹出提示框内的文本的高亮的颜色 
-    hi PmenuSel ctermfg=0 ctermbg=lightblue
 endif
 
 "引用自定义函数
