@@ -71,8 +71,8 @@ for server in $AUTO_SSH_CONFIG; do
         	echo '#!/usr/bin/expect -f' > $FILE
         	echo 'set timeout 30' >> $FILE
             if [ "$RSAKEY" != "" ]; then
-				#echo 'cd ~/Downloads/outsourc_works/宜佰搭电商/server_rsa/  \r' >> $FILE
-                #cd ~/Downloads/outsourc_works/宜佰搭电商/server_rsa/
+				#echo 'cd ~/Downloads/outsourc_works/server_rsa/  \r' >> $FILE
+                #cd ~/Downloads/outsourc_works/server_rsa/
                 cd ~/www/shell/server_rsa/
         	    echo "spawn ssh -i $RSAKEY -p$PORT "$IP >> $FILE
             else
