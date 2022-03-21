@@ -44,8 +44,10 @@ git clone https://github.com/ludovicchabant/vim-gutentags gutentags
 2. 增加插件自动更新vundle
 3. neocomplcache 改回老板，不然输入中文都会下拉代码提示，sudo gvim 还一堆报错，烦死人了
 4. 清除字典配置dict，因为neocomplcache自带了，当然html和smarty要读javascript和css的字典的话还是需要配置的
+```
     au FileType html,htm,smarty setlocal dict+=~/.vim/dict/css.dict
     au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
+```
 5. neocomplcache第一次打开新的文件格式时，会缓存当前格式的一些东西，在用户目录 ~/.neocomplcache 和 ~/.neocon
 6. 修改svn插件方法
 
