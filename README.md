@@ -150,8 +150,13 @@ mv closepair.vim.bak closepair.vim
 ========================== 21:42 2011-01-11 ==============================
 
 1. 增加closetag.vim，实现html自动闭合
-下载地址：http://www.vim.org/scripts/script.php?script_id=13
-网友增强：http://kenshin54.javaeye.com/blog/858156
+```
+http://www.vim.org/scripts/script.php?script_id=13
+```
+网友增强：
+```
+http://kenshin54.javaeye.com/blog/858156
+```
 
 2. 关闭之前自己写的闭合功能
 cd plugin
