@@ -1,3 +1,13 @@
+========================== 09:56 PM 2022-03-21 ==============================
+
+1. 修改为 plug 管理
+2. 移除 NDRE_tree、taglist、tagbar，改用 LeaderF
+3. 设置初始化窗口增加是否 macOS 判断，Linux server 下不能 set columns 和 set lines
+4. 增加 smali 支持，把 .ctags.d 移到用户目录即可
+```
+cp ~/.vim/.ctags.d ~/
+```
+
 ========================== 09:20 2020-04-02 ==============================
 
 解决 macOS 上 ctags 不支持 golang
