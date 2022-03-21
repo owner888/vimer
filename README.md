@@ -1,12 +1,15 @@
 ========================== 09:20 2020-04-02 ==============================
+
 1、解决 macOS 上 ctags 不支持 golang
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
 ========================== 09:20 2019-11-13 ==============================
+
 1、更新扩展网址
 https://vimawesome.com/
 
 ========================== 14:42 2019-06-05 ==============================
+
 1、NDRE_tree插件更新，采用GitHub
 https://github.com/scrooloose/nerdtree
 git clone https://github.com/scrooloose/nerdtree ~/.vim/bundle/nerdtree
@@ -22,6 +25,7 @@ gutentags通过'.root', '.svn', '.git', '.project'来查找根目录，所以如
 如果当前光标下是个局部变量，在Vim命令模式下执行命令 gd 就可以跳转到这个局部变量的定义处
 
 ========================== 13:09 2014-07-04 ==============================
+
 1、更改为pathogen管理插件模式
 2、增加插件自动更新vundle
 3、neocomplcache 改回老板，不然输入中文都会下拉代码提示，sudo gvim 还一堆报错，烦死人了
@@ -32,6 +36,7 @@ au FileType html,htm,smarty setlocal dict+=~/.vim/dict/javascript.dict
 6、修改svn插件方法
 
 ========================== 13:09 2014-07-04 ==============================
+
 1、zencoding插件更新，并改名为emmet
 http://www.vim.org/scripts/script.php?script_id=2981
 
@@ -50,10 +55,12 @@ http://www.vim.org/scripts/script.php?script_id=1456
 http://www.vim.org/scripts/script.php?script_id=4354
 
 ========================== 10:47 2013-09-27 ==============================
+
 1、解决Vim7.4下PHP注释无法变灰色，很难看
 删除 .vim/syntax/php.vim
 
 ========================== 12:54 2012-08-27 ==============================
+
 1、增加session会话保存，连NERD_tree打开的侧边栏都能记录，相当霸气
 保存会话 :SaveSession project1
 打开会话 :OpenSession project1
@@ -61,6 +68,7 @@ http://www.vim.org/scripts/script.php?script_id=4354
 光标位于要跟踪的函数处，ctrl+] 跟踪，ctrl+t 或者ctrl+o 返回
 
 ========================== 3:28 2012-08-18 ==============================
+
 1、修复svn升级到1.7不在根目录下无法提交bug
 2、增加连续敲击键盘mm跳转到最后一次编辑的地方,和NERD_tree的mm有冲突
 3、snippets增加两个快捷函数
@@ -68,16 +76,19 @@ pri -> echo '<pre>';print_r($value);echo '</pre>;
 var -> var_dump($value);
 
 ========================== 13:51 2011-08-17 ==============================
+
 1.替换AutoComplPop为neocomplcache 代码自动补全
 2.增加快速编写html代码插件 zencoding
 3.把html当作xml来编辑，解决html代码按=号无法格式化问题
 au FileType smarty,html set ft=xml
 
 ========================== 11:58 2011-08-09 ==============================
+
 1.增加python代码补齐提示
 /pydiction
 
 ========================== 17:00 2011-05-12 ==============================
+
 1.修改smarty注释{**}为<{**}>
 编辑 plugin/NERD_commenter.vim
 搜索 smarty 即可找到修改
@@ -89,6 +100,7 @@ au FileType smarty,html set ft=xml
 编辑 snippets/php.snippets
 
 ========================== 03:30 2011-03-01 ==============================
+
 1.重新配置，去掉一些没用的配置，现在在终端下面使用molokai样式并且开启256色不会卡了
 
 2.去掉closetag.vim，开启自己写的闭合功能，感觉够用了
@@ -96,6 +108,7 @@ cd plugin
 mv closepair.vim.bak closepair.vim
 
 ========================== 21:42 2011-01-11 ==============================
+
 1.增加closetag.vim，实现html自动闭合
 下载地址：http://www.vim.org/scripts/script.php?script_id=13
 网友增强：http://kenshin54.javaeye.com/blog/858156
@@ -109,6 +122,7 @@ mv closepair.vim closepair.vim.bak
 参考：http://www.kukaka.org/home/showonews/371
 
 ========================== 15:20 2010-12-23 ==============================
+
 1、解决source路径问题
 把自定义键盘映射配置移至 vimfiles/plugin/MY_keymap.vim
 把自定义taglist配置移至 vimfiles/plugin/MY_taglist.vim
