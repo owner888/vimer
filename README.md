@@ -64,19 +64,14 @@ git clone https://github.com/ludovicchabant/vim-gutentags gutentags
 ========================== 13:09 2014-07-04 ==============================
 
 1. zencoding插件更新，并改名为emmet
-
 ```
 http://www.vim.org/scripts/script.php?script_id=2981
 ```
-
 2. 网上说打开历史文件的插件MRU和NDRE_tree插件有冲突，反正从来没用过，去掉吧
-
 ```
 http://www.vim.org/scripts/script.php?script_id=521
 ```
-
 3. 拷贝文件路径插件copypath
-
 ```
 http://www.vim.org/scripts/script.php?script_id=1456
 拷贝文件路劲:
@@ -84,9 +79,7 @@ http://www.vim.org/scripts/script.php?script_id=1456
 拷贝文件名:
 :CopyFileName
 ```
-
 4. 缩进对齐线插件indentLine
-
 ```
 http://www.vim.org/scripts/script.php?script_id=4354
 ```
@@ -94,7 +87,6 @@ http://www.vim.org/scripts/script.php?script_id=4354
 ========================== 10:47 2013-09-27 ==============================
 
 解决Vim7.4下PHP注释无法变灰色，很难看
-
 ```
 rm .vim/syntax/php.vim
 ```
@@ -141,10 +133,8 @@ au FileType smarty,html set ft=xml
 
 1. 修改smarty注释 `{**}` 为 `<{**}>`
 编辑 plugin/NERD_commenter.vim，搜索 smarty 即可找到修改
-
 2. 增加自动补全代码快 smarty foreach
 编辑 snippets/smarty.snippets
-
 3. 增加自动补全代码快 php try
 编辑 snippets/php.snippets
 
@@ -163,43 +153,32 @@ mv closepair.vim.bak closepair.vim
 ```
 http://www.vim.org/scripts/script.php?script_id=13
 ```
-网友增强：
-```
-http://kenshin54.javaeye.com/blog/858156
-```
-
 2. 关闭之前自己写的闭合功能
+```
 cd plugin
 mv closepair.vim closepair.vim.bak
-
+```
 3. 修复taglist插件 Tlist_Refresh_Folds 报错
-编辑 plugin/taglist.vim
-参考：http://www.kukaka.org/home/showonews/371
 
 ========================== 15:20 2010-12-23 ==============================
 
 1. 解决source路径问题
 把自定义键盘映射配置移至 vimfiles/plugin/MY_keymap.vim
 把自定义taglist配置移至 vimfiles/plugin/MY_taglist.vim
-
 2. 增加snipMate插件，实现按tab键代码块补全
 ```
 http://www.vim.org/scripts/script.php?script_id=2540
 ```
-
 3、增加tab键smarty代码块补全
 ```
 cp vimfiles/snippets/html.snippets vimfiles/snippets/smarty.snippets
 ```
-
 4. 修改tab键php代码块补全 所有大括号换行，符合自己的开发习惯
 修改 vimfiles/snippets/php.snippets
-
 5. 增加NERDTree插件，实现目录和文件导航
 ```
 http://www.vim.org/scripts/script.php?script_id=1658
 ```
-
 6. 增加taglist插件，实现代码导航
 ```
 http://www.vim.org/scripts/script.php?script_id=273
@@ -208,15 +187,12 @@ taglist插件需要依赖ctags程序才能工作，目前常用的ctags版本是
 ```
 http://ctags.sourceforge.net/
 ```
-
 7. 增加PDV phpDocumentor for vim插件，实现类和函数注释
 ```
 http://www.vim.org/scripts/script.php?script_id=1355
 ```
-
 8. 增加AutoComplPop插件，实现自动弹出补全菜单
 ```
 http://www.vim.org/scripts/script.php?script_id=1879
 ```
-
 9. 增加样式vimfiles/colors/molokai.vim
