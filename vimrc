@@ -7,56 +7,54 @@ let s:gui = has('gui_running')
 " 加载插件管理器插件 plugged.vim
 " vim-plug settings {{{
 call plug#begin('~/.vim/plugged')
-    "Plug 'rizzatti/dash.vim'                   " 调用Mac系统的Dash.app软件查看函数
-    "Plug 'kien/ctrlp.vim'                      " 文件查找, 可以搜索文件/buffer/mru/tag等等
     Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-    "Plug 'lvht/mru'                            " 最近使用文件列表
-    "Plug 'pacha/vem-tabline'                   " 美化Tabs line
-    "Plug 'dstein64/vim-startuptime'            " 插件消耗时间，执行 :StartupTime
-    "Plug 'vim-airline/vim-airline'             " 状态栏美化
-    Plug 'itchyny/lightline.vim'                " 状态栏美化
-    Plug 'mengelbrecht/lightline-bufferline'    " 美化Tabs line
-    "Plug 'Yggdroot/indentLine'
-    Plug 'wakatime/vim-wakatime'                " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
-
-    " file explorer
-    " Plug 'scrooloose/nerdtree'                  " 显示目录树，按F2展开关闭
+    Plug 'dense-analysis/ale'                   " 语法检查，支持异步，还有一个老的 syntastic
     Plug 'preservim/nerdcommenter'              " 快速注释/解开注释，按 ctrl + \
-    "Plug 'Xuyuanp/nerdtree-git-plugin'         " git status 效果                                                                                                                         
-    "Plug 'airblade/vim-gitgutter'              " git diff，显示哪一行修改、增加
+    Plug 'rizzatti/dash.vim'                    " 调用Mac系统的Dash.app软件查看函数
+    Plug 'itchyny/lightline.vim'                " 状态栏美化
+    Plug 'mengelbrecht/lightline-bufferline'    " 标签栏美化
+    Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双引号/反引号)
+    "Plug 'jiangmiao/auto-pairs'
+    " Plug 'wakatime/vim-wakatime'              " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
 
-    " Plug 'majutsushi/tagbar'                    " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
-    "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-    "Plug 'owner888/taglist.vim'                " 函数变量列表，依赖ctags，不支持golang
+    "Plug 'kien/ctrlp.vim'                      " 文件查找, 可以搜索文件/buffer/mru/tag等等
+    "Plug 'lvht/mru'                            " 最近使用文件列表
+    "Plug 'dstein64/vim-startuptime'            " 插件消耗时间，执行 :StartupTime
+
+    " Plug 'Yggdroot/indentLine'                " 缩进线
+
+    " Plug 'scrooloose/nerdtree'                " 显示目录树，按F2展开关闭
+    " Plug 'Xuyuanp/nerdtree-git-plugin'        " git status 效果                                                                                                                         
+    " Plug 'airblade/vim-gitgutter'             " git diff，显示哪一行修改、增加
+    " Plug 'majutsushi/tagbar'                  " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
+    " Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
 
     Plug 'stephpy/vim-phpdoc'                   " 插入PHP函数、类文档块
 
     " H5
     Plug 'mattn/emmet-vim'                      " 自动补全HTML标签 ul>li 然后按ctrl+e
-    Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " 显示CSS颜色
+    Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] }
     Plug 'docunext/closetag.vim'                " 自动补全HTML结束标签
     " web indent
     "Plug 'jason0x43/vim-js-indent'
     "Plug 'lukaszb/vim-web-indent'
-    " brackets auto pair
-    Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双引号/反引号)
-    "Plug 'jiangmiao/auto-pairs'
 
     Plug 'junegunn/vim-easy-align'              " 快速进行对齐/格式化，同类型产品：tabular
     Plug 'Shougo/neocomplcache.vim'             " 代码补全，不依赖lua、python、nodejs
+    " Plug 'maralla/completor.vim'
     Plug 'owner888/snipMate'                    " 10年前的代码块引擎
     "Plug 'SirVer/ultisnips'                    " 代码块引擎，需要python支持
     "Plug 'honza/vim-snippets'                  " 代码块集合，输入if然后按tab，就会出来if的代码片段
 
-    Plug 'dense-analysis/ale'                   " 语法检查，支持异步，还有一个老的 syntastic
     Plug 'thosakwe/vim-flutter'
     Plug 'dart-lang/dart-vim-plugin'
     "Plug 'natebosch/vim-lsc'
     "Plug 'natebosch/vim-lsc-dart'
     Plug 'fatih/vim-go'                         " 第一次需要安装 golang 开发环境，运行 :GoUpdateBinaries，golangci-lint 可以检查错误，但是要配合上面那个ale插件才可以显示错误
     Plug 'rust-lang/rust.vim'
-    "Plug 'ludovicchabant/vim-gutentags'        " 自动生成tags，用ctrl+] 即可跳转到函数定义处，ctrl+o可以跳回来 
     Plug 'mzlogin/vim-smali'
+
+    "Plug 'ludovicchabant/vim-gutentags'        " 自动生成tags，用ctrl+] 即可跳转到函数定义处，ctrl+o可以跳回来 
 
     " C++
     "Plug 'vim-scripts/OmniCppComplete'
