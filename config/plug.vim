@@ -3,7 +3,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 定义一个用逗号来表示<Learder>
 let mapleader = "," 
-let maplocalleader = "\\"
+let maplocalleader = ",,"
 let MRU_Window_Height = 10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -52,9 +52,10 @@ au BufNewFile *.dart 0r ~/.vim/skeletons/dart.skel
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Lf_ShowDevIcons = 0   " 解决打开文件中文乱码
 "let g:Lf_ReverseOrder = 1
-let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_RootMarkers = ['.git', '.svn', '.root']    " 当前目录或者往上一级目录查找，找到就当作 root 目录
+let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']    " 当前目录或者往上一级目录查找，找到就当作 root 目录
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutB = '<C-L>'
 nnoremap <C-F> :LeaderfFunction<CR>
 "文件搜索
 nnoremap <silent> <Leader>F :Leaderf file<CR>
@@ -245,10 +246,8 @@ let Tlist_php_settings = 'php;c:classes;i:interfaces;d:const;f:func'
 let g:tlist_smali_settings = "smali;f:field;m:method"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-go google出的golang官方插件
+" => vim-go google 出的 golang 官方插件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 用gopls来代替gocode，gocode作者不维护了
-" let g:go_gopls_enabled = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_template_autocreate = 0
@@ -284,12 +283,6 @@ let g:use_emmet_complete_tag = 1
 " let delimitMate_expand_cr = 1 " 和其他扩展冲突了，还没找到
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => syntastic 语法检查
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 跳过tpl，html 文件的语法检查
-"let g:syntastic_ignore_files=['.*\.tpl$', '.*\.html$']
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ale 语法检查
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " show errors or warnings in my statusline
@@ -302,6 +295,7 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 " 解决java乱码问题
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
+" ale lsp
 let g:ale_linters = {
   \ 'go': ['gopls'],
   \}
@@ -320,6 +314,7 @@ au FileType dart set softtabstop=2
 au FileType php,java,go,rust,lua,python,javascript set tabstop=4
 au FileType php,java,go,rust,lua,python,javascript set shiftwidth=4
 au FileType php,java,go,rust,lua,python,javascript set softtabstop=4
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => markdown配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -337,11 +332,11 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => neocomplacache 代码补全
+" => completor 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable lsp for go by using gopls
 let g:completor_filetype_map = {}
-let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"
+let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => neocomplacache 代码补全
@@ -421,7 +416,9 @@ au FileType smarty,html,htm let g:javascript_enable_domhtmlcss = 1
 au FileType smarty,html,htm,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" golang函数跳转定义到 ALEGoToDefinition
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => 函数定义跳转
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType go nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
 au FileType vim nnoremap <buffer> <C-]> :call vim#Jump()<CR>
 
