@@ -305,7 +305,7 @@ let g:ale_linters = {
 " => 函数定义跳转
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 函数定义跳转，C-] 跳到到函数定义处，C-T、C-O 返回，C-W-] 可以分屏打开函数定义
-" ALEGoToDefinition 不需要，vim-go 自带了
+" vim 自帶的不是 lsp，功能有限，但是使用 ALEGoToDefinition 后 ctrl+t 跳不回来, 不知道为什么
 " au FileType go nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
 " au FileType vim nnoremap <buffer> <C-]> :call vim#Jump()<CR>
 
