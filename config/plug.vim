@@ -53,7 +53,7 @@ au BufNewFile *.dart 0r ~/.vim/skeletons/dart.skel
 let g:Lf_ShowDevIcons = 0   " 解决打开文件中文乱码
 "let g:Lf_ReverseOrder = 1
 let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root', 'go.mod']    " 当前目录或者往上一级目录查找，找到就当作 root 目录
+let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']    " 当前目录或者往上一级目录查找，找到就当作 root 目录
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_ShortcutB = '<C-L>'
 nnoremap <C-F> :LeaderfFunction<CR>
