@@ -60,6 +60,10 @@ snippet elseif
 	else if ${1:/* condition */} {
 		${2:// code...}
 	}
+snippet iferr
+	if err := ${1:/* condition */}; err != nil {
+		${2:// code...}
+	}
 snippet switch
 	switch ${1:variable} {
 	case ${2:value}:
