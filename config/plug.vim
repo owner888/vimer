@@ -50,6 +50,7 @@ au BufNewFile *.dart 0r ~/.vim/skeletons/dart.skel
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => leaderF 配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" brew install ripgrep
 let g:Lf_ShowDevIcons = 0   " 解决打开文件中文乱码
 "let g:Lf_ReverseOrder = 1
 let g:Lf_WorkingDirectoryMode = 'Ac'
@@ -119,6 +120,38 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " 启用nerdcommenttoggle检查是否对所有选定行进行了注释
 let g:NERDToggleCheckAllLines = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => leafOfTree/vim-vue-plugin
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vim_vue_plugin_config = { 
+      \'syntax': {
+      \   'template': ['html'],
+      \   'script': ['javascript', 'typescript'],
+      \   'style': ['css', 'scss', 'sass', 'less', 'stylus'],
+      \   'i18n': ['json', 'yaml'],
+      \   'route': 'json',
+      \},
+      \'full_syntax': ['json'],
+      \'initial_indent': ['i18n', 'i18n.json', 'yaml'],
+      \'attribute': 1,
+      \'keyword': 1,
+      \'foldexpr': 0,
+      \'debug': 0,
+      \}
+
+function! OnChangeVueSyntax(syntax)
+    echom 'Syntax is '.a:syntax
+    if a:syntax == 'html'
+        setlocal commentstring=<!--%s-->
+        setlocal comments=s:<!--,m:\ \ \ \ ,e:-->
+    elseif a:syntax =~ 'css'
+        setlocal comments=s1:/*,mb:*,ex:*/ commentstring&
+    else
+        setlocal commentstring=//%s
+        setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+    endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar 右侧的函数列表树
