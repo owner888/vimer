@@ -17,6 +17,28 @@ snippet prin
 	fmt.Println(${1:variable})${2}
 snippet spri
 	fmt.Sprintf("value is %s", ${1:variable})${2}
+
+snippet logd
+	logs.Debug(${1:variable})${2}
+snippet logi
+	logs.Info(${1:variable})${2}
+snippet logw
+	logs.Warn(${1:variable})${2}
+snippet loge
+	logs.Error(${1:variable})${2}
+snippet assc
+	assert.Contains(t, ${1:s}, ${2:contains})${3}
+snippet asse
+	assert.Equal(t, ${1:expected}, ${2:actual})${3}
+snippet assemp
+	assert.Empty(t, ${1:object})${2}
+snippet asserr
+	assert.Error(t, err)${2}
+snippet assnoerr
+	assert.NoError(t, err)${2}
+snippet assnil
+	assert.Nil(t, ${1:variable})${2}
+
 snippet log
 	log.Printf("%v", ${1:variable})${2}
 snippet t
