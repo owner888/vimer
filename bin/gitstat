@@ -9,19 +9,37 @@ tmpfile=$(mktemp)
 
 count_by_name() {
     local name="$1"
+    local since="$2"
+    local until="$3"
+
+    [[ -n $since ]] && date_since="--since=$since"
+    [[ -n $until ]] && date_until="--until=$until"
+
     echo -en "$name\t;" 
-    git log --author="$name" --pretty=tformat: --numstat |awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "%s; %s; %s\n", add, subs, loc }'
+    git log --author="$name" --pretty=tformat: --numstat $date_since $date_until |grep -v ^- |awk '{add += $1; subs += $2; loc += $1 - $2 } END { printf "%s; %s; %s\n", add, subs, loc}'
 }
+
+#时间段
+#格式2022-01-01
+since="$1"
+until="$2"
 
 git log --format='%aN' 2>/dev/null | sort -u | while read name; do 
     echo "$name"
-    count_by_name "$name" >> $tmpfile 2>/dev/null
+    count_by_name "$name" "$since" "$until" >> $tmpfile 2>/dev/null
 done
 
 echo '--------------------------------------------------------------------------'
-printf "%12s %18s %20s %15s\n" 'Name' 'Added Lines' 'Removed Lines' 'Total Lines'
+printf "%12s %20s %20s %15s\n" 'Name' 'Added Lines' 'Removed Lines' 'Total Lines'
 echo '--------------------------------------------------------------------------'
-cat $tmpfile |awk -F\; '{printf("%15s\t%-15d\t%-15d\t%-15d\n", $1,$2,$3,$4)}' |sort -nrk2 -t$'\t'
+cat $tmpfile |awk -F\; '{printf("%15s\t%10d\t%10d\t%10d\n", $1,$2,$3,$4)}' |sort -nrk2 -t$'\t'
+sum_string=$(cat $tmpfile |awk -F\; '{adds += $2; subs += $3; totals += $4 } END{ printf("%s\t%s\t%s", adds, subs, totals) }')
+echo '--------------------------------------------------------------------------'
+adds=$(echo $sum_string |awk '{print $1}')
+subs=$(echo $sum_string |awk '{print $2}')
+totals=$(echo $sum_string |awk '{print $3}')
+printf "%14s\t%18s\t%11s\t%11s\n" 'SUM' $adds $subs $totals
+echo '--------------------------------------------------------------------------'
 
 [[ -f $tmpfile ]] && rm $tmpfile
 
