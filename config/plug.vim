@@ -316,6 +316,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_gopls_options = ['-remote=auto']
+let g:go_build_tags = 'linux,android,darwin,windows' " 解决 //go:build android 开头的文件无法跳转方法的问题
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ale 语法检查
