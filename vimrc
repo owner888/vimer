@@ -1,4 +1,5 @@
 " echo 'source ~/.vim/vimrc' > ~/.vimrc
+" 显示键盘映射 :h keycodes
 " vim 配置文件 
 let s:darwin = has('mac')
 let s:windows = has('win32') || has('win64')
@@ -7,54 +8,76 @@ let s:gui = has('gui_running')
 " 加载插件管理器插件 plugged.vim
 " vim-plug settings {{{
 call plug#begin('~/.vim/plugged')
-    Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-    Plug 'dense-analysis/ale'                   " 语法检查，支持异步
-    Plug 'preservim/nerdcommenter'              " 快速注释/解开注释，按 ctrl + \
-    Plug 'rizzatti/dash.vim'                    " 调用Mac系统的Dash.app软件查看函数
-    Plug 'itchyny/lightline.vim'                " 状态栏美化
-    Plug 'mengelbrecht/lightline-bufferline'    " 标签栏美化
-    Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双引号/反引号)
-    " Plug 'jiangmiao/auto-pairs'               " 自动补全引号(单引号/双引号/反引号)
-    " Plug 'wakatime/vim-wakatime'              " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
-    " Plug 'kien/ctrlp.vim'                     " 文件查找, 可以搜索文件/buffer/mru/tag等等
-    " Plug 'lvht/mru'                           " 最近使用文件列表
-    " Plug 'dstein64/vim-startuptime'           " 插件消耗时间，执行 :StartupTime
-    " Plug 'Yggdroot/indentLine'                " 缩进线
-    " Plug 'scrooloose/nerdtree'                " 显示目录树，按F2展开关闭
-    " Plug 'Xuyuanp/nerdtree-git-plugin'        " git status 效果                                                                                                                         
-    " Plug 'airblade/vim-gitgutter'             " git diff，显示哪一行修改、增加
-    " Plug 'majutsushi/tagbar'                  " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
-    " Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
-    Plug 'stephpy/vim-phpdoc'                   " 插入PHP函数、类文档块
-    " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-    " If you have nodejs and yarn
-    " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-    Plug 'mattn/emmet-vim'                      " 自动补全HTML标签 ul>li 然后按ctrl+e
-    Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] }
-    Plug 'docunext/closetag.vim'                " 自动补全HTML结束标签
-    Plug 'junegunn/vim-easy-align'              " 快速进行对齐/格式化，同类型产品：tabular
-    Plug 'Shougo/neocomplcache.vim'             " 代码补全，不依赖lua、python、nodejs
-    " Plug 'maralla/completor.vim'
-    Plug 'owner888/snipMate'                    " 10年前的代码块引擎
-    " Plug 'SirVer/ultisnips'                   " 代码块引擎，需要python支持
-    " Plug 'honza/vim-snippets'                 " 代码块集合，输入if然后按tab，就会出来if的代码片段
-    Plug 'thosakwe/vim-flutter'
-    Plug 'dart-lang/dart-vim-plugin'
-    " Plug 'natebosch/vim-lsc'
-    " Plug 'natebosch/vim-lsc-dart'
-    Plug 'fatih/vim-go'                         " 第一次需要安装 golang 开发环境，运行 :GoUpdateBinaries，golangci-lint 可以检查错误，但是要配合上面那个ale插件才可以显示错误
-    Plug 'rust-lang/rust.vim'
-    Plug 'mzlogin/vim-smali'
-    " Plug 'posva/vim-vue'
-    Plug 'leafOfTree/vim-vue-plugin'
-    Plug 'tomasr/molokai'
-    Plug 'morhetz/gruvbox'
-    " asciidoc
-    " Plug 'habamax/vim-asciidoctor'
-    " base64 encode / decode
-    " Plug 'equal-l2/vim-base64'
-    " Plug 'gilligan/vim-lldb'
-    " Plug 'idanarye/vim-vebugger'
+" markdown
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'mzlogin/vim-kramdown-tab'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " 坑死了, 居然是引用 nvim 的
+" paste image in markdown
+" Plug 'ferrine/md-img-paste.vim'
+
+Plug 'skywind3000/vim-terminal-help'
+
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'dense-analysis/ale'                   " 语法检查，支持异步
+Plug 'preservim/nerdcommenter'              " 快速注释/解开注释，按 ctrl + \
+Plug 'rizzatti/dash.vim'                    " 调用Mac系统的Dash.app软件查看函数
+Plug 'itchyny/lightline.vim'                " 状态栏美化
+Plug 'mengelbrecht/lightline-bufferline'    " 标签栏美化
+Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双引号/反引号)
+" Plug 'jiangmiao/auto-pairs'               " 自动补全引号(单引号/双引号/反引号)
+" Plug 'wakatime/vim-wakatime'              " 工作耗时等信息统计，可以到 https://wakatime.com/ 查看
+" Plug 'kien/ctrlp.vim'                     " 文件查找, 可以搜索文件/buffer/mru/tag等等
+" Plug 'lvht/mru'                           " 最近使用文件列表
+" Plug 'dstein64/vim-startuptime'           " 插件消耗时间，执行 :StartupTime
+" Plug 'Yggdroot/indentLine'                " 缩进线
+" Plug 'scrooloose/nerdtree'                " 显示目录树，按F2展开关闭
+" Plug 'Xuyuanp/nerdtree-git-plugin'        " git status 效果                                                                                                                         
+" Plug 'airblade/vim-gitgutter'             " git diff，显示哪一行修改、增加
+" Plug 'majutsushi/tagbar'                  " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
+" Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
+Plug 'stephpy/vim-phpdoc'                   " 插入PHP函数、类文档块
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" If you have nodejs and yarn
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'mattn/emmet-vim'                      " 自动补全HTML标签 ul>li 然后按ctrl+e
+Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] }
+Plug 'docunext/closetag.vim'                " 自动补全HTML结束标签
+Plug 'junegunn/vim-easy-align'              " 快速进行对齐/格式化，同类型产品：tabular
+Plug 'Shougo/neocomplcache.vim'             " 代码补全，不依赖lua、python、nodejs
+" Plug 'maralla/completor.vim'
+Plug 'owner888/snipMate'                    " 10年前的代码块引擎
+" Plug 'SirVer/ultisnips'                   " 代码块引擎，需要python支持
+" Plug 'honza/vim-snippets'                 " 代码块集合，输入if然后按tab，就会出来if的代码片段
+Plug 'thosakwe/vim-flutter'
+Plug 'dart-lang/dart-vim-plugin'
+" Plug 'natebosch/vim-lsc'
+" Plug 'natebosch/vim-lsc-dart'
+Plug 'fatih/vim-go'                         " 第一次需要安装 golang 开发环境，运行 :GoUpdateBinaries，golangci-lint 可以检查错误，但是要配合上面那个ale插件才可以显示错误
+Plug 'rust-lang/rust.vim'
+
+" java decompile
+Plug 'mzlogin/vim-smali'
+
+" php
+Plug 'StanAngeloff/php.vim'
+
+" vue
+Plug 'posva/vim-vue'
+Plug 'leafOfTree/vim-vue-plugin'
+
+if s:darwin
+    Plug 'ybian/smartim'
+endif
+
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
+
+" asciidoc
+" Plug 'habamax/vim-asciidoctor'
+" base64 encode / decode
+" Plug 'equal-l2/vim-base64'
+" Plug 'gilligan/vim-lldb'
+" Plug 'idanarye/vim-vebugger'
 call plug#end()
 " }}}
 

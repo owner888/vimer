@@ -37,6 +37,33 @@ nmap <Leader>9 <Plug>lightline#bufferline#go(9)
 nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => markdown-preview
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:mkdp_markdown_css = expand('~/custom-markdown.css')
+" let g:mkdp_auto_start = 0
+" let g:mkdp_auto_close = 1
+" let g:mkdp_refresh_slow = 0
+" let g:mkdp_command_for_global = 0
+" let g:mkdp_open_to_the_world = 0
+" let g:mkdp_preview_options = {
+"     \ 'mkit': {},
+"     \ 'katex': {},
+"     \ 'uml': {},
+"     \ 'maid': {},
+"     \ 'disable_sync_scroll': 0,
+"     \ 'sync_scroll_type': 'middle',
+"     \ 'hide_yaml_meta': 1,
+"     \ 'sequence_diagrams': {},
+"     \ 'flowchart_diagrams': {},
+"     \ 'content_editable': v:false,
+"     \ 'disable_filename': 0,
+"     \ 'toc': {}
+"     \ }
+" let g:mkdp_page_title = '「${name}」'
+" let g:mkdp_filetypes = ['markdown']
+" let g:mkdp_theme = 'dark'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 通过模板生成新建文件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufNewFile *.php 0r ~/.vim/skeletons/php.skel
@@ -435,6 +462,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 au FileType smarty,html,htm set ft=xml
 au FileType smarty,html,htm set syntax=html
 au BufRead,BufNewfile *.smali set filetype=smali
+au BufRead,BufNewfile *.md set filetype=markdown
 au FileType smali setlocal cindent
 
 " xmledit

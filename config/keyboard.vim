@@ -3,6 +3,7 @@ cmap W w
 cmap Q q
 
 " map <F4> :TlistToggle<CR>
+map <F4> :call TerminalToggle()<CR>
 " map <F8> t :NERDTreeMirror<CR>gT<C-w>w<ESC>gt<C-w>w    " 新标签打开一个文件，复制目录树
 " nmap <Leader>f :NERDTreeToggle<CR>
 " nmap <Leader>F :NERDTreeFind<CR>
@@ -13,6 +14,9 @@ cmap Q q
 " map <F3> :TagbarToggle<CR>
 " map <F5> :tabprev<CR>
 " map <F6> :tabnext<CR>
+
+autocmd FileType markdown nnoremap <silent> <F5> :MarkdownPreview<CR>
+autocmd FileType markdown nnoremap <silent> <F6> :MarkdownPreviewStop<CR>
 
 " Ctrl + k | j
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
