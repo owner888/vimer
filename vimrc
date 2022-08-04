@@ -17,6 +17,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 Plug 'skywind3000/vim-terminal-help'
 
+Plug 'kristijanhusak/vim-simple-notifications'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'dense-analysis/ale'                   " 语法检查，支持异步
 Plug 'preservim/nerdcommenter'              " 快速注释/解开注释，按 ctrl + \
@@ -109,6 +110,7 @@ set softtabstop=4                   " 换行缩进宽度，4个空格
 set cindent                         " 开启C/C++风格缩进，:set paste 关闭缩进，nopaste打开
 set smartindent                     " 智能对齐方式
 set autoindent                      " automatically indent new line, 自动对齐
+set breakindent
 set smarttab                        " 一次性删除多个空格, 只在行首用tab，其他地方的tab都用空格代替
 set showmatch                       " 高亮显示匹配括号, 在输入括号时光标会短暂地跳到与之相匹配的括号处
 set matchtime=2                     " 匹配括号高亮的时间（单位是十分之一秒）
