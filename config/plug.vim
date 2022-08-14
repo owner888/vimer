@@ -345,8 +345,14 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+" 格式化 和 自动导入库
 let g:go_gopls_options = ['-remote=auto']
-let g:go_build_tags = 'linux,android,darwin,windows' " 解决 //go:build android 开头的文件无法跳转方法的问题
+let g:go_fmt_command = 'gofumpt' " gofmt | goimports | gofumpt 
+let g:go_fmt_autosave = 0
+let g:go_imports_autosave = 1
+
+" 解决 //go:build android 开头的文件无法跳转方法的问题
+let g:go_build_tags = 'linux,android,darwin,windows' 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ale 语法检查
