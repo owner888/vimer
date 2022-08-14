@@ -91,6 +91,13 @@ syntax on
 " plugin 开启支持插件，indent 开启语言缩进
 filetype plugin indent on
 
+" Python Setting {
+  set pythondll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+  set pythonhome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+  set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+  set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+" }
+
 " -----------------------------  vim 属性设置 --------------------------------
 " vim settings {{{
 set lazyredraw                      " 延迟重绘
