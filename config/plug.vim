@@ -77,7 +77,10 @@ au BufNewFile *.dart 0r ~/.vim/skeletons/dart.skel
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => leaderF 配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 安装必备的工具
+" brew install universal-ctags
 " brew install ripgrep
+
 let g:Lf_ShowDevIcons = 0   " 解决打开文件中文乱码
 "let g:Lf_ReverseOrder = 1
 let g:Lf_WorkingDirectoryMode = 'Ac'
