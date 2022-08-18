@@ -5,7 +5,7 @@ let s:darwin = has('mac')
 let s:windows = has('win32') || has('win64')
 let s:gui = has('gui_running')
 
-" 加载插件管理器插件 plugged.vim
+" -----------------------------  管理器插件 plugged.vim --------------------------------
 " vim-plug settings {{{
 call plug#begin('~/.vim/plugged')
 " markdown
@@ -73,6 +73,7 @@ Plug 'leafOfTree/vim-vue-plugin'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
 
+Plug 'dhruvasagar/vim-testify'
 " asciidoc
 " Plug 'habamax/vim-asciidoctor'
 " base64 encode / decode
@@ -91,12 +92,12 @@ syntax on
 " plugin 开启支持插件，indent 开启语言缩进
 filetype plugin indent on
 
-" Python Setting {
-  set pythondll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-  set pythonhome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
-  set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-  set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
-" }
+" Python Setting {{{
+set pythondll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+set pythonhome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+" }}}
 
 " -----------------------------  vim 属性设置 --------------------------------
 " vim settings {{{
@@ -177,8 +178,7 @@ set background=dark                 " 有的样式支持两种模式：light、d
 "set ttymouse=xterm2
 " }}}
 
-" 根据是运行gvim 还是 在终端运行vim来判断使用哪个配色方案
-"if has("gui_macvim") || has("gui_running") 
+" -----------------------------  主题鼠标设置 --------------------------------
 if has("gui_running") 
     if !has('nvim')
         " 修改字体和大小                                                                  
@@ -216,9 +216,25 @@ else
     endif
 endif
 
-"引用自定义函数
+" -----------------------------  单元测试 --------------------------------
+" 用法：TestifyNearest、TestifySuite、TestifyLast、TestifyFile
+" 要测试某个片段，停留再上面然后执行 :TestifyNearest
+" Success Call
+function! s:TestFunctionOk()
+    call testify#assert#equals(1, 1)
+    call testify#assert#not_equals(1, 2)
+endfunction
+call testify#it('Test should pass', function('s:TestFunctionOk'))
+
+" Failed Call
+function! s:TestFunctionNotOk()
+    call testify#assert#equals(1, 2)
+endfunction
+call testify#it('Test should fail', function('s:TestFunctionNotOk'))
+
+" 引用自定义函数
 source ~/.vim/config/functions.vim
-"引用插件配置
+" 引用插件配置
 source ~/.vim/config/plug.vim
-"引用快捷键配置
+" 引用快捷键配置
 source ~/.vim/config/keyboard.vim

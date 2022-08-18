@@ -1,0 +1,7 @@
+call plug#begin()
+Plug 'Valloric/YouCompleteMe', { 'do': '/usr/local/bin/python3 install.py' }
+Plug 'python-mode/python-mode', { 'for': 'python' }
+call plug#end()
+
+let g:pymode_python = 'python3'
+let g:pymode_rope = 0
