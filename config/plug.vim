@@ -143,12 +143,12 @@ let g:NERDDefaultAlign = 'left'
 " 默认情况下，将语言设置为使用其备用分隔符（不是很明白所以忽略）
 let g:NERDAltDelims_java = 1
 " 添加您自己的自定义格式或覆盖默认格式（你懂的）
-let g:NERDCustomDelimiters = { 'smali': { 'left': '#' } }
+let g:NERDCustomDelimiters = { 'smali': { 'left': '#' }, 'java': { 'left': '//' } }
 " 允许注释和反转空行（在注释区域时很有用） （没亲测）
 let g:NERDCommentEmptyLines = 1
 " 取消注释时启用尾随空白的修剪
 let g:NERDTrimTrailingWhitespace = 1
-" 启用nerdcommenttoggle检查是否对所有选定行进行了注释
+" 启用 NERDCommenterToggle 检查是否对所有选定行进行了注释
 let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
