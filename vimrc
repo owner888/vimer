@@ -66,9 +66,9 @@ Plug 'StanAngeloff/php.vim'
 Plug 'posva/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
 
-if s:darwin
-    Plug 'ybian/smartim'
-endif
+" if s:darwin
+    " Plug 'ybian/smartim'
+" endif
 
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
