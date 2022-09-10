@@ -1,0 +1,55 @@
+#!/usr/bin/env sh
+
+# java \
+#     -Declipse.application=org.eclipse.jdt.ls.core.id1 \
+#     -Dosgi.bundles.defaultStartLevel=4 \
+#     -Declipse.product=org.eclipse.jdt.ls.core.product \
+#     -Dlog.level=ALL \
+#     -noverify \
+#     -Xmx1G \
+#     --add-modules=ALL-SYSTEM \
+#     --add-opens java.base/java.util=ALL-UNNAMED \
+#     --add-opens java.base/java.lang=ALL-UNNAMED \
+#     -jar $SERVER/plugins/org.eclipse.equinox.launcher_1.*.jar \
+#     -configuration /opt/jdt-language-server/config_mac \
+#     -data /path/to/data
+
+
+# java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044 \
+#     -Declipse.application=org.eclipse.jdt.ls.core.id1 \
+#     -Dosgi.bundles.defaultStartLevel=4 \
+#     -Declipse.product=org.eclipse.jdt.ls.core.product \
+#     -Dlog.level=ALL \
+#     -noverify \
+#     -Xmx1G \
+#     -jar $SERVER/plugins/org.eclipse.equinox.launcher_1.*.jar \
+#     -configuration $SERVER/$CONFIG \
+#     -data ~/eclipse-workspace/foobar/ \
+#     --add-modules=ALL-SYSTEM \
+#     --add-opens java.base/java.util=ALL-UNNAMED \
+#     --add-opens java.base/java.lang=ALL-UNNAMED
+
+SERVER=$HOME/.vim/support/java-lsp-support/eclipse-jdt
+LOMBOK_JAR=$HOME/.vim/support/java-lsp-support/lombok.jar
+JAVA_STYLE=$HOME/.vim/support/java-lsp-support/eclipse-java-google-style.xml
+# JAVA_STYLE=$HOME/Documents/Git/eclipse.jdt.ls/org.eclipse.jdt.ls.tests/formatter\ resources/eclipse-java-google-style.xml
+
+case "$OSTYPE" in
+    darwin*)  CONFIG=config_mac ;; 
+    linux*)   CONFIG=config_linux ;;
+    *)        echo "unknown: $OSTYPE" ;;
+esac
+
+java \
+    -javaagent:$LOMBOK_JAR \
+    -Xbootclasspath/p:$LOMBOK_JAR \
+    -Declipse.application=org.eclipse.jdt.ls.core.id1 \
+    -Dosgi.bundles.defaultStartLevel=4 \
+    -Declipse.product=org.eclipse.jdt.ls.core.product \
+    -Dlog.level=WARN \
+    -noverify \
+    -Xmx1G \
+    -jar $SERVER/plugins/org.eclipse.equinox.launcher_1.*.jar \
+    -configuration $SERVER/$CONFIG \
+    -Djava.formatter.fileName $JAVA_STYLE \
+    "$@"
