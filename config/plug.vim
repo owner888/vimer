@@ -349,7 +349,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_gopls_options = ['-remote=auto']
 let g:go_fmt_command = 'gofumpt' " gofmt | goimports | gofumpt 
 let g:go_fmt_autosave = 0
-let g:go_imports_autosave = 1
+let g:go_imports_autosave = 0
 
 " 解决 //go:build android 开头的文件无法跳转方法的问题
 let g:go_build_tags = 'linux,android,darwin,windows' 
