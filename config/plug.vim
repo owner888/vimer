@@ -370,7 +370,16 @@ let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 " ale 通过 gopls lsp 检查错误，ale 不支持代码补全
 let g:ale_linters = {
   \ 'go': ['gopls'],
+  \ 'python': ['pylint'],
   \}
+
+let g:ale_python_executable = 'python3'
+let g:ale_python_pylint_use_global = 1
+
+" https://packagist.org/packages/felixfbecker/language-server
+"  \ 'php': ['langserver'],
+" let g:ale_php_langserver_use_global = 1
+" let g:ale_php_langserver_executable = $HOME.'/.composer/vendor/bin/php-language-server.php'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 函数定义跳转
