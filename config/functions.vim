@@ -1,5 +1,5 @@
 " 回调函数
-func! Handler(channel, msg)
+func! JadxHandler(channel, msg)
     "echo a:msg
 endfunc
 func Do_Jadx()
@@ -9,7 +9,7 @@ func Do_Jadx()
     "同步任务
     "let bytecode = system("jadx-gui ".jadx_filename)
     "异步任务
-    call job_start(["jadx-gui", " --show-bad-code", jadx_filename], {'callback': 'Handler'})
+    call job_start(["jadx-gui", " --show-bad-code", jadx_filename], {'callback': 'JadxHandler'})
     "echom bytecode
 endfunc
 
