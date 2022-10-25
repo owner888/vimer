@@ -6,7 +6,7 @@
 # sername|192.168.1.110|root|password|port|is_bastion
 
 
-AUTO_SSH_CONFIG=`cat ~/Dropbox/data/bin/autosshrc`
+AUTO_SSH_CONFIG=`cat ~/.autosshrc`
 BORDER_LINE="\033[1;31m############################################################ \033[0m"
 echo -e $BORDER_LINE
 echo -e "\033[1;31m#                     [LOGIN SSH]                          # \033[0m"
@@ -15,7 +15,7 @@ echo -e "\033[1;31m#                                                          # 
 i=0;
 
 if [ "$AUTO_SSH_CONFIG" == "" ]; then
-	echo -e "\033[1;31m#              Config(~/Dropbox/data/bin/autosshrc) Not Found              # \033[0m";
+	echo -e "\033[1;31m#              Config(~/.autosshrc) Not Found              # \033[0m";
 	echo -e "\033[1;31m#                                                          # \033[0m"
 	echo -e "\033[1;31m#                                                          # \033[0m"
 	echo -e $BORDER_LINE

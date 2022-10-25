@@ -66,6 +66,8 @@ Plug 'StanAngeloff/php.vim'
 Plug 'posva/vim-vue'
 Plug 'leafOfTree/vim-vue-plugin'
 
+" Plug 'yegappan/lsp'
+
 " if s:darwin
     " Plug 'ybian/smartim'
 " endif
