@@ -381,6 +381,10 @@ let g:ale_python_pylint_use_global = 1
 " let g:ale_php_langserver_use_global = 1
 " let g:ale_php_langserver_executable = $HOME.'/.composer/vendor/bin/php-language-server.php'
 
+" 自动补全，不好用，从a-z排序的
+let g:ale_completion_enabled = 0
+let g:ale_disable_lsp = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 函数定义跳转
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,6 +392,18 @@ let g:ale_python_pylint_use_global = 1
 " vim 自帶的不是 lsp，功能有限，但是使用 ALEGoToDefinition 后 ctrl+t 跳不回来, 不知道为什么
 " au FileType go nnoremap <buffer> <C-]> :ALEGoToDefinition<CR>
 " au FileType vim nnoremap <buffer> <C-]> :call vim#Jump()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => LSP
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let lspServers = [
+"     \     {
+"     \	'filetype': ['python'],
+"     \	'path': $HOME.'/Library/Python/3.10/bin/pyls',
+"     \	'args': []
+"     \     }
+"     \   ]
+" call LspAddServer(lspServers)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => flutter
