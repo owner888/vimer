@@ -29,6 +29,7 @@ nnoremap <silent> <F9> :call GetCurFilePath()<CR>
 " F12在当前目录生成ctags
 noremap <F12> :call Do_CsTag()<CR>
 
+map <D-/> <plug>NERDCommenterToggle
 map <C-\> <plug>NERDCommenterToggle
 " map php-doc key inoremap:插入模式 nnoremap:命令行模式 vnoremap:视图模式
 imap <C-D> <ESC> :call PhpDocSingle()<CR>i
