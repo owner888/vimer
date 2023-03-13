@@ -2,14 +2,27 @@
 func! JadxHandler(channel, msg)
     "echo a:msg
 endfunc
+
+func Do_GoogleJavaFormat()
+    " let filename=getcwd()."/".getreg('%')
+    let filename = expand("%:p")
+    let commands = 'java -jar '.$HOME.'/Downloads/google-java-format-1.15.0-all-deps.jar --replace ' . filename
+    echohl WarningMsg | echo commands | echohl None
+    " 同步任务
+    let bytecode = system(commands)
+    echom bytecode
+    " 异步任务
+    " call job_start(['java -jar '.$HOME.'/Downloads/google-java-format-1.15.0-all-deps.jar', ' --replace', filename], {'callback': 'JadxHandler'})
+endfunc
+
 func Do_Jadx()
-    " let jadx_filename=getcwd()."/".getreg('%')
-    let jadx_filename = expand("%:p")
-    echohl WarningMsg | echo "jadx-gui ".jadx_filename | echohl None
+    " let filename=getcwd()."/".getreg('%')
+    let filename = expand("%:p")
+    echohl WarningMsg | echo "jadx-gui ".filename | echohl None
     "同步任务
-    "let bytecode = system("jadx-gui ".jadx_filename)
+    "let bytecode = system("jadx-gui ".filename)
     "异步任务
-    call job_start(["jadx-gui", " --show-bad-code", jadx_filename], {'callback': 'JadxHandler'})
+    call job_start(["jadx-gui", " --show-bad-code", filename], {'callback': 'JadxHandler'})
     "echom bytecode
 endfunc
 

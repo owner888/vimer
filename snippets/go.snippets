@@ -9,6 +9,22 @@ snippet typei
 	type ${1:interfaceName} ${2:interface} {
 		${3:// code...}
 	}
+snippet gettype
+	var x any
+	x = 10
+	value, ok := x.(int)
+	fmt.Print(value, ",", ok)
+snippet switchtype
+	switch a.(type) {
+	case int:
+		fmt.Println("the type of a is int")
+	case string:
+		fmt.Println("the type of a is string")
+	case float64:
+		fmt.Println("the type of a is float")
+	default:
+		fmt.Println("unknown type")
+	}
 snippet :
 	${1:variable} := ${2:string}	
 snippet pri

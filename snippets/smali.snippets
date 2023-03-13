@@ -2,8 +2,44 @@ snippet log
 	const-string v0, "${1:tag}"
 
 	invoke-static {v0, ${2:p0}}, Lcom/agc/Log;->w(Ljava/lang/Object;${3:F|I|Z})I${4}
-snippet var
-	var_dump($${1:variable});${2}	
-snippet vard
-	echo '<pre>'; var_dump(${1}); echo '</pre>';
 
+snippet agcint
+	invoke-static {}, Lagc/Agc;->${1:method}()I
+
+	move-result v0
+
+snippet agcfloat
+	invoke-static {}, Lagc/Agc;->${1:method}()F
+
+	move-result v0
+
+snippet agcstr
+	invoke-static {}, Lagc/Agc;->${1:method}()Ljava/lang/String;
+
+	move-result-object v0
+
+snippet agcvoid
+	invoke-static {}, Lagc/Agc;->${1:method}()V
+
+snippet try
+	:try_start_abc
+
+	# ${1:tag}
+
+	:try_end_abc
+	.catchall {:try_start_abc .. :try_end_abc} :catchall_abc
+	:catchall_abc
+
+snippet isGoogle
+	invoke-static {}, Lagc/Agc;->isGoogleDevice()Z
+
+	move-result v0
+
+	if-nez v0, :cond_abc
+
+	const/4 v0, 0x0
+
+	return v0
+	# return-void
+
+	:cond_abc
