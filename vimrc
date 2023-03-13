@@ -95,10 +95,10 @@ syntax on
 filetype plugin indent on
 
 " Python Setting {{{
-set pythondll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-set pythonhome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
-set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
-set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+" set pythondll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+" set pythonhome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
+" set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/Python
+" set pythonthreehome=/opt/homebrew/Frameworks/Python.framework/Versions/3.10
 " }}}
 
 " -----------------------------  vim 属性设置 --------------------------------
