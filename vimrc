@@ -114,13 +114,13 @@ set helplang=cn						" 显示中文帮助
 set fileformats=unix                " 设置文件格式
 set cc=100                          " 红线位置
 set expandtab                       " 使用空格代替tab , 如果要使用indent插件一定要开启这个
-set tabstop=4	                    " Tab键的宽度, 4个空格
-set shiftwidth=4                    " 设定 << 和 >> 命令移动时的宽度为 4
+set tabstop=4	                    " Tab键显示出来的宽度, 4个空格
 set softtabstop=4                   " 换行缩进宽度，4个空格
+set shiftwidth=4                    " 设定 << 和 >> 命令移动时的宽度为 4
 set cindent                         " 开启C/C++风格缩进，:set paste 关闭缩进，nopaste打开
 set smartindent                     " 智能对齐方式
-set autoindent                      " automatically indent new line, 自动对齐
-set breakindent
+set autoindent                      " 自动对齐
+set breakindent                     " 换行自动对齐
 set smarttab                        " 一次性删除多个空格, 只在行首用tab，其他地方的tab都用空格代替
 set showmatch                       " 高亮显示匹配括号, 在输入括号时光标会短暂地跳到与之相匹配的括号处
 set matchtime=2                     " 匹配括号高亮的时间（单位是十分之一秒）
@@ -179,6 +179,8 @@ set background=dark                 " 有的样式支持两种模式：light、d
 
 "set ttymouse=xterm2
 " }}}
+
+au FileType go set noexpandtab    " Go 使用 Tab 而不是 4 个空格
 
 " -----------------------------  主题鼠标设置 --------------------------------
 if has("gui_running") 
