@@ -20,7 +20,7 @@ export PATH=$BREW/bin:$PATH
 export PATH=$BREW/php@8.1/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
-export PATH=$PATH:$HOME/Documents/gcam/tools
+export PATH=$PATH:$HOME/Documents/GoogleCamera/gcam/tools
 
 # Sublime & VS Code
 export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
@@ -36,7 +36,7 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 # Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.1.7779620
-export PATH=$PATH:$ANDROID_HOME/build-tools/31.0.0
+export PATH=$PATH:$ANDROID_HOME/build-tools/33.0.2
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
 # export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
