@@ -12,12 +12,12 @@ alias lss="ls -1 * | sort -n"
 alias lls="ls -ld * |sort -n -k9" # k9是第9列, n是正序, nr是倒叙
 alias rmds="find . -type f -name \".DS_Store\"|xargs rm -rf"
 # alias rmds="find . -name \".DS_Store\" -depth -exec rm {} \;"
-alias python="python3"
+# alias python="python3"
 
 export BREW=/opt/homebrew/opt
 
 export PATH=$BREW/bin:$PATH
-export PATH=$BREW/php@8.1/bin:$PATH
+# export PATH=$BREW/php@8.1/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
 export PATH=$PATH:$HOME/Documents/GoogleCamera/gcam/tools
@@ -26,10 +26,11 @@ export PATH=$PATH:$HOME/Documents/GoogleCamera/gcam/tools
 export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
 export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
+# 修复 Leaderf 插件 ctags 报错：brew install ctags
 # export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
-export GOROOT=$HOME/sdk/go1.19
+export GOROOT=$HOME/sdk/go1.20
 export GOPATH=$HOME/Documents/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
@@ -46,7 +47,7 @@ export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PA
 export PATH=$PATH:$HOME/flutter/bin
 
 # Python
-export PATH=$PATH:$HOME/Library/Python/3.10/bin
+# export PATH=$PATH:$HOME/Library/Python/3.10/bin
 export PYTHONPATH="$HOME/Documents/Git/Obfuscapk/src"
 
 # GNU sed: brew install gnu-sed
