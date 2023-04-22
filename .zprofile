@@ -26,7 +26,7 @@ export PATH=$PATH:$HOME/Documents/GoogleCamera/gcam/tools
 export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
 export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
-# 修复 Leaderf 插件 ctags 报错：brew install ctags
+# 修复 Leaderf 插件 ctags 报错：brew install universal-ctags
 # export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
