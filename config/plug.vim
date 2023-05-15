@@ -373,6 +373,11 @@ let g:ale_linters = {
   \ 'python': ['pylint'],
   \}
 
+" php smarty 不检查
+let g:ale_pattern_options = {
+\   '.*\.tpl$': {'ale_enabled': 0},
+\}
+
 let g:ale_python_executable = 'python3'
 let g:ale_python_pylint_use_global = 1
 
