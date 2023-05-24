@@ -1,3 +1,46 @@
+function! LogToFile(logfile, message)
+    call writefile([a:message], a:logfile, 'a')
+endfunction
+
+function! WriteFile(...)
+    let message = join(a:000, ' ')
+    let logfile = '/tmp/vim.log'
+    call writefile([message], logfile, 'a')
+endfunction
+
+" 日志方法
+function! Warn(...)
+    let message = join(a:000, ' ')
+    echohl WarningMsg
+    echomsg '[WARNING] ' . message
+    echohl None
+    call LogToFile('/tmp/vim.log' message)
+endfunction
+
+function! Error(...)
+    let message = join(a:000, ' ')
+    echohl ErrorMsg
+    echomsg '[ERROR] ' . message
+    echohl None
+endfunction
+
+function! Info(...)
+    let message = join(a:000, ' ')
+    echohl MoreMsg
+    echomsg '[INFO] ' . message
+    echohl None
+    call WriteFile('/tmp/vim.log' message)
+endfunction
+
+function! Debug(...)
+    let message = join(a:000, ' ')
+    if exists('g:debug') && g:debug == 1
+        echohl Debug
+        echomsg '[DEBUG] ' . message
+        echohl None
+    endif
+endfunction
+
 " 回调函数
 func! JadxHandler(channel, msg)
     "echo a:msg

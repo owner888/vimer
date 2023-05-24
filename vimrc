@@ -87,6 +87,7 @@ call plug#end()
 
 " 自动载入 vimrc 文件，使得我们对 vim 的定制立即生效，无需重启
 autocmd! bufwritepost vimrc source %
+autocmd! bufwritepost functions.vim source %
 
 " 开启语法高亮
 syntax enable
