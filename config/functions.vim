@@ -41,6 +41,11 @@ function! Debug(...)
     endif
 endfunction
 
+function! CopyMatches (m) 
+    let @+ .= a:m . "\n" 
+    return a:m
+endfunction
+
 " 回调函数
 func! JadxHandler(channel, msg)
     "echo a:msg

@@ -2,6 +2,7 @@
 cmap W w
 cmap Q q
 
+map <F3> :let @+ = ''<cr>:%s/regex/\=CopyMatches(submatch(0))/g
 " map <F4> :TlistToggle<CR>
 map <F4> :call TerminalToggle()<CR>
 " map <F8> t :NERDTreeMirror<CR>gT<C-w>w<ESC>gt<C-w>w    " 新标签打开一个文件，复制目录树
@@ -9,11 +10,11 @@ map <F4> :call TerminalToggle()<CR>
 " nmap <Leader>F :NERDTreeFind<CR>
 " nmap <Leader>s :NERDTreeMirror<CR>
 
-" map <F2> :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
 " map <F3> :TlistToggle<CR>
 " map <F3> :TagbarToggle<CR>
-" map <F5> :tabprev<CR>
-" map <F6> :tabnext<CR>
+map <F5> :tabprev<CR>
+map <F6> :tabnext<CR>
 
 autocmd FileType markdown nnoremap <silent> <F5> :MarkdownPreview<CR>
 autocmd FileType markdown nnoremap <silent> <F6> :MarkdownPreviewStop<CR>

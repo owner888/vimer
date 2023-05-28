@@ -27,7 +27,7 @@ export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
 export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
 # 修复 Leaderf 插件 ctags 报错：brew install universal-ctags
-# export PATH="/Applications/MacVim.app/Contents/bin":$PATH
+export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
 export GOROOT=$HOME/sdk/go1.20
@@ -55,6 +55,7 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # brew install lazygit
 alias lg=lazygit
+alias fixandroid="softwareupdate --install-rosetta --agree-to-license"
 
 
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
