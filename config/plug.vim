@@ -73,6 +73,7 @@ au BufNewFile *.json 0r ~/.vim/skeletons/json.skel
 au BufNewFile *.java 0r ~/.vim/skeletons/java.skel
 au BufNewFile *.rust 0r ~/.vim/skeletons/rust.skel
 au BufNewFile *.dart 0r ~/.vim/skeletons/dart.skel
+au BufNewFile *.smali 0r ~/.vim/skeletons/smali.skel
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => leaderF 配置
