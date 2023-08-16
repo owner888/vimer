@@ -40,11 +40,11 @@ export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.1.7779620
 export PATH=$PATH:$ANDROID_HOME/build-tools/33.0.2
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
-# export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 # export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH
 
 # Flutter
-export PATH=$PATH:$HOME/flutter/bin
+export PATH=$HOME/flutter/bin:$PATH
 
 # Python
 # export PATH=$PATH:$HOME/Library/Python/3.10/bin
