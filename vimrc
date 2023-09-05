@@ -113,7 +113,7 @@ set fileencoding=utf-8
 set fileencodings=utf-8,chinese,latin1
 set helplang=cn						" 显示中文帮助
 set fileformats=unix                " 设置文件格式
-set cc=100                          " 红线位置
+set cc=120                          " 红线位置
 set expandtab                       " 使用空格代替tab , 如果要使用indent插件一定要开启这个
 set tabstop=4	                    " Tab键显示出来的宽度, 4个空格
 set softtabstop=4                   " 换行缩进宽度，4个空格
