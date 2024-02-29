@@ -30,7 +30,7 @@ export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
-export GOROOT=$HOME/sdk/go1.21
+export GOROOT=$HOME/sdk/go1.22
 export GOPATH=$HOME/Documents/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
