@@ -20,7 +20,7 @@ export PATH=$BREW/bin:$PATH
 # export PATH=$BREW/php@8.1/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
-export PATH=$PATH:$HOME/Documents/GoogleCamera/gcam/tools
+export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
 
 # Sublime & VS Code
 export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
@@ -30,38 +30,38 @@ export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
-export GOROOT=$HOME/sdk/go1.22
-export GOPATH=$HOME/Documents/golang
+export GOROOT=$HOME/sdk/go1.23
+export GOPATH=$HOME/Development/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.1.7779620
-export PATH=$PATH:$ANDROID_HOME/build-tools/33.0.2
+export PATH=$ANDROID_HOME/build-tools/33.0.2:$PATH
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 # export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH
 
 # Flutter
-export PATH=$HOME/flutter/bin:$PATH
+export PATH=$HOME/Development/flutter/bin:$PATH
 
 # Python
 # export PATH=$PATH:$HOME/Library/Python/3.10/bin
-export PYTHONPATH="$HOME/Documents/Git/Obfuscapk/src"
+export PYTHONPATH="$HOME/Development/Git/Obfuscapk/src"
 
 # GNU sed: brew install gnu-sed
-export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="$BREW/gnu-sed/libexec/gnubin:$PATH"
 
 # brew install lazygit
 alias lg=lazygit
 alias fixandroid="softwareupdate --install-rosetta --agree-to-license"
 
 
+# proxy
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'
 
-# proxy
 function proxy_on() {
     export http_proxy="http://127.0.0.1:1087"
     export https_proxy=$http_proxy
