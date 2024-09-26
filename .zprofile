@@ -26,7 +26,11 @@ export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
 export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
 export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
 export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
-# 修复 Leaderf 插件 ctags 报错：brew install universal-ctags
+# 修复 Leaderf 插件 ctags 报错
+if ! command -v /opt/homebrew/bin/ctags >/dev/null 2>&1; then
+    echo "universal-ctags not found. Installing..."
+    brew install universal-ctags
+fi
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
@@ -73,3 +77,4 @@ function proxy_off() {
     unset https_proxy
     echo -e "proxy off"
 }
+
