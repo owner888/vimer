@@ -31,6 +31,11 @@ if ! command -v /opt/homebrew/bin/ctags >/dev/null 2>&1; then
     echo "universal-ctags not found. Installing..."
     brew install universal-ctags
 fi
+# 修复 ALE 插件 intelephense 报错
+if ! command -v /opt/homebrew/bin/intelephense >/dev/null 2>&1; then
+    echo "intelephense not found. Installing..."
+    npm install -g intelephense
+fi
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang

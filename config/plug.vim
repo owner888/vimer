@@ -366,13 +366,27 @@ let g:airline#extensions#tagbar#enabled = 0
 let g:ale_lint_on_text_changed = "never"
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
+
 " 解决java乱码问题
 let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
-" ale 通过 gopls lsp 检查错误，ale 不支持代码补全
+
+" ale 通过 gopls lsp 检查错误，ale 支持的代码补全不好用，从 a-z 排序的
+" 解决 ale 找不到 intelephense 命令问题
+" npm install -g intelephense
 let g:ale_linters = {
   \ 'go': ['gopls'],
   \ 'python': ['pylint'],
+  \ 'php': ['intelephense'],
   \}
+
+" 下面这个好像用不上
+" call ale#linter#Define('php', {
+"   \ 'name': 'intelephense',
+"   \ 'lsp': 'stdio',
+"   \ 'executable': 'intelephense',
+"   \ 'command': '%e --stdio',
+"   \ 'project_root': function('ale_linters#php#langserver#GetProjectRoot')
+"   \})
 
 " php smarty 不检查
 let g:ale_pattern_options = {
@@ -387,7 +401,7 @@ let g:ale_python_pylint_use_global = 1
 " let g:ale_php_langserver_use_global = 1
 " let g:ale_php_langserver_executable = $HOME.'/.composer/vendor/bin/php-language-server.php'
 
-" 自动补全，不好用，从a-z排序的
+" 自动补全，不好用，从 a-z 排序的
 let g:ale_completion_enabled = 0
 let g:ale_disable_lsp = 0
 
@@ -417,7 +431,7 @@ let g:ale_disable_lsp = 0
 "let g:flutter_command = ''
 let g:flutter_hot_reload_on_save = 1
 " dart文件保存时自动格式化
-"au BufWritePre *.dart* DartFmt
+au BufWritePre *.dart* DartFmt
 au FileType dart set tabstop=2
 au FileType dart set shiftwidth=2
 au FileType dart set softtabstop=2
