@@ -82,6 +82,7 @@ Plug 'dhruvasagar/vim-testify'
 " Plug 'equal-l2/vim-base64'
 " Plug 'gilligan/vim-lldb'
 " Plug 'idanarye/vim-vebugger'
+Plug 'thaerkh/vim-workspace'
 call plug#end()
 " }}}
 

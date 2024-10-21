@@ -7,6 +7,24 @@ let maplocalleader = ",,"
 let MRU_Window_Height = 10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => workspace 配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:workspace_autocreate = 1
+let g:workspace_create_new_tabs = 0  " enabled = 1 (default), disabled = 0
+
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_session_disable_on_args = 1
+let g:workspace_persist_undo_history = 1  " enabled = 1 (default), disabled = 0
+let g:workspace_undodir='.undodir'
+
+let g:workspace_autosave_always = 1
+let g:workspace_autosave_untrailspaces = 0
+let g:workspace_autosave_untrailtabs = 0
+let g:workspace_autosave_ignore = ['gitcommit']
+
+nnoremap <leader>s :ToggleWorkspace<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tabline 配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline#bufferline#show_number  = 2
