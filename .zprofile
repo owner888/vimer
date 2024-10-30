@@ -7,9 +7,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # export LSCOLORS='GxFxCxDxBxegedabagaced'    # 指定颜色
 # export WORDCHARS='*?[]~&;!$%^<>'
 
-alias lss="ls -1 * | sort -n"
+# alias lss="ls -1 * | sort -n"
 # alias lls="ls -l | awk '{print $9}' | sort -k1.1n"
-alias lls="ls -ld * |sort -n -k9" # k9是第9列, n是正序, nr是倒叙
+alias lss="du -sh -- * | sort -rh" # 循环文件和文件夹，按大小排序
+alias lls="ls -ld * |sort -n -k9"  # k9 是第9列, n是正序, nr是倒叙
 alias rmds="find . -type f -name \".DS_Store\"|xargs rm -rf"
 # alias rmds="find . -name \".DS_Store\" -depth -exec rm {} \;"
 # alias python="python3"
