@@ -1,6 +1,6 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# oh my zsh 自带颜色
+# oh my zsh 自带颜色，不需要设置了
 # export GREP_COLOR=auto
 # export CLICOLOR='Yes'                       # 是否输出颜色
 # export LS_OPTIONS='--color=auto'            # 如果没有指定，则自动选择颜色
@@ -12,31 +12,49 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias lss="du -sh -- * | sort -rh" # 循环文件和文件夹，按大小排序
 alias lls="ls -ld * |sort -n -k9"  # k9 是第9列, n是正序, nr是倒叙
 alias rmds="find . -type f -name \".DS_Store\"|xargs rm -rf"
-# alias rmds="find . -name \".DS_Store\" -depth -exec rm {} \;"
-# alias python="python3"
 
-export BREW=/opt/homebrew/opt
+# ------------------------------ 软件检测 ------------------------------
 
-export PATH=$BREW/bin:$PATH
-# export PATH=$BREW/php@8.1/bin:$PATH
-export PATH=$PATH:/opt/bin:/usr/local/bin
-export PATH=$PATH:$HOME/.vim/bin
-export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
-
-# Sublime & VS Code
-export PATH=/Applications/Sublime\ Text.app/Contents/SharedSupport/bin:$PATH
-export PATH=/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:$PATH
-export PATH=/Applications/Beyond\ Compare.app/Contents/MacOS:$PATH
 # 修复 Leaderf 插件 ctags 报错
 if ! command -v /opt/homebrew/bin/ctags >/dev/null 2>&1; then
     echo "universal-ctags not found. Installing..."
     brew install universal-ctags
 fi
+
 # 修复 ALE 插件 intelephense 报错
 if ! command -v /opt/homebrew/bin/intelephense >/dev/null 2>&1; then
     echo "intelephense not found. Installing..."
     npm install -g intelephense
 fi
+
+if ! command -v /opt/homebrew/bin/lazygit >/dev/null 2>&1; then
+    echo "lazygit not found. Installing..."
+    brew install lazygit
+fi
+alias lg=lazygit
+
+# 标准 sed
+if ! command -v /opt/homebrew/opt/gnu-sed/libexec/gnubin/sed >/dev/null 2>&1; then
+    echo "gnu-sed not found. Installing..."
+    brew install gnu-sed
+fi
+
+# GNU sed: brew install gnu-sed
+export PATH="$BREW/gnu-sed/libexec/gnubin:$PATH"
+
+# ------------------------------ 环境变量 ------------------------------
+
+export BREW=/opt/homebrew/opt
+
+export PATH=$BREW/bin:$PATH
+export PATH=$PATH:/opt/bin:/usr/local/bin
+export PATH=$PATH:$HOME/.vim/bin
+export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
+
+# Sublime & VS Code & Beyond Compare & MacVim
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin":$PATH
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$PATH
+export PATH="/Applications/Beyond Compare.app/Contents/MacOS":$PATH
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
@@ -57,16 +75,11 @@ export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$HOME/Development/flutter/bin:$PATH
 
 # Python
-# export PATH=$PATH:$HOME/Library/Python/3.10/bin
 export PYTHONPATH="$HOME/Development/Git/Obfuscapk/src"
 
-# GNU sed: brew install gnu-sed
-export PATH="$BREW/gnu-sed/libexec/gnubin:$PATH"
-
-# brew install lazygit
-alias lg=lazygit
 alias fixandroid="softwareupdate --install-rosetta --agree-to-license"
 
+# ------------------------------ 代理设置 ------------------------------
 
 # proxy
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
