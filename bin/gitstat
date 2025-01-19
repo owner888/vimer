@@ -1,11 +1,9 @@
 #!/bin/bash
 #
 
-#
-#git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
+# git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
 
 tmpfile=$(mktemp)
-#tmpfile="/tmp/aaa.txt"
 
 count_by_name() {
     local name="$1"
@@ -19,13 +17,13 @@ count_by_name() {
     git log --author="$name" --pretty=tformat: --numstat $date_since $date_until |grep -v ^- |awk '{add += $1; subs += $2; loc += $1 - $2 } END { printf "%s; %s; %s\n", add, subs, loc}'
 }
 
-#时间段
-#格式2022-01-01
+# 时间段
+# 格式 2022-01-01
 since="$1"
 until="$2"
 
 git log --format='%aN' 2>/dev/null | sort -u | while read name; do 
-    echo "$name"
+    # echo "$name"
     count_by_name "$name" "$since" "$until" >> $tmpfile 2>/dev/null
 done
 

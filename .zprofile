@@ -15,6 +15,12 @@ alias rmds="find . -type f -name \".DS_Store\"|xargs rm -rf"
 
 # ------------------------------ 软件检测 ------------------------------
 
+# 修复 Leaderf 插件 ripgrep 报错
+if ! command -v /opt/homebrew/bin/rg >/dev/null 2>&1; then
+    echo "ripgrep not found. Installing..."
+    brew install ripgrep
+fi
+
 # 修复 Leaderf 插件 ctags 报错
 if ! command -v /opt/homebrew/bin/ctags >/dev/null 2>&1; then
     echo "universal-ctags not found. Installing..."
