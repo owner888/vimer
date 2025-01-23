@@ -62,6 +62,7 @@ export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin":$PATH
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin":$PATH
 export PATH="/Applications/Beyond Compare.app/Contents/MacOS":$PATH
 export PATH="/Applications/MacVim.app/Contents/bin":$PATH
+export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin":$PATH
 
 # Golang
 export GOROOT=$HOME/sdk/go1.23
