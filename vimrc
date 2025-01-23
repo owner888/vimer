@@ -55,6 +55,7 @@ Plug 'dart-lang/dart-vim-plugin'
 " Plug 'natebosch/vim-lsc-dart'
 Plug 'fatih/vim-go'                         " 第一次需要安装 golang 开发环境，运行 :GoUpdateBinaries，golangci-lint 可以检查错误，但是要配合上面那个ale插件才可以显示错误
 Plug 'rust-lang/rust.vim'
+Plug 'owner888/vim-swift-format'
 
 " java decompile
 Plug 'mzlogin/vim-smali'
@@ -250,6 +251,7 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
+let g:log_file = '/tmp/vimlog.txt'
 
 " augroup ProjectDrawer
 "   autocmd!
