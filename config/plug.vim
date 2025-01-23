@@ -390,10 +390,8 @@ let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 let g:vim_swift_format_use_ale = 1
 
 let g:vim_swift_format_executable = 'swift-format'
-let g:vim_swift_format_lint_command = 'swift-format lint %s'
-let g:vim_swift_format_format_command = 'swift-format format --in-place %s'
-" let g:vim_swift_format_lint_command = 'swift-format lint %s --configuration '.$HOME.'/.vim/.swift-format.json'
-" let g:vim_swift_format_format_command = 'swift-format format --in-place %s --configuration '.$HOME.'/.vim/.swift-format.json'
+let g:vim_swift_format_lint_command = 'swift-format lint %s --configuration '.$HOME.'/.vim/.swift-format.json'
+let g:vim_swift_format_format_command = 'swift-format format --in-place %s --configuration '.$HOME.'/.vim/.swift-format.json'
 
 " ale 通过 gopls lsp 检查错误，ale 支持的代码补全不好用，从 a-z 排序的
 " 解决 ale 找不到 intelephense 命令问题
