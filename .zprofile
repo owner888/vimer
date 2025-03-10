@@ -65,15 +65,17 @@ export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin":$PATH
 
 # Golang
-export GOROOT=$HOME/sdk/go1.23
+export GOROOT=$HOME/sdk/go1.24
 export GOPATH=$HOME/Development/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.1.7779620
+export ANDROID_ADB="$ANDROID_HOME/platform-tools"
+export ANDROID_EMULATOR="$ANDROID_HOME/emulator"
 export PATH=$ANDROID_HOME/build-tools/33.0.2:$PATH
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_ADB:$ANDROID_EMULATOR
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 # export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH

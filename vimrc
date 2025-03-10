@@ -35,7 +35,6 @@ Plug 'scrooloose/nerdtree'                " 显示目录树，按F2展开关闭
 " Plug 'Xuyuanp/nerdtree-git-plugin'        " git status 效果                                                                                                                         
 " Plug 'airblade/vim-gitgutter'             " git diff，显示哪一行修改、增加
 " Plug 'majutsushi/tagbar'                  " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
-" Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
 Plug 'stephpy/vim-phpdoc'                   " 插入PHP函数、类文档块
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " If you have nodejs and yarn
@@ -44,9 +43,7 @@ Plug 'mattn/emmet-vim'                      " 自动补全HTML标签 ul>li 然�
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] }
 Plug 'docunext/closetag.vim'                " 自动补全HTML结束标签
 Plug 'junegunn/vim-easy-align'              " 快速进行对齐/格式化，同类型产品：tabular
-Plug 'Shougo/neocomplcache.vim'             " 代码补全，不依赖lua、python、nodejs
 " Plug 'maralla/completor.vim'
-Plug 'owner888/snipMate'                    " 10年前的代码块引擎
 " Plug 'SirVer/ultisnips'                   " 代码块引擎，需要python支持
 " Plug 'honza/vim-snippets'                 " 代码块集合，输入if然后按tab，就会出来if的代码片段
 Plug 'thosakwe/vim-flutter'
@@ -55,7 +52,6 @@ Plug 'dart-lang/dart-vim-plugin'
 " Plug 'natebosch/vim-lsc-dart'
 Plug 'fatih/vim-go'                         " 第一次需要安装 golang 开发环境，运行 :GoUpdateBinaries，golangci-lint 可以检查错误，但是要配合上面那个ale插件才可以显示错误
 Plug 'rust-lang/rust.vim'
-Plug 'owner888/vim-swift-format'
 
 " java decompile
 Plug 'mzlogin/vim-smali'
@@ -84,6 +80,11 @@ Plug 'dhruvasagar/vim-testify'
 " Plug 'gilligan/vim-lldb'
 " Plug 'idanarye/vim-vebugger'
 Plug 'thaerkh/vim-workspace'
+
+" Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
+Plug 'owner888/snipMate'                    " 10年前的代码块引擎
+Plug 'owner888/vim-swift-format'
+Plug 'Shougo/neocomplcache.vim'
 call plug#end()
 " }}}
 
@@ -251,7 +252,15 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 3
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-let g:log_file = '/tmp/vimlog.txt'
+let g:log_file = '/tmp/vim.log'
+
+" 日志函数
+function! Log(msg)
+  let time = strftime('%Y-%m-%d %H:%M:%S')
+  let log_line = "[" . time . "] " . a:msg
+  " 追加写入文件
+  call writefile([log_line], g:log_file, 'a')
+endfunction
 
 " augroup ProjectDrawer
 "   autocmd!
