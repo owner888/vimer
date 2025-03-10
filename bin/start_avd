@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# 列出所有的模拟器
+available_avds=($(emulator -list-avds))
+
+# 计算模拟器数量
+avd_count=${#available_avds[@]}
+
+# 如果只有一个模拟器，直接启动它
+if [ $avd_count -eq 1 ]; then
+    echo "启动模拟器：${available_avds[0]}"
+    nohup emulator -avd "${available_avds[0]}" >/dev/null 2>&1 &
+    exit 0
+fi
+
+# 显示模拟器列表
+echo "可用的模拟器："
+for i in "${!available_avds[@]}"; do
+    echo "[$i] ${available_avds[$i]}"
+done
+
+# 获取用户输入并启动选定的模拟器
+while true; do
+    read -p "请输入模拟器编号并按回车键启动: " avd_index
+    if [[ $avd_index =~ ^[0-9]+$ ]] && [ $avd_index -ge 0 ] && [ $avd_index -lt $avd_count ]; then
+        echo "启动模拟器：${available_avds[$avd_index]}"
+        nohup emulator -avd "${available_avds[$avd_index]}" >/dev/null 2>&1 &
+        break
+    else
+        echo "无效的输入，请重新输入"
+    fi
+done
+
