@@ -107,7 +107,7 @@ let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']    " 当前�
 let g:Lf_ShortcutF = '<C-P>'
 let g:Lf_ShortcutB = '<C-L>'
 nnoremap <C-F> :LeaderfFunction<CR>
-nnoremap <C-M> :Leaderf mru<CR>
+nnoremap <C-B> :Leaderf mru<CR>
 nnoremap <C-N> :Leaderf rg<CR>
 "文件搜索
 nnoremap <silent> <Leader>F :Leaderf file<CR>
