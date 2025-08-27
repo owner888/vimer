@@ -66,8 +66,7 @@ export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 # export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin":$PATH
 
 # Golang
-# export GOROOT=$HOME/sdk/go1.24
-export GOROOT=/opt/homebrew/Cellar/go/1.24.2/libexec
+export GOROOT=/opt/homebrew/Cellar/go/1.25.0/libexec
 export GOPATH=$HOME/Development/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
