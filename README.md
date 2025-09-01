@@ -1,9 +1,14 @@
-========================== 09:56 PM 2022-03-21 ==============================
+========================== 12:42 AM 2025-09-01 ===========================
 
-1. 修改为 plug 管理
-2. 移除 NDRE_tree、taglist、tagbar，改用 LeaderF
-3. 设置初始化窗口增加是否 macOS 判断，Linux server 下不能 set columns 和 set lines
-4. 增加 smali 支持，把 .ctags.d 移到用户目录即可
+要让 apktool 忽略私有样式，需要把 1.apk 拷贝到 $HOME/Library/apktool
+
+========================== 09:56 PM 2022-03-21 ===========================
+
+- 修改为 plug 管理
+- 移除 NDRE_tree、taglist、tagbar，改用 LeaderF
+- 设置初始化窗口增加是否 macOS 判断，Linux server 下不能 set columns 和 set lines
+- 增加 smali 支持，把 .ctags.d 移到用户目录即可
+
 ```
 cp ~/.vim/.ctags.d ~/
 ```
@@ -26,7 +31,7 @@ https://vimawesome.com/
 
 ========================== 14:42 2019-06-05 ==============================
 
-1. NDRE_tree插件更新，采用GitHub
+1. NDRE_tree 插件更新，采用 GitHub
 
 ```
 git clone https://github.com/scrooloose/nerdtree ~/.vim/bundle/nerdtree
