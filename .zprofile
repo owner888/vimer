@@ -55,7 +55,7 @@ export BREW=/opt/homebrew/opt
 export PATH=$BREW/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
-export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
+export PATH=$PATH:$HOME/Development/GoogleCamera/GcamPlugin/tools
 
 # Sublime & VS Code & Beyond Compare & MacVim
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin":$PATH
@@ -66,7 +66,7 @@ export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 # export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin":$PATH
 
 # Golang
-export GOROOT=/opt/homebrew/Cellar/go/1.25.0/libexec
+export GOROOT=/opt/homebrew/Cellar/go/1.25.1/libexec
 export GOPATH=$HOME/Development/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
