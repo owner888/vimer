@@ -27,6 +27,13 @@ if ! command -v /opt/homebrew/bin/ctags >/dev/null 2>&1; then
     brew install universal-ctags
 fi
 
+# 修复 npm 报错
+if ! command -v /opt/homebrew/bin/npm >/dev/null 2>&1; then
+    echo "npm not found. Installing..."
+    brew install npm
+fi
+
+
 # 修复 ALE 插件 intelephense 报错
 if ! command -v /opt/homebrew/bin/intelephense >/dev/null 2>&1; then
     echo "intelephense not found. Installing..."
@@ -55,7 +62,8 @@ export BREW=/opt/homebrew/opt
 export PATH=$BREW/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
-export PATH=$PATH:$HOME/Development/GoogleCamera/GcamPlugin/tools
+# export PATH=$PATH:$HOME/Development/tools
+export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
 
 # Sublime & VS Code & Beyond Compare & MacVim
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin":$PATH
