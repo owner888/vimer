@@ -1,5 +1,3 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # oh my zsh 自带颜色，不需要设置了
 # export GREP_COLOR=auto
 # export CLICOLOR='Yes'                       # 是否输出颜色
