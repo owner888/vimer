@@ -393,24 +393,37 @@ let g:vim_swift_format_executable = 'swift-format'
 let g:vim_swift_format_lint_command = 'swift-format lint %s --configuration '.$HOME.'/.vim/.swift-format.json'
 let g:vim_swift_format_format_command = 'swift-format format --in-place %s --configuration '.$HOME.'/.vim/.swift-format.json'
 
-" ale 通过 gopls lsp 检查错误，ale 支持的代码补全不好用，从 a-z 排序的
-" 解决 ale 找不到 intelephense 命令问题
-" npm install -g intelephense
+" -------------------------
+" ALE 配置
+" -------------------------
+" 关闭自动补全，不好用，每次都从 a-z 排序，没有记忆功能，也不分使用次数权重
+let g:ale_completion_enabled = 0
+
+" 开启 LSP 支持
+let g:ale_disable_lsp = 0
+" 不要自动猜测我要用哪些 linter，只启用我在 g:ale_linters 里手动声明的那些
+let g:ale_linters_explicit = 1
 let g:ale_linters = {
   \ 'go': ['gopls'],
   \ 'python': ['pylint'],
   \ 'php': ['intelephense'],
   \ 'swift': ['swift-format'],
+  \ 'java': ['javalsp', 'gradle'],
   \}
 
-" 下面这个好像用不上
-" call ale#linter#Define('php', {
-"   \ 'name': 'intelephense',
-"   \ 'lsp': 'stdio',
-"   \ 'executable': 'intelephense',
-"   \ 'command': '%e --stdio',
-"   \ 'project_root': function('ale_linters#php#langserver#GetProjectRoot')
-"   \})
+" 自动格式化，checkstyle 和 google-java-format 冲突了，google-java-format 格式化的代码 checkstyle 一直提示不规范，笑死
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'java': ['google_java_format'],
+\}
+" Java language server 配置
+let g:ale_java_javalsp_executable = '/opt/homebrew/bin/jdtls'
+let g:ale_java_javalsp_config = {
+\   'config_path': '/opt/homebrew/Cellar/jdtls/1.51.0/libexec/config_mac',
+\}
+" 如果你想让 ALE 在保存时自动用 google-java-format 格式化：
+let g:ale_java_google_java_format_executable = 'google-java-format'
+let g:ale_java_google_java_format_options = '--aosp'
 
 " php smarty 不检查
 let g:ale_pattern_options = {
@@ -420,14 +433,20 @@ let g:ale_pattern_options = {
 let g:ale_python_executable = 'python3'
 let g:ale_python_pylint_use_global = 1
 
+" 只在文件保存时 lint
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+
+" 错误样式
+highlight ALEError ctermbg=DarkRed
+highlight ALEWarning ctermbg=DarkYellow
+
+" PHP language server 配置
 " https://packagist.org/packages/felixfbecker/language-server
 "  \ 'php': ['langserver'],
 " let g:ale_php_langserver_use_global = 1
 " let g:ale_php_langserver_executable = $HOME.'/.composer/vendor/bin/php-language-server.php'
 
-" 自动补全，不好用，从 a-z 排序的
-let g:ale_completion_enabled = 0
-let g:ale_disable_lsp = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => 函数定义跳转
