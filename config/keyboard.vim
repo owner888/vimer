@@ -19,6 +19,27 @@ map <F6> :tabnext<CR>
 autocmd FileType markdown nnoremap <silent> <F5> :MarkdownPreview<CR>
 autocmd FileType markdown nnoremap <silent> <F6> :MarkdownPreviewStop<CR>
 
+" 定义命令：强制重启 gopls 并刷新缓冲区
+" command! GoplsHardRestart write | silent execute '!pkill -f gopls' | redraw! | edit
+
+" 定义命令：强制重启 gopls 并刷新缓冲区
+command! GoplsHardRestart write |
+      \ silent! execute '!pkill -f gopls >/dev/null 2>&1' |
+      \ redraw! | edit |
+      \ echohl ModeMsg | echom '✅ gopls 已重启完成' | echohl None
+nnoremap <F7> :GoplsHardRestart<CR>
+
+" 不起作用的重启 gopls 方法
+function! GoplsRestart()
+  write
+  if exists('g:go_lsp_job_id')
+    call job_stop(g:go_lsp_job_id)
+    unlet g:go_lsp_job_id
+  endif
+  call go#lsp#Restart()
+  echohl ModeMsg | echom "✅ gopls 已重新启动 (独立模式)" | echohl None
+endfunction
+
 " Ctrl + k | j
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
