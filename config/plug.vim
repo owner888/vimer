@@ -408,7 +408,7 @@ let g:ale_linters = {
   \ 'python': ['pylint'],
   \ 'php': ['intelephense'],
   \ 'swift': ['swift-format'],
-  \ 'java': ['javalsp', 'gradle'],
+  \ 'java': ['javalsp', 'javac', 'gradle'],
   \}
 
 " 自动格式化，checkstyle 和 google-java-format 冲突了，google-java-format 格式化的代码 checkstyle 一直提示不规范，笑死
