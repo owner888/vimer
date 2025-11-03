@@ -19,6 +19,20 @@ map <F6> :tabnext<CR>
 autocmd FileType markdown nnoremap <silent> <F5> :MarkdownPreview<CR>
 autocmd FileType markdown nnoremap <silent> <F6> :MarkdownPreviewStop<CR>
 
+" === 一键复制 :messages 到系统剪贴板 ===
+command! CopyMessages call s:CopyMessagesToClipboard()
+
+function! s:CopyMessagesToClipboard() abort
+  if !has('clipboard')
+    echoerr '当前 Vim 未编译 clipboard 功能（请安装带 +clipboard 的 MacVim）'
+    return
+  endif
+  redir @+
+  silent messages
+  redir END
+  echo "✅ 已将 :messages 内容复制到剪贴板"
+endfunction
+
 " 定义命令：强制重启 gopls 并刷新缓冲区
 " command! GoplsHardRestart write | silent execute '!pkill -f gopls' | redraw! | edit
 
