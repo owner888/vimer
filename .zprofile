@@ -86,6 +86,10 @@ export PATH=$PATH:$ANDROID_ADB:$ANDROID_EMULATOR
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 # export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH
+# 切换系统默认 Java 版本
+# sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH="$JAVA_HOME/bin:$PATH"
 
 # Flutter
 export PATH=$HOME/Development/flutter/bin:$PATH
