@@ -374,33 +374,33 @@ let g:go_imports_autosave = 0
 let g:go_build_tags = 'linux,android,darwin,windows' 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ale 语法检查
+" => ALE 语法检查
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " show errors or warnings in my statusline
 let g:airline#extensions#ale#enabled = 1
 " airline 和 tagbar 兼容性有问题
 let g:airline#extensions#tagbar#enabled = 0
-" 只在文件保存的时候检查
+" 关闭自动补全，不好用，每次都从 a-z 排序，没有记忆功能，也不分使用次数权重
+let g:ale_completion_enabled = 0
+
+" 语法检查：只在文件保存的时候检查，不要在输入的时候检查，影响性能
 let g:ale_lint_on_text_changed = "never"
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 
-" 解决java乱码问题
-let g:ale_java_javac_options = '-encoding UTF-8  -J-Duser.language=en'
 let g:vim_swift_format_use_ale = 1
-
 let g:vim_swift_format_executable = 'swift-format'
 let g:vim_swift_format_lint_command = 'swift-format lint %s --configuration '.$HOME.'/.vim/.swift-format.json'
 let g:vim_swift_format_format_command = 'swift-format format --in-place %s --configuration '.$HOME.'/.vim/.swift-format.json'
 
-" -------------------------
-" ALE 配置
-" -------------------------
-" 关闭自动补全，不好用，每次都从 a-z 排序，没有记忆功能，也不分使用次数权重
-let g:ale_completion_enabled = 0
+" 确保 ALE 启动时带上 JAVA_HOME + ANDROID_HOME
+let g:ale_command_wrapper =
+      \ 'env JAVA_HOME=' . substitute(system('/usr/libexec/java_home -v 21'), '\n', '', '') .
+      \ ' ANDROID_HOME=' . expand('~/Library/Android/sdk')
 
 " 开启 LSP 支持
-let g:ale_disable_lsp = 0
+" let g:ale_disable_lsp = 0
 " 不要自动猜测我要用哪些 linter，只启用我在 g:ale_linters 里手动声明的那些
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
@@ -408,34 +408,25 @@ let g:ale_linters = {
   \ 'python': ['pylint'],
   \ 'php': ['intelephense'],
   \ 'swift': ['swift-format'],
-  \ 'java': ['javalsp', 'javac', 'gradle'],
   \}
 
-" 自动格式化，checkstyle 和 google-java-format 冲突了，google-java-format 格式化的代码 checkstyle 一直提示不规范，笑死
+" 自动格式化
+" checkstyle 和 google-java-format 冲突了，google-java-format 格式化的代码 checkstyle 提示不规范 😁
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   'java': ['google_java_format'],
 \}
-" Java language server 配置
-let g:ale_java_javalsp_executable = '/opt/homebrew/bin/jdtls'
-let g:ale_java_javalsp_config = {
-\   'config_path': '/opt/homebrew/Cellar/jdtls/1.51.0/libexec/config_mac',
-\}
-" 如果你想让 ALE 在保存时自动用 google-java-format 格式化：
 let g:ale_java_google_java_format_executable = 'google-java-format'
 let g:ale_java_google_java_format_options = '--aosp'
 
-" php smarty 不检查
+" html 和 php smarty 不检查
 let g:ale_pattern_options = {
+\   '.*\.html$': {'ale_enabled': 0},
 \   '.*\.tpl$': {'ale_enabled': 0},
 \}
 
 let g:ale_python_executable = 'python3'
 let g:ale_python_pylint_use_global = 1
-
-" 只在文件保存时 lint
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
 
 " 错误样式
 highlight ALEError ctermbg=DarkRed
