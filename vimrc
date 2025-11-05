@@ -6,17 +6,11 @@ let s:darwin = has('mac')
 let s:windows = has('win32') || has('win64')
 let s:gui = has('gui_running')
 
-" ──────────────────────────────────────────────
-" macOS 系统日志屏蔽：防止 NSMachPort 等警告刷屏
-" ──────────────────────────────────────────────
-if has("mac") || has("macunix")
-  " 关闭 Cocoa 层日志输出
-  silent! let $NSUnbufferedIO = "YES"
-  " 关闭 Objective-C Fork 安全检查（防止子线程触发异常）
-  silent! let $OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES"
-  " 禁止 CoreFoundation 和 Distributed Objects 输出调试日志
-  silent! let $CFLogForceStdErr = "NO"
-  silent! let $CFLogLevel = "0"
+if has("gui_macvim")
+  " jdtls 只支持 java 21 及以上版本
+  let $JAVA_HOME = substitute(system('/usr/libexec/java_home -v 21'), '\n', '', '')
+  let $PATH = $JAVA_HOME . "/bin:" . $PATH
+  let $ANDROID_HOME = expand('~/Library/Android/sdk')
 endif
 
 " -----------------------------  管理器插件 plugged.vim --------------------------------
@@ -95,11 +89,12 @@ Plug 'dhruvasagar/vim-testify'
 " Plug 'idanarye/vim-vebugger'
 Plug 'thaerkh/vim-workspace'
 
-" Plug 'owner888/taglist.vim'               " 函数变量列表，依赖ctags，不支持golang
+" Plug 'owner888/taglist.vim'               " 函数变量列表，依赖 ctags，不支持 golang
 Plug 'owner888/snipMate'                    " 10年前的代码块引擎
 Plug 'owner888/vim-swift-format'
 Plug 'Shougo/neocomplcache.vim'
 Plug 'github/copilot.vim'
+Plug 'gergap/vim-ollama'
 
 " Plug 'owner888/agccomplete'
 " Plug 'owner888/codeassistant.vim'
