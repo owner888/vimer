@@ -2,6 +2,10 @@
 cmap W w
 cmap Q q
 
+" 复制 :messages 到的内容到系统剪贴板
+" command! Messages redir => msgs | messages | redir END | new | put =msgs
+command! Messages redir => msgs | messages | redir END | let @+ = msgs
+
 map <F3> :let @+ = ''<cr>:%s/regex/\=CopyMatches(submatch(0))/g
 " map <F4> :TlistToggle<CR>
 map <F4> :call TerminalToggle()<CR>

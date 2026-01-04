@@ -92,7 +92,10 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Flutter
-export PATH=$HOME/Development/flutter/bin:$PATH
+# export PATH=$HOME/Development/flutter/bin:$PATH
+# Flutter 版本管理工具 FVM
+export PATH=$HOME/fvm/default/bin:$PATH
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # Python
 export PYTHONPATH="$HOME/Development/Git/Obfuscapk/src"
