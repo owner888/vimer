@@ -41,7 +41,7 @@ function! Debug(...)
     endif
 endfunction
 
-function! CopyMatches (m) 
+function! CopyMatches(m)
     let @+ .= a:m . "\n" 
     return a:m
 endfunction

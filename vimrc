@@ -122,7 +122,9 @@ filetype plugin indent on
 " vim settings {{{
 set lazyredraw                      " 延迟重绘
 set redrawtime=10000                " 重绘时间间隔
-set nocompatible                    " 不兼容vi模式, 关掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限 
+set nocompatible                    " 不兼容vi模式, 关掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+set modeline                        " 启用 modeline 支持
+set modelines=5                     " 检查文件开头和结尾的 5 行
 set encoding=utf8					" 设置编码
 set termencoding=utf-8
 set fileencoding=utf-8
