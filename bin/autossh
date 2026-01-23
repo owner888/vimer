@@ -1,9 +1,10 @@
 #!/bin/bash
 
 # AUTO SSH - Auto Login SSH Server (expect-based)
-# 需要手动创建 ~/.autosshrc  文件
-# 描述|ip|帐号|密码|端口|快捷命名|rsa公钥名称|rsa公钥路径
-# sername|192.168.1.110|root|password|port|is_bastion
+# 需要手动创建 ~/.autosshrc 文件
+# 类型：normal / bastion / forward / bastion_forward
+# 描述   |ip              |帐号|密码    |rsa公钥   |type  |lport|rhost|rport
+# sername|192.168.1.110:22|root|password|id_rsa.pub|normal|
 
 
 AUTO_SSH_CONFIG=`cat ~/.autosshrc`
@@ -57,51 +58,83 @@ i=0
 for server in $AUTO_SSH_CONFIG; do
 	i=`expr $i + 1`
 	if [ $i -eq $no ] ; then
-		IP=`echo $server | awk -F\| '{ print $2 }'`
+		IP_PORT=`echo $server | awk -F\| '{ print $2 }'`
 		NAME=`echo $server | awk -F\| '{ print $3 }'`
 		PASS=`echo $server | awk -F\| '{ print $4 }'`
-		PORT=`echo $server | awk -F\| '{ print $5 }'`
-		ISBASTION=`echo $server | awk -F\| '{ print $6 }'`
-		RSAKEY=`echo $server | awk -F\| '{ print $7 }'`
-		RSAKEYPATH=`echo $server | awk -F\| '{ print $8 }'`
-		FILE='/tmp/.login.sh'
-		if [ "$PORT" == "" ]; then
-			PORT=10022
-		fi
-        	echo '#!/usr/bin/expect -f' > $FILE
-        	echo 'set timeout 30' >> $FILE
-            if [ "$RSAKEY" != "" ]; then
-				#echo 'cd ~/Downloads/outsourc_works/server_rsa/  \r' >> $FILE
-                #cd ~/Downloads/outsourc_works/server_rsa/
-                cd ~/www/shell/server_rsa/
-        	    echo "spawn ssh -i $RSAKEY -p$PORT "$IP >> $FILE
+		RSAKEY=`echo $server | awk -F\| '{ print $5 }'`
+        TYPE=`echo $server | awk -F\| '{ print $6 }'`
+        LPORT=`echo $server | awk -F\| '{ print $7 }'`
+        RHOST=`echo $server | awk -F\| '{ print $8 }'`
+        RPORT=`echo $server | awk -F\| '{ print $9 }'`
+
+        FILE='/tmp/.login.sh'
+
+        # 默认端口 22
+        IP="${IP_PORT%%:*}"
+        PORT="${IP_PORT##*:}"
+        if [ "$PORT" == "$IP_PORT" ]; then
+            PORT=22
+        fi
+
+        # ===== SSH KeepAlive =====
+        KEEPALIVE_OPTS='-o ServerAliveInterval=30 -o ServerAliveCountMax=3'
+        # ===== Port Forward Config =====
+        # 判断跳板机
+        if [[ "$TYPE" == "bastion" || "$TYPE" == "bastion_forward" ]]; then
+            IS_JUMPSERVER=1
+        else
+            IS_JUMPSERVER=0
+        fi
+
+        if [[ "$TYPE" == "forward" || "$TYPE" == "bastion_forward" ]]; then
+            IS_FORWARD=1
+        else
+            IS_FORWARD=0
+        fi
+        FORWARD=""
+        if [ "$IS_FORWARD" == 1 ]; then
+            LPORT=${LPORT:-3306}
+            RHOST=${RHOST:-127.0.0.1}
+            RPORT=${RPORT:-3306}
+            FORWARD="-N -L ${LPORT}:${RHOST}:${RPORT}"
+        fi
+
+        if [ "$PORT" == "" ]; then
+			PORT=22
+        fi
+
+        echo '#!/usr/bin/expect -f' > $FILE
+        echo 'set timeout 30' >> $FILE
+        if [ "$RSAKEY" != "" ]; then
+            cd ~/.ssh/
+            echo "spawn ssh $KEEPALIVE_OPTS -i $RSAKEY -p$PORT $FORWARD "$IP >> $FILE
+        else
+            echo "spawn ssh $KEEPALIVE_OPTS -o \"StrictHostKeyChecking no\" -p$PORT $FORWARD -l "$NAME $IP >> $FILE
+        fi
+        if [ "$PASS" != "" ]; then
+            echo 'expect "password:"' >> $FILE
+            echo 'send   '$PASS"\r" >> $FILE
+            if [ "$2" == 'sudo' ]; then
+                echo 'expect "@"' >> $FILE
+                echo 'send   "sudo su\r"' >> $FILE
+                echo 'expect "password for"' >> $FILE
+                echo 'send   '$PASS"\r" >> $FILE
             else
-        	    echo "spawn ssh -o \"StrictHostKeyChecking no\" -p$PORT -l "$NAME $IP >> $FILE
+                if [ "$IS_JUMPSERVER" == 1 ] && [ "$2" != "" ]; then
+                    echo 'expect ">"' >> $FILE
+                    echo 'send   '$2"\r" >> $FILE
+                    echo 'expect "password:"' >> $FILE
+                    echo 'send   '$PASS"\r" >> $FILE
+                    if [ "$3" == 'sudo' ]; then
+                        echo 'expect "@"' >> $FILE
+                        echo 'send   "sudo su\r"' >> $FILE
+                        echo 'expect "password for"' >> $FILE
+                        echo 'send   '$PASS"\r" >> $FILE
+                    fi
+                fi
             fi
-            if [ "$PASS" != "" ]; then
-	        	echo 'expect "password:"' >> $FILE
-	        	echo 'send   '$PASS"\r" >> $FILE
-				if [ "$2" == 'sudo' ]; then
-					echo 'expect "@"' >> $FILE
-					echo 'send   "sudo su\r"' >> $FILE
-					echo 'expect "password for"' >> $FILE
-					echo 'send   '$PASS"\r" >> $FILE
-				else
-					if [ "$ISBASTION" == 1 ] && [ "$2" != "" ]; then
-		        			echo 'expect ">"' >> $FILE
-		        			echo 'send   '$2"\r" >> $FILE
-		        			echo 'expect "password:"' >> $FILE
-		        			echo 'send   '$PASS"\r" >> $FILE
-							if [ "$3" == 'sudo' ]; then
-								echo 'expect "@"' >> $FILE
-								echo 'send   "sudo su\r"' >> $FILE
-								echo 'expect "password for"' >> $FILE
-								echo 'send   '$PASS"\r" >> $FILE
-							fi
-					fi
-				fi
-			fi
-        	echo 'interact' >> $FILE
+        fi
+        echo 'interact' >> $FILE
 		chmod a+x $FILE
 		$FILE
 		echo '' > $FILE

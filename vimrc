@@ -39,7 +39,7 @@ Plug 'Raimondi/delimitMate'                 " 自动补全引号(单引号/双�
 " Plug 'lvht/mru'                           " 最近使用文件列表
 " Plug 'dstein64/vim-startuptime'           " 插件消耗时间，执行 :StartupTime
 " Plug 'Yggdroot/indentLine'                " 缩进线
-Plug 'scrooloose/nerdtree'                " 显示目录树，按F2展开关闭
+Plug 'preservim/nerdtree'                   " 显示目录树，按F2展开关闭
 " Plug 'Xuyuanp/nerdtree-git-plugin'        " git status 效果                                                                                                                         
 " Plug 'airblade/vim-gitgutter'             " git diff，显示哪一行修改、增加
 " Plug 'majutsushi/tagbar'                  " 函数变量列表，依赖ctags，golang 依赖 gotags: go get -u github.com/jstemmer/gotags
