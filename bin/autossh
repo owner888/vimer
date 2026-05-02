@@ -5,9 +5,11 @@
 # 类型：normal / bastion / forward / bastion_forward
 # 描述   |ip              |帐号|密码    |rsa公钥   |type  |lport|rhost|rport
 # sername|192.168.1.110:22|root|password|id_rsa.pub|normal|
+# Windows 远程桌面跳板机
+# sername|192.168.1.110:22|root|password|id_rsa.pub|forward|3389|192.168.1.112|3389
 
 
-AUTO_SSH_CONFIG=`cat ~/.autosshrc`
+AUTO_SSH_CONFIG=`grep -v '^\s*#' ~/.autosshrc`
 BORDER_LINE="\033[1;31m############################################################ \033[0m"
 echo -e $BORDER_LINE
 echo -e "\033[1;31m#                     [LOGIN SSH]                          # \033[0m"
