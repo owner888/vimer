@@ -1,2 +1,3 @@
  TEST-Server|user@192.168.10.47|user|passwd|22|1
- 
+# Mosh 示例：lport 复用为 mosh-server 端口
+# MyServer-Mosh|example.com:8022|user|password||mosh|6001

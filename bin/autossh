@@ -2,11 +2,13 @@
 
 # AUTO SSH - Auto Login SSH Server (expect-based)
 # 需要手动创建 ~/.autosshrc 文件
-# 类型：normal / bastion / forward / bastion_forward
-# 描述   |ip              |帐号|密码    |rsa公钥   |type  |lport|rhost|rport
+# 类型：normal | bastion | forward | bastion_forward | mosh
+# 描述|ip|帐号|密码|rsa公钥|type|lport|rhost|rport
 # sername|192.168.1.110:22|root|password|id_rsa.pub|normal|
 # Windows 远程桌面跳板机
 # sername|192.168.1.110:22|root|password|id_rsa.pub|forward|3389|192.168.1.112|3389
+# Mosh 用法（lport 复用为 mosh-server 端口）
+# sername|example.com:8022|user|password||mosh|6001
 
 
 AUTO_SSH_CONFIG=`grep -v '^\s*#' ~/.autosshrc`
@@ -103,6 +105,37 @@ for server in $AUTO_SSH_CONFIG; do
 
         if [ "$PORT" == "" ]; then
 			PORT=22
+        fi
+
+        # ===== Mosh 分支 =====
+        if [[ "$TYPE" == "mosh" ]]; then
+            MOSH_SERVER_BIN="/opt/homebrew/bin/mosh-server"
+            MOSH_PORT="${LPORT:-60001}"
+            if [ "$RSAKEY" != "" ]; then
+                SSH_OPT="ssh -p $PORT -i $HOME/.ssh/$RSAKEY"
+            else
+                SSH_OPT="ssh -p $PORT -o StrictHostKeyChecking=no"
+            fi
+
+            if [ "$PASS" != "" ]; then
+                # 用 SSH_ASKPASS 让 mosh 内部 ssh 自动取密码（OpenSSH 8.4+ 支持 SSH_ASKPASS_REQUIRE=force）
+                ASKPASS=$(mktemp /tmp/.autossh-askpass.XXXXXX)
+                cat > "$ASKPASS" <<EOF
+#!/bin/sh
+echo '$PASS'
+EOF
+                chmod 700 "$ASKPASS"
+                export SSH_ASKPASS="$ASKPASS"
+                export SSH_ASKPASS_REQUIRE=force
+                export DISPLAY="${DISPLAY:-:0}"
+                mosh --ssh="$SSH_OPT" --server="$MOSH_SERVER_BIN new -p $MOSH_PORT" "$NAME@$IP"
+                rc=$?
+                rm -f "$ASKPASS"
+                exit $rc
+            else
+                exec mosh --ssh="$SSH_OPT" --server="$MOSH_SERVER_BIN new -p $MOSH_PORT" "$NAME@$IP"
+            fi
+            break
         fi
 
         echo '#!/usr/bin/expect -f' > $FILE

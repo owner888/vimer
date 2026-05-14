@@ -31,7 +31,6 @@ if ! command -v /opt/homebrew/bin/npm >/dev/null 2>&1; then
     brew install npm
 fi
 
-
 # 修复 ALE 插件 intelephense 报错
 if ! command -v /opt/homebrew/bin/intelephense >/dev/null 2>&1; then
     echo "intelephense not found. Installing..."
@@ -44,7 +43,7 @@ if ! command -v /opt/homebrew/bin/lazygit >/dev/null 2>&1; then
 fi
 alias lg=lazygit
 
-# 标准 sed
+# 标准 sed，解决 cline 等 AI agent 调用 sed 报错问题，如果还遇到，就说明它们根据 macOS 系统来适配了，这里就反而要去掉了
 if ! command -v /opt/homebrew/opt/gnu-sed/libexec/gnubin/sed >/dev/null 2>&1; then
     echo "gnu-sed not found. Installing..."
     brew install gnu-sed
@@ -72,7 +71,6 @@ export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 # export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin":$PATH
 
 # Golang
-# export GOROOT=/opt/homebrew/Cellar/go/1.25.5/libexec
 export GOPATH=$HOME/Development/golang
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
