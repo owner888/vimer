@@ -59,7 +59,6 @@ export BREW=/opt/homebrew/opt
 export PATH=$BREW/bin:$PATH
 export PATH=$PATH:/opt/bin:/usr/local/bin
 export PATH=$PATH:$HOME/.vim/bin
-# export PATH=$PATH:$HOME/Development/tools
 export PATH=$PATH:$HOME/Development/GoogleCamera/gcam/tools
 
 # Sublime & VS Code & Beyond Compare & MacVim
@@ -76,18 +75,16 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 
 # Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.1.7779620
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.12077973
 export ANDROID_ADB="$ANDROID_HOME/platform-tools"
 export ANDROID_EMULATOR="$ANDROID_HOME/emulator"
-export PATH=$ANDROID_HOME/build-tools/33.0.2:$PATH
+export PATH=$ANDROID_HOME/build-tools/36.0.0:$PATH
 export PATH=$PATH:$ANDROID_ADB:$ANDROID_EMULATOR
 export PATH=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-# export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH
-# 切换系统默认 Java 版本
-# sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
 export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 export PATH="$JAVA_HOME/bin:$PATH"
+# export PATH=$HOME/.vim/support/gradle-classpath-1.2.0/bin:$PATH
 
 # Flutter
 # export PATH=$HOME/Development/flutter/bin:$PATH
