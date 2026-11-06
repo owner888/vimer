@@ -71,7 +71,7 @@ export PATH="/Applications/MacVim.app/Contents/bin":$PATH
 
 # Golang
 export GOPATH=$HOME/Development/golang
-export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
 
 # Android
 export ANDROID_HOME=$HOME/Library/Android/sdk

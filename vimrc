@@ -93,7 +93,6 @@ Plug 'thaerkh/vim-workspace'
 Plug 'owner888/snipMate'                    " 10年前的代码块引擎
 Plug 'owner888/vim-swift-format'
 Plug 'Shougo/neocomplcache.vim'
-Plug 'github/copilot.vim'
 Plug 'gergap/vim-ollama'
 
 " Plug 'owner888/agccomplete'

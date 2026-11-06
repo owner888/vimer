@@ -1,28 +1,28 @@
+" 加载本地私密配置（若存在，如 OPENAI_API_KEY、私有 baseurl 等）
+silent! source <sfile>:h/ollama.local.vim
+
 " Use Python virtual environment (and install packages via pip)
 let g:ollama_use_venv = 1
 
-" 不支持采样(旧版模型)的模型
-let g:ollama_model_sampling_denylist = ['gpt-5', 'gpt-5.1-codex']
+" OpenAI baseurl 默认空（使用官方 API），如需走中转网关请在 ollama.local.vim 中覆盖
+if !exists('g:ollama_openai_baseurl')
+    let g:ollama_openai_baseurl = ''
+endif
 
-" Claude Sonnet 4 配置
-" let g:ollama_claude_credentialname = 'api-keys/anthropic-key'
+" 本地 Ollama 服务地址
+let g:ollama_host = 'http://localhost:11434'
 
-" Tab completion: 使用 OpenAI gpt-5.1-codex (使用 /v1/responses 端点)
-let g:ollama_model_provider = 'claude'
-let g:ollama_model = 'claude-sonnet-4-20250514'
-" let g:ollama_model_provider = 'openai_responses'
-" let g:ollama_model = 'gpt-5.1-codex'
+" Tab completion: 代码补全（使用本地 qwen2.5-coder 极速补全）
+let g:ollama_model_provider = 'ollama'
+let g:ollama_model = 'qwen2.5-coder:1.5b-base'
 
-" Chat: 使用 OpenAI
+" Chat: 对话
 let g:ollama_chat_provider = 'openai'
-let g:ollama_chat_model = 'gpt-5'
+let g:ollama_chat_model = 'claude-3-7-sonnet'
 
-" Code editing: 使用 OpenAI
+" Code editing: 代码编辑
 let g:ollama_edit_provider = 'openai'
-let g:ollama_edit_model = 'gpt-4o-mini'
-
-" OpenAI API configuration
-" let g:ollama_openai_baseurl = 'https://api.openai.com/v1'
+let g:ollama_edit_model = 'claude-3-7-sonnet'
 
 " 查看模型：curl http://127.0.0.1:11434/api/tags
 " let g:ollama_host = 'http://localhost:11434'
@@ -32,9 +32,9 @@ let g:ollama_edit_model = 'gpt-4o-mini'
 " let g:ollama_model = 'codellama:13b-instruct'
 
 " 控制提示前后上下文的行数，这样你可以减少 AI 提示的上下文范围来提高响应速度
-" let g:ollama_context_lines = 100
-" debounce time to wait before triggering a completion
-" let g:ollama_debounce_time = 300
+let g:ollama_context_lines = 40
+" debounce time to wait before triggering a completion (缩短到 150ms 减少等待)
+let g:ollama_debounce_time = 150
 " If you do not want to run completion for certain
 " filetypes, list them here.
 " let g:ollama_completion_denylist_filetype = []
@@ -56,11 +56,8 @@ let g:ollama_logfile = '/tmp/logs/vim-ollama.log'
 " ollama chat conversation log
 let g:ollama_review_logfile = '/tmp/logs/vim-ollama-review.log'
 
-let g:ollama_completion_allowlist_filetype = ['php']
-let g:copilot_filetypes = {
-   \ '*': v:true,
-   \ 'php': v:false,
-   \ }
+" 允许所有语言触发代码补全（为空则不限制文件类型）
+let g:ollama_completion_allowlist_filetype = []
 
 " Keybindings
 " Shift + Command + i to open OllamaChat

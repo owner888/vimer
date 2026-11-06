@@ -2,3 +2,4 @@ plugged/
 .DS_Store
 .netrwhist
 sessions
+config/*.local.vim
